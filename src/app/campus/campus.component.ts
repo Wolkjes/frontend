@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampusComponent implements OnInit {
 
+  isShown: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
     }
+
+  toggleShow() {
+    this.isShown = ! this.isShown;
+  }
 }
