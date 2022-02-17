@@ -5,7 +5,7 @@ import { SingleSensorComponent } from './single-sensor/single-sensor.component';
 
 const routes: Routes = [
   { path: 'singleSensor', component: SingleSensorComponent},
-  { path: 'campus', component: CampusComponent}
+  { path: 'campus', component: CampusComponent},
 ];
 
 @NgModule({

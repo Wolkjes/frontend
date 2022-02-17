@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { SingleSensorComponent } from './single-sensor/single-sensor.component';
 import { CampusComponent } from './campus/campus.component';
+import { AddCo2SensorComponent } from './add-co2-sensor/add-co2-sensor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     SingleSensorComponent,
-    CampusComponent
+    CampusComponent,
+    AddCo2SensorComponent
   ],
   imports: [
     BrowserModule,

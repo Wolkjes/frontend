@@ -10,6 +10,5 @@ export class CampusComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-
+    }
 }
