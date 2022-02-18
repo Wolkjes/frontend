@@ -8,6 +8,7 @@ import { SingleSensorComponent } from './single-sensor/single-sensor.component';
 import { CampusComponent } from './campus/campus.component';
 import { AddCo2SensorComponent } from './add-co2-sensor/add-co2-sensor.component';
 import { FooterComponent } from './footer/footer.component';
+import { EditCo2SensorComponent } from './edit-co2-sensor/edit-co2-sensor.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FooterComponent } from './footer/footer.component';
     SingleSensorComponent,
     CampusComponent,
     AddCo2SensorComponent,
-    FooterComponent
+    FooterComponent,
+    EditCo2SensorComponent
   ],
   imports: [
     BrowserModule,
