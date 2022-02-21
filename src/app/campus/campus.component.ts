@@ -22,7 +22,10 @@ export class CampusComponent implements OnInit {
   }
 
   toggleShowEditSensor() {
-    this.editSensorIsShown = ! this.editSensorIsShown
+    this.editSensorIsShown = ! this.editSensorIsShown;
+  }
 
+  noA(e) {
+    e.stopPropagation();
   }
 }
