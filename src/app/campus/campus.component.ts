@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampusComponent implements OnInit {
 
+  addSensorIsShown: boolean = false;
+  editSensorIsShown: boolean = false;
+  deleteSensorIsShown: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
 
     }
+    
+  
+
+  toggleShowAddSensor() {
+    this.addSensorIsShown = ! this.addSensorIsShown;
+  }
+
+  toggleShowEditSensor() {
+    this.editSensorIsShown = ! this.editSensorIsShown;
+  }
+
+  toggleDeleteConfirmation() {
+    this.deleteSensorIsShown = ! this.deleteSensorIsShown;
+  }
+
+  noA(e) {
+    e.stopPropagation();
+  }
 }
