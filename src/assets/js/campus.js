@@ -1,4 +1,4 @@
-const client = new Paho.MQTT.Client("ws://10.23.62.184:9001/mqtt", "myClientId" + new Date().getTime());
+const client = new Paho.MQTT.Client("ws://188.166.43.149:9001/mqtt", "myClientId" + new Date().getTime());
 
 client.connect({ onSuccess: onConnect })
 let counter = 0
