@@ -38,9 +38,9 @@
                         <a href="/campus"
                             class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
                             role="menuitem" tabindex="-1" id="menu-item-0">Campus Proximus</a>
-                        <div class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
+                        <button (click)="toggleShowAddCampus()" class="w-full text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
                             role="menuitem" tabindex="-1" id="menu-item-2">
-                            <div onclick="toggleShowAddCampus()" class="flex">
+                            <div class="flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -48,7 +48,7 @@
                                 </svg>
                                 Voeg campus toe
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -71,16 +71,7 @@
                 </button>
             </div>
 
-            <!--
-      Dropdown menu, show/hide based on menu state.
-  
-      Entering: "transition ease-out duration-100"
-        From: "transform opacity-0 scale-95"
-        To: "transform opacity-100 scale-100"
-      Leaving: "transition ease-in duration-75"
-        From: "transform opacity-100 scale-100"
-        To: "transform opacity-0 scale-95"
-    -->
+            <!-- Dropdown menu, show/hide based on menu state. -->
             <div id="dropdown2"
                 class="hidden rigin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
