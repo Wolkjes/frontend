@@ -13,6 +13,7 @@ import { DeleteCo2SensorComponent } from './delete-co2-sensor/delete-co2-sensor.
 import { AddCampusComponent } from './add-campus/add-campus.component';
 import { UsersDashboardComponent } from './users-dashboard/users-dashboard.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AddUserComponent } from './add-user/add-user.component';
     DeleteCo2SensorComponent,
     AddCampusComponent,
     UsersDashboardComponent,
-    AddUserComponent
+    AddUserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
