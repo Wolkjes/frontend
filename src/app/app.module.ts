@@ -14,6 +14,7 @@ import { AddCampusComponent } from './add-campus/add-campus.component';
 import { UsersDashboardComponent } from './users-dashboard/users-dashboard.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { LoginComponent } from './login/login.component';
+import { EditCampusComponent } from './edit-campus/edit-campus.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoginComponent } from './login/login.component';
     AddCampusComponent,
     UsersDashboardComponent,
     AddUserComponent,
-    LoginComponent
+    LoginComponent,
+    EditCampusComponent
   ],
   imports: [
     BrowserModule,

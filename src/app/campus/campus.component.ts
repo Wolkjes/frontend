@@ -10,6 +10,7 @@ export class CampusComponent implements OnInit {
   addSensorIsShown: boolean = false;
   editSensorIsShown: boolean = false;
   deleteSensorIsShown: boolean = false;
+  editCampusIsShown: boolean = false;
 
   constructor() { }
 
@@ -27,6 +28,10 @@ export class CampusComponent implements OnInit {
 
   toggleDeleteConfirmation() {
     this.deleteSensorIsShown = ! this.deleteSensorIsShown;
+  }
+
+  toggleEditCampus(){
+    this.editCampusIsShown = ! this.editCampusIsShown;
   }
 
   noA(e) {
