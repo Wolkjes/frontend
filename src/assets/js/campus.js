@@ -22,8 +22,9 @@ client.onMessageArrived = onMessageArrived;
 function add(){
   var e = document.getElementById("choose-sensor");
   var sensor = e.value;
+  var lokaal = document.getElementById("lokaal-campus").text;
   console.log(sensor);
-  var message = new Paho.MQTT.Message(JSON.stringify({"value":false}));
+  var message = new Paho.MQTT.Message(JSON.stringify({"value":false,"lokaal":lokaal}));
   message.destinationName = "new/" + sensor;
   client.send(message);
 
