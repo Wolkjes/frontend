@@ -21,9 +21,9 @@ client.onMessageArrived = onMessageArrived;
 
 function onMessageArrived(message) {
     let jsonMessage = JSON.parse(message.payloadString);
+    let id = jsonMessage.sensor_id;
+    let co2 = jsonMessage.value;
     if  (jsonMessage.variable === "CO2"){
-      let id = jsonMessage.sensor_id;
-      let co2 = jsonMessage.value;
   
       let div = document.getElementById(id);
       if (div !== null){
@@ -59,8 +59,25 @@ function onMessageArrived(message) {
       let temperatuurP = document.getElementById("co2P");
       if (temperatuurP !== null){
         temperatuurP.textContent = jsonMessage.value + " PPM";
-      }
+      
+        let colorSingle = document.getElementById("co2P");
+
+        if(co2 > 900){
+          colorSingle.classList.add("text-red-500");
+          colorSingle.classList.remove("text-orange-500");
+          colorSingle.classList.remove("text-green-500");
+        }else if(co2 > 700){
+          colorSingle.classList.add("text-orange-500");
+          colorSingle.classList.remove("text-red-500");
+          colorSingle.classList.remove("text-green-500");
+        }else{
+          colorSingle.classList.add("text-green-500");
+          colorSingle.classList.remove("text-orange-500");
+          colorSingle.classList.remove("text-red-500");
+        }
+      } 
     }
+
 
     if  (jsonMessage.variable === "humidity"){
       let temperatuurP = document.getElementById("humidityP");
