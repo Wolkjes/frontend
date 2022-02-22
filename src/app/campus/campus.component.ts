@@ -11,7 +11,7 @@ export class CampusComponent implements OnInit {
   editSensorIsShown: boolean = false;
   deleteSensorIsShown: boolean = false;
   editCampusIsShown: boolean = false;
-  deleteCampusIsShown: boolean = true;
+  deleteCampusIsShown: boolean = false;
 
   constructor() { }
 
