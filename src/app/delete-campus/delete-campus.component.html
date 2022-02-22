@@ -1,0 +1,44 @@
+<div class="mt-5 md:mt-0 md:col-span-2 shadow-2xl">
+    <form action="#" method="POST">
+        <div class="shadow overflow-hidden sm:rounded-md">
+            <div role="alert">
+                <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        Danger
+                    </div>
+                </div>
+                <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                    <p>Ben je zeker dat je deze campus wilt verwijderen?
+                        <br><br> Je kan deze actie niet meer ongedaan maken...
+                        <br>Als je zeker bent schrijf dan onderstaande boodschap over en klik op verwijder.
+                    </p>
+                    <p class="mt-7 mb-2 w-fit px-10 text-red-700 py-1 rounded-lg border-red-700 bg-red-300 border-2">Ja,
+                        ik wil deze campus
+                        verwijderen!</p>
+                    <div class="col-span-6 sm:col-span-3">
+                        <input type="text" name="name-campus" id="name-campus"
+                            class="mt-1 focus:ring-red-500 focus:red-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+
+                    <div class="flex justify-end">
+                        <div class="px-4 py-3 text-right sm:px-0">
+                            <button class=" inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm
+                    font-medium rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2
+                    focus:ring-offset-2 focus:ring-red-500">Annuleer</button>
+                        </div>
+                        <div class="px-4 py-3 text-right sm:pr-6 sm:pl-3">
+                            <button type="submit"
+                                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Verwijder</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
