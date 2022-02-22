@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersDashboardComponent implements OnInit {
 
+  addUserIshown: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  toggleShowAddUser() {
+    this.addUserIshown = ! this.addUserIshown;
+  }
 }

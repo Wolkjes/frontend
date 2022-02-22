@@ -12,6 +12,7 @@ import { EditCo2SensorComponent } from './edit-co2-sensor/edit-co2-sensor.compon
 import { DeleteCo2SensorComponent } from './delete-co2-sensor/delete-co2-sensor.component';
 import { AddCampusComponent } from './add-campus/add-campus.component';
 import { UsersDashboardComponent } from './users-dashboard/users-dashboard.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UsersDashboardComponent } from './users-dashboard/users-dashboard.compo
     EditCo2SensorComponent,
     DeleteCo2SensorComponent,
     AddCampusComponent,
-    UsersDashboardComponent
+    UsersDashboardComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
