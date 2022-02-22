@@ -10,15 +10,12 @@ export class CampusComponent implements OnInit {
   addSensorIsShown: boolean = false;
   editSensorIsShown: boolean = false;
   deleteSensorIsShown: boolean = false;
-  addCampusisShown: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
 
-    }
-    
-  
+    }  
 
   toggleShowAddSensor() {
     this.addSensorIsShown = ! this.addSensorIsShown;
@@ -30,10 +27,6 @@ export class CampusComponent implements OnInit {
 
   toggleDeleteConfirmation() {
     this.deleteSensorIsShown = ! this.deleteSensorIsShown;
-  }
-
-  toggleShowAddCampus() {
-    this.addCampusisShown = ! this.addCampusisShown;
   }
 
   noA(e) {

@@ -30,24 +30,26 @@
                 </button>
 
                 <!-- Dropdown menu -->
-                <div id="dropdown" class="hidden rigin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                <div role="none">
-                    <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                    <a href="/campus" class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg" role="menuitem" tabindex="-1"
-                        id="menu-item-0">Campus Proximus</a>
-                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg" role="menuitem" tabindex="-1"
-                        id="menu-item-2">
-                        <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>
-                            Voeg campus toe
+                <div id="dropdown"
+                    class="hidden rigin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div role="none">
+                        <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                        <a href="/campus"
+                            class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
+                            role="menuitem" tabindex="-1" id="menu-item-0">Campus Proximus</a>
+                        <div class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
+                            role="menuitem" tabindex="-1" id="menu-item-2">
+                            <div onclick="toggleShowAddCampus()" class="flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                Voeg campus toe
+                            </div>
                         </div>
-                        </a>
-                </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -79,16 +81,20 @@
         From: "transform opacity-100 scale-100"
         To: "transform opacity-0 scale-95"
     -->
-            <div id="dropdown2" class="hidden rigin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            <div id="dropdown2"
+                class="hidden rigin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                 <div role="none">
                     <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                    <a href="/users" class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg" role="menuitem" tabindex="-1"
-                        id="menu-item-0">Users</a>
-                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg" role="menuitem" tabindex="-1"
-                        id="menu-item-2">Campussen</a>
+                    <a href="/campus"
+                        class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
+                        role="menuitem" tabindex="-1" id="menu-item-2">Campussen</a>
+                    <a href="/users"
+                        class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
+                        role="menuitem" tabindex="-1" id="menu-item-0">Users</a>
                     <form method="POST" action="#" role="none">
-                        <button type="submit" class="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
+                        <button type="submit"
+                            class="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
                             role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
                     </form>
                 </div>
@@ -96,4 +102,10 @@
         </div>
     </div>
 </header>
+
+<div *ngIf="addCampusIsShown" class="row container-fluid" id="divshow">
+    <app-add-campus class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    </app-add-campus>
+</div>
+
 <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
