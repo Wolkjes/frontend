@@ -15,9 +15,7 @@ export class CampusComponent implements OnInit {
 
   ngOnInit(): void {
 
-    }
-    
-  
+    }  
 
   toggleShowAddSensor() {
     this.addSensorIsShown = ! this.addSensorIsShown;
