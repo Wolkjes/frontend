@@ -36,7 +36,7 @@ export class CampusComponent implements OnInit {
   }
 
   toggleDeleteCampus(){
-    this.deleteCampusIsShown = ! this.editCampusIsShown;
+    this.deleteCampusIsShown = ! this.deleteCampusIsShown;
   }
 
   noA(e) {
