@@ -10,7 +10,9 @@
     </div>
 </section>
 
-<div *ngIf="addUserIshown" class="row container-fluid" id="divshow">
+<div *ngIf="addUserIshown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div (click)="toggleShowAddUser()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <app-add-user class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-    </app-add-user> 
+    </app-add-user>
 </div>

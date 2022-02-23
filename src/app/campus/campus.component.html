@@ -310,26 +310,39 @@
         </div>
     </div>
 </section>
-<div *ngIf="addSensorIsShown" class="row container-fluid">
+
+<div *ngIf="addSensorIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <app-add-co2-sensor class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
     </app-add-co2-sensor>
 </div>
-<app-add-co2-sensor id="addSensorWindow"
-    class="hidden absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></app-add-co2-sensor>
-<div *ngIf="editSensorIsShown" class="row container-fluid">
+
+<div *ngIf="editSensorIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <app-edit-co2-sensor class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
     </app-edit-co2-sensor>
 </div>
-<div *ngIf="deleteSensorIsShown" class="row container-fluid">
+
+<div *ngIf="deleteSensorIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <app-delete-co2-sensor class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
     </app-delete-co2-sensor>
 </div>
-<div *ngIf="editCampusIsShown" class="row container-fluid">
-    <app-edit-campus class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"> </app-edit-campus>
+
+<div *ngIf="editCampusIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <app-edit-campus class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    </app-edit-campus>
 </div>
+
+
 <div *ngIf="deleteCampusIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
     aria-modal="true">
-    <div (click)="toggleDeleteCampus()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <app-delete-campus class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
     </app-delete-campus>
 </div>
