@@ -18,8 +18,8 @@ export class CampusService {
     return this.http.get<Campus[]>(this.baseUrl);
   }
 
-  get(campus_id: any): Observable<Campus> {
-    return this.http.get(`${this.baseUrl}/${campus_id}`);
+  get(campus_id: number): Observable<Campus[]> {
+    return this.http.get<Campus[]>(`${this.baseUrl}/${campus_id}`);
   }
 
   create(data: any): Observable<any> {
@@ -33,4 +33,6 @@ export class CampusService {
   delete(campus_id: any): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${campus_id}`);
   }
+
+
 }

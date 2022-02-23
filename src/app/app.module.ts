@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { EditCampusComponent } from './edit-campus/edit-campus.component';
 import { DeleteCampusComponent } from './delete-campus/delete-campus.component';
 import { EventEmitterService } from './event-emitter.service';
+import { CookieService  } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { EventEmitterService } from './event-emitter.service';
     HttpClientModule
   ],
   providers: [
-    EventEmitterService
+    EventEmitterService,
+    CookieService 
   ],
   bootstrap: [AppComponent]
 })
