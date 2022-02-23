@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {Observable, timer} from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -16,13 +17,19 @@ export class TopBarComponent implements OnInit {
   private cookieValue:string = "";
   activeCampus:string = "Campussen";
 
-  constructor(private campusService: CampusService, private cookieService: CookieService) {
+  constructor(private campusService: CampusService, private cookieService: CookieService ,
+    private eventEmitterService: EventEmitterService) {
 
   }
 
   ngOnInit(): void {
     this.getCampuses();
     this.activeCampus = this.cookieService.get("activeCampusNaam");
+    if (this.eventEmitterService.subsVar==undefined) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.closeFunction.subscribe((name:string) => {
+        this.toggleShowAddCampus();
+      });
+    }
   }
 
   campuses: Campus[] = [];
