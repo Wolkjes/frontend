@@ -15,8 +15,8 @@ export class EditCampusComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  campusComponentFunction() {
-    this.eventEmitterService.onCampusComponentButtonCLick();
+  closeWindow() {
+    this.eventEmitterService.close();
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-add-co2-sensor',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddCo2SensorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventEmitterService: EventEmitterService) {
+    
+  }
 
   ngOnInit(): void {
+  }
+
+  close(){
+    this.eventEmitterService.close();
   }
 
 }

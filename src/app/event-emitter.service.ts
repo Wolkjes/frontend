@@ -5,13 +5,13 @@ import { Subscription } from 'rxjs';
   providedIn: 'root'
 })
 export class EventEmitterService {
-
+  //this was made to close all the modals because these are in different components
   closeFunction = new EventEmitter();
   subsVar: Subscription | undefined; 
 
   constructor() { }
 
-  onCampusComponentButtonCLick() {
+  close() {
     this.closeFunction.emit();
   }
 }
