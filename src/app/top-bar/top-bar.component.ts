@@ -4,6 +4,7 @@ import { Campus } from '../model/campus.model';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {Observable, timer} from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-top-bar',
@@ -12,20 +13,31 @@ import {Observable, timer} from 'rxjs';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor(private campusService: CampusService) {
+  private cookieValue:string = "";
+  activeCampus:string = "Campussen";
+
+  constructor(private campusService: CampusService, private cookieService: CookieService) {
+
+  }
+
+  ngOnInit(): void {
+    this.getCampuses();
+    this.activeCampus = this.cookieService.get("activeCampusNaam");
   }
 
   campuses: Campus[] = [];
+
+  setCoockieCampus(campus:Campus){
+    this.cookieService.set('activeCampusId', campus.campus_id.toString());
+    this.cookieService.set('activeCampusNaam', campus.name.toString());
+    window.location.reload();
+  }
 
   getCampuses(): void{
       this.campusService.getAll().subscribe(data => this.campuses = data);
   }
 
   addCampusIsShown: boolean = false;
-
-  ngOnInit(): void {
-    this.getCampuses();
-  }
 
   toggleShowAddCampus() {
     this.addCampusIsShown = ! this.addCampusIsShown;

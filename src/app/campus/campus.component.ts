@@ -20,7 +20,6 @@ export class CampusComponent implements OnInit {
     private eventEmitterService: EventEmitterService) { }
 
   ngOnInit() {
-
       if (this.eventEmitterService.subsVar==undefined) {
         this.eventEmitterService.subsVar = this.eventEmitterService.closeFunction.subscribe((name:string) => {
         this.close();

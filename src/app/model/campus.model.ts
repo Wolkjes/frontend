@@ -1,8 +1,8 @@
 export class Campus {
-    campus_id?: any;
-    name?: string;
-    address?: string;
-    good_value?: BigInteger;
-    max_value?: BigInteger;
-    critical_value?: BigInteger;
+    campus_id: number = 0;
+    name: string = "";
+    address: string = "";
+    good_value: number = 0;
+    max_value: number = 0;
+    critical_value: number = 0;
   }
