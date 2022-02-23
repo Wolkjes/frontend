@@ -6,6 +6,8 @@ import { EventEmitterService } from '../event-emitter.service';
   templateUrl: './campus.component.html',
   styleUrls: ['./campus.component.css']
 })
+
+
 export class CampusComponent implements OnInit {
 
   addSensorIsShown: boolean = false;
@@ -15,8 +17,7 @@ export class CampusComponent implements OnInit {
   deleteCampusIsShown: boolean = false;
 
   constructor(
-    private eventEmitterService: EventEmitterService
-  ) { }
+    private eventEmitterService: EventEmitterService) { }
 
   ngOnInit() {
 

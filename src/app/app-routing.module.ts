@@ -7,7 +7,7 @@ import { UsersDashboardComponent } from './users-dashboard/users-dashboard.compo
 
 const routes: Routes = [
   { path: 'singleSensor', component: SingleSensorComponent},
-  { path: 'campus', component: CampusComponent},
+  { path: 'campus/:id', component: CampusComponent},
   { path: 'users', component: UsersDashboardComponent},
   { path: 'login', component: LoginComponent}
 ];

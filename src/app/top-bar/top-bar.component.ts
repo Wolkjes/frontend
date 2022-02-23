@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CampusService} from '../service/campus.service';
+import { Campus } from '../model/campus.model';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { Validators } from '@angular/forms';
+import {Observable, timer} from 'rxjs';
 
 @Component({
   selector: 'app-top-bar',
@@ -7,11 +12,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopBarComponent implements OnInit {
 
+  constructor(private campusService: CampusService) {
+  }
+
+  campuses: Campus[] = [];
+
+  getCampuses(): void{
+      this.campusService.getAll().subscribe(data => this.campuses = data);
+  }
+
   addCampusIsShown: boolean = false;
 
-  constructor() { }
-
   ngOnInit(): void {
+    this.getCampuses();
   }
 
   toggleShowAddCampus() {
