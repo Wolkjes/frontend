@@ -35,9 +35,9 @@
                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                     <div role="none">
                         <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                        <a href="/campus"
+                        <a *ngFor="let campus of campuses" [attr.href]="'/campus/' + campus.campus_id"
                             class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
-                            role="menuitem" tabindex="-1" id="menu-item-0">Campus Proximus</a>
+                            role="menuitem" tabindex="-1" id="menu-item-0">{{campus.name}}</a>
                         <button (click)="toggleShowAddCampus()" class="w-full text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
                             role="menuitem" tabindex="-1" id="menu-item-2">
                             <div class="flex">

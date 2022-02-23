@@ -1,13 +1,13 @@
-const client = new Paho.MQTT.Client("ws://10.23.62.184:9001/mqtt", "myClientId" + new Date().getTime());
-const myTopic = "+/+"
+const client = new Paho.MQTT.Client("ws://188.166.43.149:9001/mqtt", "myClientId" + new Date().getTime());
 
 client.connect({ onSuccess: onConnect })
 let counter = 0
 function onConnect() {
   console.log("connection successful")
-  client.subscribe("+/co2")
-  client.subscribe("+/hum")
-  client.subscribe("+/temp")   //subscribe to our topic
+  client.subscribe("D0.27/co2")
+  client.subscribe("D0.27/hum")
+  client.subscribe("D0.27/temp")
+  client.subscribe("new/+")   //subscribe to our topic
   setInterval(()=>{
 },5000)} 
 
@@ -19,11 +19,37 @@ const publish = (topic, msg) => {  //takes topic and message string
 
 client.onMessageArrived = onMessageArrived;
 
+function add(){
+  var e = document.getElementById("choose-sensor");
+  var sensor = e.value;
+  var lokaal = document.getElementById("lokaal-campus").text;
+  console.log(sensor);
+  var message = new Paho.MQTT.Message(JSON.stringify({"value":false,"lokaal":lokaal}));
+  message.destinationName = "new/" + sensor;
+  client.send(message);
+
+}
+
 function onMessageArrived(message) {
+
+  if (message.destinationName.substring(0,3) === "new"){
+
+    console.log(message.payloadString);
+
+    var x = document.getElementById("choose-sensor");
+    var option = document.createElement("option");
+    option.text = message.destinationName.substring(4);
+    x.add(option);
+    console.log(message.destinationName.substring(4));
+  }
+  
+
+
+
     let jsonMessage = JSON.parse(message.payloadString);
+    let id = jsonMessage.sensor_id;
+    let co2 = jsonMessage.value;
     if  (jsonMessage.variable === "CO2"){
-      let id = jsonMessage.sensor_id;
-      let co2 = jsonMessage.value;
   
       let div = document.getElementById(id);
       if (div !== null){
@@ -33,7 +59,6 @@ function onMessageArrived(message) {
         title.textContent = id;
     
         if(co2 > 900){
-          console.log("rood")
           color.classList.add("bg-red-500");
           color.classList.remove("bg-orange-500");
           color.classList.remove("bg-green-500");
@@ -48,6 +73,7 @@ function onMessageArrived(message) {
         }
       }
     }
+
     if  (jsonMessage.variable === "temperature"){
       let temperatuurP = document.getElementById("temperatuur");
       if (temperatuurP !== null){
@@ -59,8 +85,25 @@ function onMessageArrived(message) {
       let temperatuurP = document.getElementById("co2P");
       if (temperatuurP !== null){
         temperatuurP.textContent = jsonMessage.value + " PPM";
-      }
+      
+        let colorSingle = document.getElementById("co2P");
+
+        if(co2 > 900){
+          colorSingle.classList.add("text-red-500");
+          colorSingle.classList.remove("text-orange-500");
+          colorSingle.classList.remove("text-green-500");
+        }else if(co2 > 700){
+          colorSingle.classList.add("text-orange-500");
+          colorSingle.classList.remove("text-red-500");
+          colorSingle.classList.remove("text-green-500");
+        }else{
+          colorSingle.classList.add("text-green-500");
+          colorSingle.classList.remove("text-orange-500");
+          colorSingle.classList.remove("text-red-500");
+        }
+      } 
     }
+
 
     if  (jsonMessage.variable === "humidity"){
       let temperatuurP = document.getElementById("humidityP");
