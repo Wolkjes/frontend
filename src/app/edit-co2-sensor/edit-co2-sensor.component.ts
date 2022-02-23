@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CampusComponent } from '../campus/campus.component';
 import { EventEmitterService } from '../event-emitter.service';
 
 @Component({

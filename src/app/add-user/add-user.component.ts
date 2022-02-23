@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-add-user',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventEmitterService: EventEmitterService) { }
 
   ngOnInit(): void {
-  }
 
+  }
+  close(){
+    this.eventEmitterService.close();
+  }
 }

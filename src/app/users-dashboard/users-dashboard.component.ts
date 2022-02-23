@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-users-dashboard',
@@ -9,9 +10,16 @@ export class UsersDashboardComponent implements OnInit {
 
   addUserIshown: boolean = false;
 
-  constructor() { }
+  constructor(
+    private eventEmitterService: EventEmitterService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    if (this.eventEmitterService.subsVar==undefined) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.closeFunction.subscribe((string) => {
+        this.toggleShowAddUser();
+      })
+    }
   }
 
   toggleShowAddUser() {
