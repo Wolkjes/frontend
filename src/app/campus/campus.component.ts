@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-campus',
@@ -10,14 +11,30 @@ export class CampusComponent implements OnInit {
   addSensorIsShown: boolean = false;
   editSensorIsShown: boolean = false;
   deleteSensorIsShown: boolean = false;
-  editCampusIsShown: boolean = false;
+  editCampusIsShown: boolean = true;
   deleteCampusIsShown: boolean = false;
 
-  constructor() { }
+  constructor(
+    private eventEmitterService: EventEmitterService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
+      if (this.eventEmitterService.subsVar==undefined) {
+        this.eventEmitterService.subsVar = this.eventEmitterService.closeFunction.subscribe((name:string) => {
+        this.close();
+        }); 
+      }
     }  
+ 
+  // close all windows from another Component
+  close() {
+    this.addSensorIsShown = false;
+    this.editSensorIsShown = false;
+    this.deleteSensorIsShown = false;
+    this.editCampusIsShown = false;
+    this.deleteCampusIsShown = false;
+  }
 
   toggleShowAddSensor() {
     this.addSensorIsShown = ! this.addSensorIsShown;

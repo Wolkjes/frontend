@@ -16,6 +16,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { LoginComponent } from './login/login.component';
 import { EditCampusComponent } from './edit-campus/edit-campus.component';
 import { DeleteCampusComponent } from './delete-campus/delete-campus.component';
+import { EventEmitterService } from './event-emitter.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { DeleteCampusComponent } from './delete-campus/delete-campus.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    EventEmitterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
