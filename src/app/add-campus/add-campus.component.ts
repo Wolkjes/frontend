@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-add-campus',
@@ -8,12 +7,9 @@ import { EventEmitterService } from '../event-emitter.service';
 })
 export class AddCampusComponent implements OnInit {
 
-  constructor(private eventEmitterService: EventEmitterService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  close(){
-    this.eventEmitterService.close();
-  }
 }
