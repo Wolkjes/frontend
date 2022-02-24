@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        // this.reloadPage();
+        this.loadHomePage();
       },
       error: err => {
         this.errorMessage = err.error.message;
@@ -41,5 +42,9 @@ export class LoginComponent implements OnInit {
   }
   reloadPage(): void {
     window.location.reload();
+  }
+
+  loadHomePage(): void {
+    window.location.href = '/campus';
   }
 }
