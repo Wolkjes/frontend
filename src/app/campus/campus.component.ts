@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../event-emitter.service';
+import { LokaalService } from '../service/lookaal.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Lokaal } from '../model/lokaal.model';
 
 @Component({
   selector: 'app-campus',
@@ -10,16 +13,26 @@ import { EventEmitterService } from '../event-emitter.service';
 
 export class CampusComponent implements OnInit {
 
+  private campus_id:number;
+  lokalen:Lokaal[];
+
   addSensorIsShown: boolean = false;
   editSensorIsShown: boolean = false;
   deleteSensorIsShown: boolean = false;
   editCampusIsShown: boolean = false;
   deleteCampusIsShown: boolean = false;
 
-  constructor(
-    private eventEmitterService: EventEmitterService) { }
+  constructor(private eventEmitterService: EventEmitterService, private lokaalService:LokaalService, private cookieService:CookieService) {
+    this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
+    this.lokalen = [];
+  }
+
+  getAll(): void{
+    this.lokaalService.getAll(this.campus_id).subscribe(data => this.lokalen = data);
+  }
 
   ngOnInit() {
+    this.getAll();
       if (this.eventEmitterService.subsVar==undefined) {
         this.eventEmitterService.subsVar = this.eventEmitterService.closeFunction.subscribe((name:string) => {
         this.close();
