@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'singleSensor', component: SingleSensorComponent},
   { path: 'campus', component: CampusComponent},
   { path: 'users', component: UsersDashboardComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: '', redirectTo: '/campus', pathMatch: 'full'},
 ];
 
 @NgModule({
