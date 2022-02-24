@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { Campus } from '../model/campus.model';
 
@@ -8,10 +8,10 @@ import { Campus } from '../model/campus.model';
 })
 export class CampusService {
 
-  private baseUrl = 'http://localhost:8080/wolkjes/campus/';
+  private baseUrl = "http://localhost:8080/wolkjes/campus";
+  private campus:Campus;
 
   constructor(private http: HttpClient) {
-
    }
 
   getAll(): Observable<Campus[]> {
@@ -22,16 +22,35 @@ export class CampusService {
     return this.http.get<Campus[]>(`${this.baseUrl}/${campus_id}`);
   }
 
-  create(data: any): Observable<any> {
-    return this.http.post(this.baseUrl, data);
+  getLatest(): Campus {
+    this.http.get<Campus>(this.baseUrl+"/latest").subscribe(data => {this.campus = data[0]});
+    console.log(this.campus);
+    return this.campus;
+  }
+  
+
+  create(data: any){
+    let headers = new HttpHeaders({
+    'Content-Type': 'application/json'
+    });
+    
+    let options = { headers: headers };
+    return this.http.post(this.baseUrl+"/", data, options).subscribe(data => {
+      console.log(data);
+    });
   }
 
   update(campus_id: any, data: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${campus_id}`, data);
   }
 
-  delete(campus_id: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${campus_id}`);
+  delete(campus_id: any):any{
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+      });
+      console.log(campus_id)
+    return this.http.delete<any>(this.baseUrl+"/"+campus_id).subscribe(data => console.log(data));
+    
   }
 
 

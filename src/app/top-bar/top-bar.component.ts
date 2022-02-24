@@ -16,8 +16,7 @@ export class TopBarComponent implements OnInit {
   private cookieValue:string = "";
   activeCampus:string = "Campussen";
 
-  constructor(private campusService: CampusService, private cookieService: CookieService ,
-    ) {
+  constructor(private campusService: CampusService, private cookieService: CookieService) {
   }
 
   ngOnInit(): void {
