@@ -8,7 +8,7 @@ import { Campus } from '../model/campus.model';
 })
 export class CampusService {
 
-  private baseUrl = 'http://localhost:8080/wolkjes/campus/';
+  private baseUrl = "http://localhost:8080/wolkjes/campus";
 
   constructor(private http: HttpClient) {
 
@@ -22,8 +22,10 @@ export class CampusService {
     return this.http.get<Campus[]>(`${this.baseUrl}/${campus_id}`);
   }
 
-  create(data: any): Observable<any> {
-    return this.http.post(this.baseUrl, data);
+  create(data: any){
+    return this.http.post(this.baseUrl+"/", data).subscribe(data => {
+      console.log(data);
+    });
   }
 
   update(campus_id: any, data: any): Observable<any> {
