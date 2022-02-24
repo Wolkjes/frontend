@@ -18,6 +18,7 @@ import { EditCampusComponent } from './edit-campus/edit-campus.component';
 import { DeleteCampusComponent } from './delete-campus/delete-campus.component';
 import { EventEmitterService } from './event-emitter.service';
 import { CookieService  } from 'ngx-cookie-service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CookieService  } from 'ngx-cookie-service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     EventEmitterService,
