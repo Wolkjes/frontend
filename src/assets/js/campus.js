@@ -32,7 +32,6 @@ function onMessageArrived(message) {
 
   if (message.destinationName.substring(0,3) === "new"){
     var idString = message.destinationName.substring(4);
-
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "http://localhost:8080/wolkjes/sensor/", true);
       xhr.setRequestHeader('Content-Type', 'application/json');
@@ -57,7 +56,7 @@ function onMessageArrived(message) {
           color.classList.remove("bg-orange-500");
           color.classList.remove("bg-green-500");
         }else if(co2 > 700){
-            color.classList.add('bg-orange-500');
+            color.classList.add("bg-orange-500");
             color.classList.remove("bg-red-500");
             color.classList.remove("bg-green-500");
         }else{

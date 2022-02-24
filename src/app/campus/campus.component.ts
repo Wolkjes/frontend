@@ -14,6 +14,7 @@ import { Lokaal } from '../model/lokaal.model';
 export class CampusComponent implements OnInit {
 
   private campus_id:number;
+  naam:string;
   lokalen:Lokaal[];
 
   addSensorIsShown: boolean = false;
@@ -24,6 +25,7 @@ export class CampusComponent implements OnInit {
 
   constructor(private eventEmitterService: EventEmitterService, private lokaalService:LokaalService, private cookieService:CookieService) {
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
+    this.naam = this.cookieService.get("activeCampusNaam");
     this.lokalen = [];
   }
 

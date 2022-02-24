@@ -27,7 +27,10 @@ export class SensorService {
   }
 
   update(sensor_id: number, data: any){
-    return this.http.put(this.baseUrl+sensor_id, data);
+    console.log(sensor_id)
+    return this.http.put(this.baseUrl+sensor_id, data).subscribe(data => {
+      console.log(data);
+    });
   }
 
   delete(sensor_id: any): Observable<any> {
