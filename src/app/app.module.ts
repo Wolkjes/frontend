@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule } from '@angular/forms';
 import { DeleteLokaalComponent } from './delete-lokaal/delete-lokaal.component';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { DeleteLokaalComponent } from './delete-lokaal/delete-lokaal.component';
     EditCampusComponent,
     DeleteCampusComponent,
     PageNotFoundComponent,
-    DeleteLokaalComponent
+    DeleteLokaalComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
