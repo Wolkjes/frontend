@@ -29,15 +29,13 @@ export class CampusService {
   }
   
 
-  create(data: any){
+  create(data: any): Observable<Campus[]>{
     let headers = new HttpHeaders({
     'Content-Type': 'application/json'
     });
     
     let options = { headers: headers };
-    return this.http.post(this.baseUrl+"/", data, options).subscribe(data => {
-      console.log(data);
-    });
+    return this.http.post<Campus[]>(this.baseUrl+"/", data, options);
   }
 
   update(campus_id: any, data: any): Observable<any> {
