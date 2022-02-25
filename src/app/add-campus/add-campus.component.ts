@@ -6,6 +6,7 @@ import { SensorService } from '../service/sensor.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CampusService } from '../service/campus.service';
+import { GrafanaService } from '../service/grafana.service';
 
 @Component({
   selector: 'app-add-campus',
@@ -15,8 +16,9 @@ import { CampusService } from '../service/campus.service';
 export class AddCampusComponent implements OnInit {
 
   newCampus: FormGroup;
+  private campus:Campus[];
 
-  constructor(fb: FormBuilder,  private campusService: CampusService) {
+  constructor(fb: FormBuilder,  private campusService: CampusService, private grafanaService: GrafanaService) {
     this.newCampus = fb.group({
       lokaal_campus: [""],
     });
@@ -26,8 +28,18 @@ export class AddCampusComponent implements OnInit {
     var data = {
       name: this.newCampus.value.lokaal_campus
     }
-    this.campusService.create(data);
+    this.campusService.create(data).subscribe(data => {
+      this.campus = data;
+      this.update(data);
+    });;
+    //this.campusService.getLatest();
+    
     window.location.reload();
+  }
+
+  update(data:any): void{
+    this.campus = data;
+    //this.grafanaService.create(this.campus[0])
   }
 
   ngOnInit(): void {

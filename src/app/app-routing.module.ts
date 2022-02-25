@@ -7,7 +7,7 @@ import { SingleSensorComponent } from './single-sensor/single-sensor.component';
 import { UsersDashboardComponent } from './users-dashboard/users-dashboard.component';
 
 const routes: Routes = [
-  { path: 'singleSensor', component: SingleSensorComponent},
+  { path: 'singleSensor/:sensor_id', component: SingleSensorComponent},
   { path: 'campus', component: CampusComponent},
   { path: 'users', component: UsersDashboardComponent},
   { path: 'login', component: LoginComponent},
