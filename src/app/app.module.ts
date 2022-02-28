@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { DeleteLokaalComponent } from './delete-lokaal/delete-lokaal.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ChangeThresholdsComponent } from './change-thresholds/change-thresholds.component';
+import { authInterceptorProviders } from './service/auth.interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ import { ChangeThresholdsComponent } from './change-thresholds/change-thresholds
   ],
   providers: [
     EventEmitterService,
-    CookieService 
+    CookieService,
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
