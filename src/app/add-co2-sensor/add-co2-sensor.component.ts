@@ -48,6 +48,8 @@ export class AddCo2SensorComponent implements OnInit {
       this.sensor = data;
       this.update(data);
     });
+
+    window.location.reload();
   }
 
   update(data:any): void{

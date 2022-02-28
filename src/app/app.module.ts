@@ -23,6 +23,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FormsModule } from '@angular/forms';
 import { DeleteLokaalComponent } from './delete-lokaal/delete-lokaal.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { ChangeThresholdsComponent } from './change-thresholds/change-thresholds.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
     DeleteCampusComponent,
     PageNotFoundComponent,
     DeleteLokaalComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    ChangeThresholdsComponent
   ],
   imports: [
     BrowserModule,
