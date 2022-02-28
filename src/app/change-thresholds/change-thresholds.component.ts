@@ -8,12 +8,8 @@ import { EventEmitterService } from '../event-emitter.service';
 })
 export class ChangeThresholdsComponent implements OnInit {
 
-  // myScriptElement: HTMLScriptElement;
 
   constructor(private eventEmitterService: EventEmitterService) {
-    // this.myScriptElement = document.createElement("script");
-    // this.myScriptElement.src = "https://cdn.jsdelivr.net/gh/maxshuty/accessible-web-components@latest/dist/simpleRange.min.js";
-    // document.body.appendChild(this.myScriptElement);
   }
 
   ngOnInit(): void {

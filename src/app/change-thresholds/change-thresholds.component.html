@@ -2,12 +2,24 @@
     <form action="#" method="POST">
         <div class="shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6">
+                <div class="col-span-6 sm:col-span-3">
+                    <div class="flex">
+                        <div class="m-5">
 
-                
-                <!-- <div>
-                    <range-selector id="rangeSelector1" min-label="Minimum" max-label="Maximum" min-range="1000"
-                        max-range="2022" number-of-legend-items-to-show="6" />
-                </div> -->
+                            <label for="maxGreen">Groen vanaf 0 tot:</label>
+                            <input type="number" min="0" max="5000" formControlName="maxGreen" name="maxGreen"
+                                id="maxGreen"
+                                class="mt-1 focus:ring-blue-500 focus:blue-500 block w-60 shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="m-5">
+
+                            <label for="maxOrange">Oranje tot:</label>
+                            <input type="number" min="0" max="5000" formControlName="maxOrange" name="maxOrange"
+                                id="maxOrange"
+                                class="w-60 mt-1 focus:ring-blue-500 focus:blue-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="flex justify-end bg-gray-50">
                 <div class="px-4 py-3 text-right sm:px-0">
