@@ -38,7 +38,8 @@
                         <a *ngFor="let campus of campuses" (click)="setCoockieCampus(campus)"
                             class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
                             role="menuitem" tabindex="-1" id="menu-item-0">{{campus.name}}</a>
-                        <button (click)="toggleShowAddCampus()" class="w-full text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
+                        <button (click)="toggleShowAddCampus()"
+                            class="w-full text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
                             role="menuitem" tabindex="-1" id="menu-item-2">
                             <div class="flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -58,7 +59,7 @@
         <div class="relative inline-block text-left">
             <div>
                 <button type="button" id="dropdownButton2" data-dropdown-toggle="dropdown2"
-                    class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+                    class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
                     id="menu-button" aria-expanded="true" aria-haspopup="true">
                     Options
                     <!-- Heroicon name: solid/chevron-down -->
@@ -96,7 +97,8 @@
 
 <div *ngIf="addCampusIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
     aria-modal="true">
-    <div (click)="toggleShowAddCampus()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div (click)="toggleShowAddCampus()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        aria-hidden="true"></div>
     <app-add-campus class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
     </app-add-campus>
 </div>
