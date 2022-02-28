@@ -49,7 +49,6 @@ export class AddCo2SensorComponent implements OnInit {
       this.update(data);
     });
 
-    window.location.reload();
   }
 
   update(data:any): void{
@@ -57,7 +56,7 @@ export class AddCo2SensorComponent implements OnInit {
     console.log(this.sensor);
     this.grafanaService.addPanel(this.sensor[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)
 
-    window.location.reload;
+    window.location.reload();
   }
 
   getSensors(): void{

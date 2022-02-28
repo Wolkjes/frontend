@@ -22,6 +22,7 @@ export class CampusComponent implements OnInit {
   deleteLokaalIsShown: boolean = false;
   editCampusIsShown: boolean = false;
   deleteCampusIsShown: boolean = false;
+  changeTresholdsIsShown: boolean = false;
 
   constructor(private eventEmitterService: EventEmitterService, private lokaalService:LokaalService, private cookieService:CookieService) {
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
@@ -49,6 +50,7 @@ export class CampusComponent implements OnInit {
     this.deleteLokaalIsShown = false;
     this.editCampusIsShown = false;
     this.deleteCampusIsShown = false;
+    this.changeTresholdsIsShown = false;
   }
 
   toggleShowAddSensor() {
@@ -69,6 +71,10 @@ export class CampusComponent implements OnInit {
 
   toggleDeleteCampus(){
     this.deleteCampusIsShown = ! this.deleteCampusIsShown;
+  }
+
+  toggleChangeTresholds(){
+    this.changeTresholdsIsShown = ! this.deleteCampusIsShown;
   }
 
   noA(e) {
