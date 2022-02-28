@@ -83,7 +83,7 @@
                     <a href="/users"
                         class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
                         role="menuitem" tabindex="-1" id="menu-item-0">Users</a>
-                    <form method="POST" action="#" role="none">
+                    <form method="POST" action="#" role="none" (ngSubmit)="logout()">
                         <button type="submit"
                             class="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-blue-500 hover:text-white rounded-lg"
                             role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
