@@ -35,12 +35,17 @@ export class DeleteCampusComponent implements OnInit {
   }
 
   update(data:any): void{
-    this.campus = data;
-    this.cookieService.set("activeCampusId", this.campus[0].campus_id.toString());
-    this.cookieService.set("activeCampusNaam", this.campus[0].name);
+    this.setCookie("activeCampusId", this.campus[0].campus_id);
+    this.setCookie("activeCampusNaam", this.campus[0].name);
+    
     setTimeout(() => {
       window.location.reload();
     }, 1000);
+  }
+
+  setCookie(name, value, days = 7, path = '/') {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString()
+    document.cookie = name + "=" + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
   }
 
   ngOnInit(): void {

@@ -13,7 +13,6 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class TopBarComponent implements OnInit {
 
-  private cookieValue:string = "";
   activeCampus:string = "Campussen";
 
   constructor(private campusService: CampusService, private cookieService: CookieService) {
@@ -26,10 +25,18 @@ export class TopBarComponent implements OnInit {
 
   campuses: Campus[] = [];
 
+  setCookie(name, value, days = 7, path = '/') {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString()
+    document.cookie = name + "=" + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
+  }
+
   setCoockieCampus(campus:Campus){
-    this.cookieService.set('activeCampusId', campus.campus_id.toString());
-    this.cookieService.set('activeCampusNaam', campus.name.toString());
-    window.location.reload();
+    this.setCookie("activeCampusId", campus.campus_id);
+    this.setCookie("activeCampusNaam", campus.name)
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   getCampuses(): void{

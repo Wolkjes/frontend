@@ -5,7 +5,6 @@ import { SensorService } from '../service/sensor.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { GrafanaService } from '../service/grafana.service';
-import { Campus } from '../model/campus.model';
 
 @Component({
   selector: 'app-add-co2-sensor',
@@ -46,7 +45,6 @@ export class AddCo2SensorComponent implements OnInit {
 
     this.sensorService.gethim(this.newSensor.value.choose_sensor).subscribe(data => {
       this.sensor = data;
-      console.log(data);
       this.update(data);
     });
 
