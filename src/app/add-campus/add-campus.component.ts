@@ -31,7 +31,7 @@ export class AddCampusComponent implements OnInit {
     this.campusService.create(data).subscribe(data => {
       this.campus = data;
       this.update(data);
-    });;
+    });
     //this.campusService.getLatest();
     
     window.location.reload();
@@ -39,7 +39,7 @@ export class AddCampusComponent implements OnInit {
 
   update(data:any): void{
     this.campus = data;
-    //this.grafanaService.create(this.campus[0])
+    this.grafanaService.create(this.campus[0])
   }
 
   ngOnInit(): void {
