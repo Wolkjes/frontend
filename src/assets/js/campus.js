@@ -39,6 +39,30 @@ function threshold(){
   var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
   message.destinationName = campus + "/threshold" ;
   client.send(message);
+
+  window.location.reload();
+  const background = document.getElementsByClassName("threshold");
+  const waardes = document.getElementsByClassName("threshold_text");
+
+  console.log(waardes);
+  for (let i = 0; i < waardes.length; i++) {
+    if(waardes[i].value > critical){
+      background[i].classList.add("bg-red-500");
+      background[i].classList.remove("bg-orange-500");
+      background[i].classList.remove("bg-green-500");
+      background[i].classList.remove("bg-gray-400")
+    }else if(collection[i].value > warning){
+      background[i].classList.add("bg-orange-500");
+      background[i].classList.remove("bg-red-500");
+      background[i].classList.remove("bg-green-500");
+      background[i].classList.remove("bg-gray-400")
+    }else{
+      background[i].classList.add("bg-green-500");
+      background[i].classList.remove("bg-orange-500");
+      background[i].classList.remove("bg-red-500");
+      background[i].classList.remove("bg-gray-400")
+    }
+  }
 }
 
 function onMessageArrived(message) {
@@ -60,16 +84,20 @@ function onMessageArrived(message) {
       let co2 = jsonMessage.value;
       let destination = message.destinationName.split("/")[1]
       let co2P = document.getElementById(destination);
-      let co2IndiP = document.getElementById("co2P");      
+      let co2IndiP = document.getElementById("co2P");
+      let critical = jsonMessage.critical;
+      let warning = jsonMessage.warning;   
+      console.log(warning);
+      console.log(critical); 
       if (co2P !== null){
         co2P.textContent = jsonMessage.value;
         let color = document.getElementById(destination+"color");
-        if(co2 > 800){
+        if(co2 > critical){
           color.classList.add("bg-red-500");
           color.classList.remove("bg-orange-500");
           color.classList.remove("bg-green-500");
           color.classList.remove("bg-gray-400")
-        }else if(co2 > 700){
+        }else if(co2 > warning){
             color.classList.add("bg-orange-500");
             color.classList.remove("bg-red-500");
             color.classList.remove("bg-green-500");
