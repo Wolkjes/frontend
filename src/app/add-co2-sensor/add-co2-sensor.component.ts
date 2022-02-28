@@ -44,8 +44,9 @@ export class AddCo2SensorComponent implements OnInit {
       new: newS,
     })
 
-    this.sensorService.get(this.newSensor.value.choose_sensor).subscribe(data => {
+    this.sensorService.gethim(this.newSensor.value.choose_sensor).subscribe(data => {
       this.sensor = data;
+      console.log(data);
       this.update(data);
     });
 
@@ -53,10 +54,12 @@ export class AddCo2SensorComponent implements OnInit {
 
   update(data:any): void{
     this.sensor = data;
-    console.log(this.sensor);
-    this.grafanaService.addPanel(this.sensor[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)
+    console.log(data);
+    this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)
 
-    window.location.reload();
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
   }
 
   getSensors(): void{

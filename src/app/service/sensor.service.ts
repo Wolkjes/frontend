@@ -22,6 +22,10 @@ export class SensorService {
     return this.http.get<Sensor[]>(`${this.baseUrl}${sensor_id}`);
   }
 
+  gethim(sensor_id: number): Observable<Sensor[]> {
+    return this.http.get<Sensor[]>(`${this.baseUrl}get/${sensor_id}`);
+  }
+
   create(data: any): Observable<any> {
     return this.http.post(this.baseUrl, data);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, setTestabilityGetter } from '@angular/core';
 import { Campus } from '../model/campus.model';
 import { EventEmitterService } from '../event-emitter.service';
 import { Sensor } from '../model/sensor.model';
@@ -34,13 +34,14 @@ export class AddCampusComponent implements OnInit {
       this.update(data);
     });
     //this.campusService.getLatest();
-    
-    window.location.reload();
   }
 
   update(data:any): void{
     this.campus = data;
-    this.grafanaService.create(this.campus[0])
+    this.grafanaService.create(this.campus[0]);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   ngOnInit(): void {

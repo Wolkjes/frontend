@@ -53,7 +53,7 @@ export class GrafanaService {
     return this.http.post(this.baseUrl+"/dashboards/db", jsonData, this.options).subscribe(data => console.log(data));
   }
 
-  addPanel(data: Sensor, campus_id: number, campus_naam: string, lokaal_naam:string){
+  addPanel(sensor: Sensor, campus_id: number, campus_naam: string, lokaal_naam:string){
 
     var dashboard = this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => 
     {
@@ -61,7 +61,7 @@ export class GrafanaService {
       var panels:any[] = data.dashboard.panels;
       panels.push(
         {
-        "id": data.id,
+        "id": sensor.id,
         "gridPos": {
           "h": 8,
           "w": 12,
@@ -213,7 +213,7 @@ export class GrafanaService {
               {
                 "key": "topic",
                 "operator": "=",
-                "value": lokaal_naam + "/co2"
+                "value": campus_naam + "/" + lokaal_naam + "/co2"
               }
             ]
           },
@@ -261,7 +261,7 @@ export class GrafanaService {
               {
                 "key": "topic",
                 "operator": "=",
-                "value": lokaal_naam+"/temp"
+                "value": campus_naam + "/" + lokaal_naam+"/temp"
               }
             ]
           },
@@ -309,7 +309,7 @@ export class GrafanaService {
               {
                 "key": "topic",
                 "operator": "=",
-                "value": lokaal_naam+"/hum"
+                "value": campus_naam + "/" + lokaal_naam+"/hum"
               }
             ]
           }

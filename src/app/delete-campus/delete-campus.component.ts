@@ -38,7 +38,9 @@ export class DeleteCampusComponent implements OnInit {
     this.campus = data;
     this.cookieService.set("activeCampusId", this.campus[0].campus_id.toString());
     this.cookieService.set("activeCampusNaam", this.campus[0].name);
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
   ngOnInit(): void {

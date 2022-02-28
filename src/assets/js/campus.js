@@ -1,6 +1,6 @@
 var url = window.location.pathname;
 var id = url.substring(url.lastIndexOf('/') + 1);
-
+var campus = getCookie("activeCampusNaam");
 
 const client = new Paho.MQTT.Client("ws://188.166.43.149:9001/mqtt", "myClientId" + new Date().getTime());
 
@@ -26,8 +26,18 @@ function add(){
   var sensor = e.value;
   var lokaal = document.getElementById("sensorNaam").value;
   console.log(sensor);
-  var message = new Paho.MQTT.Message(JSON.stringify({"value": false, "key": "new", "lokaal": lokaal}));
+  var message = new Paho.MQTT.Message(JSON.stringify({"value": false, "key": "new", "lokaal": lokaal, "campus": campus}));
   message.destinationName = "new/" + sensor;
+  client.send(message);
+}
+
+function threshold(){
+  var warning = document.getElementById("maxGreen").value;
+  var critical = document.getElementById("maxOrange").value;
+  console.log(warning);
+  console.log(critical);
+  var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
+  message.destinationName = campus + "/threshold" ;
   client.send(message);
 }
 
@@ -111,4 +121,21 @@ function onConnectionLost(responseObject) {
     console.log("onConnectionLost:" + responseObject.errorMessage);
   }
   client.connect({ onSuccess: onConnect });
+}
+
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
