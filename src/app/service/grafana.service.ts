@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import { Campus } from '../model/campus.model';
 import { Lokaal } from '../model/lokaal.model';
 import { json } from 'body-parser';
+import { Sensor } from '../model/sensor.model';
 
 
 @Injectable({
@@ -38,6 +39,7 @@ export class GrafanaService {
           "id": null,
           "uid": data.campus_id.toString(),
           "title": data.name,
+          "panels": [],
           "tags": [ "templated" ],
           "timezone": "browser",
           "schemaVersion": 16,
@@ -51,15 +53,15 @@ export class GrafanaService {
     return this.http.post(this.baseUrl+"/dashboards/db", jsonData, this.options).subscribe(data => console.log(data));
   }
 
-  addPanel(data: any, campus_id: number, campus_naam: string, lokaal_naam:string){
+  addPanel(data: Sensor, campus_id: number, campus_naam: string, lokaal_naam:string){
 
-    var dashboard = this.http.get<any>(this.baseUrl+"/dashboards/uid/1").subscribe(data => 
+    var dashboard = this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => 
     {
-      console.log(data.dashboard.panels);
+      console.log(data.dashboard.version+1);
       var panels:any[] = data.dashboard.panels;
       panels.push(
         {
-        "id": this.version,
+        "id": data.id,
         "gridPos": {
           "h": 8,
           "w": 12,
@@ -319,7 +321,7 @@ export class GrafanaService {
         "dashboard" :{
             "uid": campus_id.toString(),
             "title": campus_naam,
-            "version": data.dashboard.version+1,
+            "version": data.dashboard.version,
             "panels":panels
         }
       }

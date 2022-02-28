@@ -1,7 +1,7 @@
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto flex flex-wrap">
 
-    <h1 class="text-gray-900 text-2xl title-font font-medium w-50 items-center md:w-full text-center">Lokaal D2.02</h1>
+    <h1 class="text-gray-900 text-2xl title-font font-medium w-50 items-center md:w-full text-center">Lokaal {{sensor[0].lokaal_naam}}</h1>
 
     <div class="flex flex-wrap w-full -m-4">
 
@@ -69,7 +69,7 @@
     </div>
 
     <div class="w-full">
-      <iframe src="http://188.166.43.149:3000/d-solo/RMk8lNf7z/campus-proximus?orgId=1&theme=light&panelId=2&refresh=4s" width="100%" height="400" frameborder="0"></iframe>
+      <iframe [src]="safeSrc" width="100%" height="400" frameborder="0">{{imgPath}}</iframe>
     </div>
 
   </div>
