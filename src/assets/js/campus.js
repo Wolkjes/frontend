@@ -8,7 +8,7 @@ client.connect({ onSuccess: onConnect })
 let counter = 0
 function onConnect() {
   console.log("connection successful")
-  client.subscribe("+/+")
+  client.subscribe("+/+/+")
   client.subscribe("new/+")   //subscribe to our topic
   setInterval(()=>{
 },5000)} 
