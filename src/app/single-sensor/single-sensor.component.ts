@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Sensor } from '../model/sensor.model';
 import { SensorService } from '../service/sensor.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-single-sensor',
@@ -20,7 +21,9 @@ export class SingleSensorComponent implements OnInit {
   imgPath:string  = "http://188.166.43.149:3000/d-solo/17/campus-proximus?orgId=1&theme=light&panelId=1&refresh=4s";
   safeSrc: SafeResourceUrl = "";
 
-  constructor(private sensorService:SensorService, private route: ActivatedRoute, private cookieService: CookieService, private sanitizer: DomSanitizer) {
+  deleteSensorIsShown: boolean = false;
+
+  constructor(private eventEmitterService: EventEmitterService, private sensorService:SensorService, private route: ActivatedRoute, private cookieService: CookieService, private sanitizer: DomSanitizer) {
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
     this.campus_naam = this.cookieService.get("activeCampusNaam");
     this.campus_naam = this.campus_naam.replace(" ", "-");
@@ -35,10 +38,14 @@ export class SingleSensorComponent implements OnInit {
     });
 
   
-     }
+    }
 
   ngOnInit(): void {
-
+    if (this.eventEmitterService.subsVar==undefined) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.closeFunction.subscribe((name:string) => {
+      this.toggleDeleteSensor();
+      }); 
+  }
   }
 
   update(data:any): void{
@@ -47,6 +54,10 @@ export class SingleSensorComponent implements OnInit {
     console.log(this.imgPath)
     this.panel_id = this.sensor[0].id
     this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl("http://188.166.43.149:3000/d-solo/" + this.campus_id +"/" + this.campus_naam + "?orgId=1&theme=light&panelId=" + this.panel_id + "&refresh=4s");
+  }
+
+  toggleDeleteSensor(){
+    this.deleteSensorIsShown = ! this.deleteSensorIsShown;
   }
 
 }
