@@ -21,14 +21,9 @@ export class SingleSensorComponent implements OnInit {
   imgPath:string  = "http://188.166.43.149:3000/d-solo/17/campus-proximus?orgId=1&theme=light&panelId=1&refresh=4s";
   safeSrc: SafeResourceUrl = "";
 
-<<<<<<< HEAD
   deleteSensorIsShown: boolean = false;
 
   constructor(private eventEmitterService: EventEmitterService, private sensorService:SensorService, private route: ActivatedRoute, private cookieService: CookieService, private sanitizer: DomSanitizer) {
-=======
-  constructor(private sensorService:SensorService, private route: ActivatedRoute, private cookieService: CookieService, private sanitizer: DomSanitizer) {
-    console.log(document.cookie)
->>>>>>> eb6c843 (cookies fix)
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
     this.campus_naam = this.cookieService.get("activeCampusNaam");
     this.campus_naam = this.campus_naam.replace(" ", "-");
