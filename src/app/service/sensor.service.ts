@@ -27,7 +27,6 @@ export class SensorService {
   }
 
   update(sensor_id: number, data: any){
-    console.log(sensor_id)
     return this.http.put(this.baseUrl+sensor_id, data).subscribe(data => {
       console.log(data);
     });
