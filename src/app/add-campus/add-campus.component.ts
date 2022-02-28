@@ -34,14 +34,14 @@ export class AddCampusComponent implements OnInit {
       this.update(data);
     });
     //this.campusService.getLatest();
+    
   }
 
   update(data:any): void{
     this.campus = data;
-    this.grafanaService.create(this.campus[0]);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    this.grafanaService.create(this.campus[0])
+
+    window.location.reload();
   }
 
   ngOnInit(): void {

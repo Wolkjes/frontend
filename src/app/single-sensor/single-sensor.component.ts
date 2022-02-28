@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Sensor } from '../model/sensor.model';
 import { SensorService } from '../service/sensor.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-single-sensor',
@@ -22,7 +23,7 @@ export class SingleSensorComponent implements OnInit {
 
   deleteSensorIsShown: boolean = false;
 
-  constructor(private sensorService:SensorService, private route: ActivatedRoute, private cookieService: CookieService, private sanitizer: DomSanitizer) {
+  constructor(private eventEmitterService: EventEmitterService, private sensorService:SensorService, private route: ActivatedRoute, private cookieService: CookieService, private sanitizer: DomSanitizer) {
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
     this.campus_naam = this.cookieService.get("activeCampusNaam");
     this.campus_naam = this.campus_naam.replace(" ", "-");
@@ -37,10 +38,14 @@ export class SingleSensorComponent implements OnInit {
     });
 
   
-     }
+    }
 
   ngOnInit(): void {
-
+    if (this.eventEmitterService.subsVar==undefined) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.closeFunction.subscribe((name:string) => {
+      this.toggleDeleteSensor();
+      }); 
+  }
   }
 
   update(data:any): void{
@@ -52,7 +57,7 @@ export class SingleSensorComponent implements OnInit {
   }
 
   toggleDeleteSensor(){
-    this.deleteSensorIsShown ! = this.deleteSensorIsShown;
+    this.deleteSensorIsShown = ! this.deleteSensorIsShown;
   }
 
 }
