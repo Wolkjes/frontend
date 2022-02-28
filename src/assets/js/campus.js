@@ -48,7 +48,7 @@ function onMessageArrived(message) {
     let sensor_id = jsonMessage.sensor_id;
     if  (jsonMessage.variable === "CO2"){
       let co2 = jsonMessage.value;
-      let destination = message.destinationName.split("/")[0]
+      let destination = message.destinationName.split("/")[1]
       let co2P = document.getElementById(destination);
       let co2IndiP = document.getElementById("co2P");      
       if (co2P !== null){
