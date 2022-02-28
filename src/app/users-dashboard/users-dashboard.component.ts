@@ -9,6 +9,7 @@ import { EventEmitterService } from '../event-emitter.service';
 export class UsersDashboardComponent implements OnInit {
 
   addUserIshown: boolean = false;
+  deleteUserIsShown: boolean = false;
 
   constructor(
     private eventEmitterService: EventEmitterService
@@ -17,12 +18,21 @@ export class UsersDashboardComponent implements OnInit {
   ngOnInit() {
     if (this.eventEmitterService.subsVar==undefined) {
       this.eventEmitterService.subsVar = this.eventEmitterService.closeFunction.subscribe((string) => {
-        this.toggleShowAddUser();
+        this.close();
       })
     }
   }
 
+  close(){
+    this.addUserIshown = false;
+    this.deleteUserIsShown = false;
+  }
+
   toggleShowAddUser() {
     this.addUserIshown = ! this.addUserIshown;
+  }
+
+  toggleDeleteUser() {
+    this.deleteUserIsShown = ! this.deleteUserIsShown
   }
 }

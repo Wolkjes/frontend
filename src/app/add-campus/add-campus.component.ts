@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CampusService } from '../service/campus.service';
 import { GrafanaService } from '../service/grafana.service';
 
+
 @Component({
   selector: 'app-add-campus',
   templateUrl: './add-campus.component.html',
@@ -24,7 +25,7 @@ export class AddCampusComponent implements OnInit {
     });
    }
 
-  addCampus(): void{
+  addCampus() {
     var data = {
       name: this.newCampus.value.lokaal_campus
     }

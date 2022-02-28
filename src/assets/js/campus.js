@@ -58,14 +58,18 @@ function onMessageArrived(message) {
           color.classList.add("bg-red-500");
           color.classList.remove("bg-orange-500");
           color.classList.remove("bg-green-500");
+          color.classList.remove("bg-gray-400")
         }else if(co2 > 700){
             color.classList.add("bg-orange-500");
             color.classList.remove("bg-red-500");
             color.classList.remove("bg-green-500");
+          color.classList.remove("bg-gray-400")
+            
         }else{
             color.classList.add("bg-green-500");
             color.classList.remove("bg-orange-500");
             color.classList.remove("bg-red-500");
+          color.classList.remove("bg-gray-400")
         }
 
       }else if(sensor_id === id ){
