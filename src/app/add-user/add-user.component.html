@@ -5,36 +5,36 @@
                 <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-3">
                         <label for="username" class="block text-sm font-medium text-gray-700">Gebruikersnaam</label>
-                        <input type="text" name="username" id="username" formControlName="username"
+                        <input required type="text" name="username" id="username" formControlName="username"
                             class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="text" name="email" id="email" formControlName="email"
+                        <input required type="text" name="email" id="email" formControlName="email"
                             class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
 
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="password" class="block text-sm font-medium text-gray-700">Wachtwoord</label>
-                        <input type="password" name="password" id="password" formControlName="password"
+                        <input required type="password" name="password" id="password" formControlName="password"
                             class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
 
 
-                    <!-- <div class="col-span-6 sm:col-span-3">
-                        <label for="password2" class="block text-sm font-medium text-gray-700">Herhaal
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="confirm" class="block text-sm font-medium text-gray-700">Herhaal
                             wachtwoord</label>
-                        <input type="password" name="password2" id="password2" formControlName="password2"
+                        <input required type="password" name="confirm" id="confirm" formControlName="confirm"
                             class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                    </div> -->
+                    </div>
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="choose-role" class="block text-sm font-medium text-gray-700">Role</label>
-                        <select id="choose-role" name="role" formControlName="role"
+                        <select required id="choose-role" name="role" formControlName="role"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            <option>user</option>
+                            <option selected>user</option>
                             <option>admin
                             </option>
                         </select>
