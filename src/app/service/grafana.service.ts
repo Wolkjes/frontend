@@ -53,11 +53,27 @@ export class GrafanaService {
     return this.http.post(this.baseUrl+"/dashboards/db", jsonData, this.options).subscribe(data => console.log(data));
   }
 
+  updateCampus(campus_id:number, name:string, campus_name:string) {
+
+    this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => {
+      var dashboard = data;
+
+      dashboard.dashboard.title = name;
+      for(let i = 0; i !== dashboard.dashboard.panels.length;i++){
+        for(let j = 0; j !== dashboard.dashboard.panels[i].targets.length; j++){
+          var test = dashboard.dashboard.panels[i].targets[j].tags[0].value;
+          dashboard.dashboard.panels[i].targets[j].tags[0].value = test.replace(campus_name, name);
+        }
+      }
+
+      return this.http.post(this.baseUrl+"/dashboards/db", dashboard, this.options).subscribe(data => console.log(data));
+    })
+  }
+
   addPanel(sensor: Sensor, campus_id: number, campus_naam: string, lokaal_naam:string){
 
     var dashboard = this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => 
     {
-      console.log(data.dashboard.version+1);
       var panels:any[] = data.dashboard.panels;
       panels.push(
         {

@@ -1,10 +1,6 @@
 import { Component, OnInit, setTestabilityGetter } from '@angular/core';
 import { Campus } from '../model/campus.model';
-import { EventEmitterService } from '../event-emitter.service';
-import { Sensor } from '../model/sensor.model';
-import { SensorService } from '../service/sensor.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { CampusService } from '../service/campus.service';
 import { GrafanaService } from '../service/grafana.service';
 

@@ -25,17 +25,26 @@ function add(){
   var e = document.getElementById("choose_sensor");
   var sensor = e.value;
   var lokaal = document.getElementById("sensorNaam").value;
-  console.log(sensor);
   var message = new Paho.MQTT.Message(JSON.stringify({"value": false, "key": "new", "lokaal": lokaal, "campus": campus}));
   message.destinationName = "new/" + sensor;
+  client.send(message);
+}
+
+function changeCampus(){
+  var name = document.getElementById("name_campus").value;
+  var messageFlag = new Paho.MQTT.Message(JSON.stringify({"key": "name", "name": name}));
+  messageFlag.destinationName = name + "/changename";
+  messageFlag.retained = true;
+  client.send(messageFlag);
+  var message = new Paho.MQTT.Message(JSON.stringify({"key": "name", "name": name}));
+  message.destinationName = campus + "/changename";
+  message.retained = true;
   client.send(message);
 }
 
 function threshold(){
   var warning = document.getElementById("maxGreen").value;
   var critical = document.getElementById("maxOrange").value;
-  console.log(warning);
-  console.log(critical);
   var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
   message.destinationName = campus + "/threshold" ;
   client.send(message);
@@ -44,7 +53,6 @@ function threshold(){
   const background = document.getElementsByClassName("threshold");
   const waardes = document.getElementsByClassName("threshold_text");
 
-  console.log(waardes);
   for (let i = 0; i < waardes.length; i++) {
     if(waardes[i].value > critical){
       background[i].classList.add("bg-red-500");
@@ -87,8 +95,6 @@ function onMessageArrived(message) {
       let co2IndiP = document.getElementById("co2P");
       let critical = jsonMessage.critical;
       let warning = jsonMessage.warning;   
-      console.log(warning);
-      console.log(critical); 
       if (co2P !== null){
         co2P.textContent = jsonMessage.value;
         let color = document.getElementById(destination+"color");
