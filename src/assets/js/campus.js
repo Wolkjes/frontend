@@ -56,20 +56,23 @@ function threshold(){
 
   for (let i = 0; i < waardes.length; i++) {
     if(waardes[i].value > critical){
+      background[i].classList.remove("bg-green-500");
+      background[i].classList.remove("bg-orange-500");
+      background[i].classList.remove("bg-red-500");
+      background[i].classList.remove("bg-gray-400");
       background[i].classList.add("bg-red-500");
-      background[i].classList.remove("bg-orange-500");
-      background[i].classList.remove("bg-green-500");
-      background[i].classList.remove("bg-gray-400")
     }else if(collection[i].value > warning){
-      background[i].classList.add("bg-orange-500");
-      background[i].classList.remove("bg-red-500");
       background[i].classList.remove("bg-green-500");
-      background[i].classList.remove("bg-gray-400")
-    }else{
-      background[i].classList.add("bg-green-500");
       background[i].classList.remove("bg-orange-500");
       background[i].classList.remove("bg-red-500");
-      background[i].classList.remove("bg-gray-400")
+      background[i].classList.remove("bg-gray-400");
+      background[i].classList.add("bg-orange-500");
+    }else{
+      background[i].classList.remove("bg-green-500");
+      background[i].classList.remove("bg-orange-500");
+      background[i].classList.remove("bg-red-500");
+      background[i].classList.remove("bg-gray-400");
+      background[i].classList.add("bg-green-500");
     }
   }
 }
@@ -101,21 +104,23 @@ function onMessageArrived(message) {
         co2P.textContent = jsonMessage.value;
         let color = document.getElementById(destination+"color");
         if(co2 > critical){
-          color.classList.add("bg-red-500");
-          color.classList.remove("bg-orange-500");
           color.classList.remove("bg-green-500");
-          color.classList.remove("bg-gray-400")
+          color.classList.remove("bg-orange-500");
+          color.classList.remove("bg-red-500");
+          color.classList.remove("bg-gray-400");
+          color.classList.add("bg-red-500");
         }else if(co2 > warning){
-            color.classList.add("bg-orange-500");
-            color.classList.remove("bg-red-500");
-            color.classList.remove("bg-green-500");
-          color.classList.remove("bg-gray-400")
-            
+          color.classList.remove("bg-green-500");
+          color.classList.remove("bg-orange-500");
+          color.classList.remove("bg-red-500");
+          color.classList.remove("bg-gray-400");
+          color.classList.add("bg-orange-500");
         }else{
-            color.classList.add("bg-green-500");
-            color.classList.remove("bg-orange-500");
-            color.classList.remove("bg-red-500");
-          color.classList.remove("bg-gray-400")
+          color.classList.remove("bg-green-500");
+          color.classList.remove("bg-orange-500");
+          color.classList.remove("bg-red-500");
+          color.classList.remove("bg-gray-400");
+          color.classList.add("bg-green-500");
         }
 
       }else if(sensor_id === id ){
