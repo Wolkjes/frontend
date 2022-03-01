@@ -8,6 +8,12 @@ import { Campus } from '../model/campus.model';
 })
 export class CampusService {
 
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json'
+    });
+    
+  private options = { headers: this.headers };
+
   private baseUrl = "http://localhost:8080/wolkjes/campus";
   private campus:Campus;
 
@@ -30,16 +36,13 @@ export class CampusService {
   
 
   create(data: any): Observable<Campus[]>{
-    let headers = new HttpHeaders({
-    'Content-Type': 'application/json'
-    });
-    
-    let options = { headers: headers };
-    return this.http.post<Campus[]>(this.baseUrl+"/", data, options);
+    return this.http.post<Campus[]>(this.baseUrl+"/", data, this.options);
   }
 
-  update(campus_id: any, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${campus_id}`, data);
+  update(campus_id: number, data: any){
+    return this.http.put(this.baseUrl+"/"+campus_id, {name:data}, this.options).subscribe(data => {
+      console.log(data);
+    });
   }
 
   delete(campus_id: any):any{
