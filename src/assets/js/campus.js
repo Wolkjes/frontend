@@ -47,6 +47,7 @@ function threshold(){
   var critical = document.getElementById("maxOrange").value;
   var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
   message.destinationName = campus + "/threshold" ;
+  message.retained = true;
   client.send(message);
 
   window.location.reload();
