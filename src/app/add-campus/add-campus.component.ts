@@ -19,7 +19,7 @@ export class AddCampusComponent implements OnInit {
     this.newCampus = fb.group({
       lokaal_campus: [""],
     });
-   }
+  }
 
   addCampus() {
     var data = {
