@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { Campus } from '../model/campus.model';
 import { Lokaal } from '../model/lokaal.model';
@@ -9,7 +9,19 @@ import { Lokaal } from '../model/lokaal.model';
 })
 export class LokaalService {
 
-  private baseUrl = 'http://localhost:8080/wolkjes/lokaal/';
+  private baseUrl = 'http://localhost:8080/wolkjes/lokaal';
+
+  private headers = new HttpHeaders({
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": 'YOUR URL HERE',
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Expose-Headers": "Set-Cookie",
+    "Access-Control-Allow-Headers": "Content-Type, x-xsrf-token, X-Requested-With, Accept, Expires, Last-Modified, Cache-Control",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Authorization": "Bearer eyJrIjoiNUp1dDZKMjFZcE9ZWk5hclRDN29HQVh2MzBJM0xOR04iLCJuIjoiS2V5IiwiaWQiOjF9",
+  });
+
+  private options;
 
   constructor(private http: HttpClient) {
 
@@ -31,8 +43,12 @@ export class LokaalService {
     return this.http.put(`${this.baseUrl}/${campus_id}`, data);
   }
 
-  delete(campus_id: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${campus_id}`);
+  delete(lokaal_id: any, campus_naam:string, lokaal_naam:any){
+    this. options = { 
+      headers: this.headers,
+      body:{"campus_naam":campus_naam, "lokaal_naam": lokaal_naam}
+     };
+    return this.http.request("DELETE", `${this.baseUrl}/${lokaal_id}`, this.options).subscribe();
   }
 
 

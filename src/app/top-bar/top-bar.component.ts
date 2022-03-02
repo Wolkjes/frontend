@@ -36,7 +36,7 @@ export class TopBarComponent implements OnInit {
 
     setTimeout(() => {
       window.location.reload();
-    }, 1000);
+    }, 500);
   }
 
   getCampuses(): void{

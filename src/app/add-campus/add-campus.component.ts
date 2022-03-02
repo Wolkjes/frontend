@@ -1,10 +1,6 @@
 import { Component, OnInit, setTestabilityGetter } from '@angular/core';
 import { Campus } from '../model/campus.model';
-import { EventEmitterService } from '../event-emitter.service';
-import { Sensor } from '../model/sensor.model';
-import { SensorService } from '../service/sensor.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { CampusService } from '../service/campus.service';
 import { GrafanaService } from '../service/grafana.service';
 
@@ -23,7 +19,7 @@ export class AddCampusComponent implements OnInit {
     this.newCampus = fb.group({
       lokaal_campus: [""],
     });
-   }
+  }
 
   addCampus() {
     var data = {
@@ -32,16 +28,22 @@ export class AddCampusComponent implements OnInit {
     this.campusService.create(data).subscribe(data => {
       this.campus = data;
       this.update(data);
-    });
-    //this.campusService.getLatest();
-    
+    });    
   }
 
   update(data:any): void{
     this.campus = data;
     this.grafanaService.create(this.campus[0])
 
+    this.setCookie("activeCampusId", this.campus[0].campus_id);
+    this.setCookie("activeCampusNaam", this.campus[0].name)
+
     window.location.reload();
+  }
+
+  setCookie(name, value, days = 7, path = '/') {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString()
+    document.cookie = name + "=" + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
   }
 
   ngOnInit(): void {

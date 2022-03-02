@@ -12,8 +12,8 @@ export class ChangeThresholdsComponent implements OnInit {
 
   constructor(private eventEmitterService: EventEmitterService, private fb:FormBuilder) {
     this.thresholds = this.fb.group({
-      maxGreen:[0],
-      maxOrange:[0]
+      maxGreen:[500],
+      maxOrange:[700]
     })
   }
 

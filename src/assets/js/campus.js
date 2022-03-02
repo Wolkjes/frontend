@@ -25,42 +25,54 @@ function add(){
   var e = document.getElementById("choose_sensor");
   var sensor = e.value;
   var lokaal = document.getElementById("sensorNaam").value;
-  console.log(sensor);
   var message = new Paho.MQTT.Message(JSON.stringify({"value": false, "key": "new", "lokaal": lokaal, "campus": campus}));
   message.destinationName = "new/" + sensor;
+  client.send(message);
+}
+
+function changeCampus(){
+  var name = document.getElementById("name_campus").value;
+  var messageFlag = new Paho.MQTT.Message(JSON.stringify({"key": "name", "name": name}));
+  messageFlag.destinationName = name + "/changename";
+  messageFlag.retained = true;
+  client.send(messageFlag);
+  var message = new Paho.MQTT.Message(JSON.stringify({"key": "name", "name": name}));
+  message.destinationName = campus + "/changename";
+  message.retained = true;
   client.send(message);
 }
 
 function threshold(){
   var warning = document.getElementById("maxGreen").value;
   var critical = document.getElementById("maxOrange").value;
-  console.log(warning);
-  console.log(critical);
   var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
   message.destinationName = campus + "/threshold" ;
+  message.retained = true;
   client.send(message);
 
   window.location.reload();
   const background = document.getElementsByClassName("threshold");
   const waardes = document.getElementsByClassName("threshold_text");
 
-  console.log(waardes);
   for (let i = 0; i < waardes.length; i++) {
     if(waardes[i].value > critical){
+      background[i].classList.remove("bg-green-500");
+      background[i].classList.remove("bg-orange-500");
+      background[i].classList.remove("bg-red-500");
+      background[i].classList.remove("bg-gray-400");
       background[i].classList.add("bg-red-500");
-      background[i].classList.remove("bg-orange-500");
-      background[i].classList.remove("bg-green-500");
-      background[i].classList.remove("bg-gray-400")
     }else if(collection[i].value > warning){
-      background[i].classList.add("bg-orange-500");
-      background[i].classList.remove("bg-red-500");
       background[i].classList.remove("bg-green-500");
-      background[i].classList.remove("bg-gray-400")
-    }else{
-      background[i].classList.add("bg-green-500");
       background[i].classList.remove("bg-orange-500");
       background[i].classList.remove("bg-red-500");
-      background[i].classList.remove("bg-gray-400")
+      background[i].classList.remove("bg-gray-400");
+      background[i].classList.add("bg-orange-500");
+    }else{
+      background[i].classList.remove("bg-green-500");
+      background[i].classList.remove("bg-orange-500");
+      background[i].classList.remove("bg-red-500");
+      background[i].classList.remove("bg-gray-400");
+      background[i].classList.add("bg-green-500");
     }
   }
 }
@@ -80,34 +92,35 @@ function onMessageArrived(message) {
   }else{
     let jsonMessage = JSON.parse(message.payloadString);
     let sensor_id = jsonMessage.sensor_id;
-    if  (jsonMessage.variable === "CO2"){
+    let variable = message.destinationName.split("/")[2]
+    if  (variable === "co2"){
       let co2 = jsonMessage.value;
       let destination = message.destinationName.split("/")[1]
       let co2P = document.getElementById(destination);
       let co2IndiP = document.getElementById("co2P");
       let critical = jsonMessage.critical;
       let warning = jsonMessage.warning;   
-      console.log(warning);
-      console.log(critical); 
       if (co2P !== null){
         co2P.textContent = jsonMessage.value;
         let color = document.getElementById(destination+"color");
         if(co2 > critical){
-          color.classList.add("bg-red-500");
-          color.classList.remove("bg-orange-500");
           color.classList.remove("bg-green-500");
-          color.classList.remove("bg-gray-400")
+          color.classList.remove("bg-orange-500");
+          color.classList.remove("bg-red-500");
+          color.classList.remove("bg-gray-400");
+          color.classList.add("bg-red-500");
         }else if(co2 > warning){
-            color.classList.add("bg-orange-500");
-            color.classList.remove("bg-red-500");
-            color.classList.remove("bg-green-500");
-          color.classList.remove("bg-gray-400")
-            
+          color.classList.remove("bg-green-500");
+          color.classList.remove("bg-orange-500");
+          color.classList.remove("bg-red-500");
+          color.classList.remove("bg-gray-400");
+          color.classList.add("bg-orange-500");
         }else{
-            color.classList.add("bg-green-500");
-            color.classList.remove("bg-orange-500");
-            color.classList.remove("bg-red-500");
-          color.classList.remove("bg-gray-400")
+          color.classList.remove("bg-green-500");
+          color.classList.remove("bg-orange-500");
+          color.classList.remove("bg-red-500");
+          color.classList.remove("bg-gray-400");
+          color.classList.add("bg-green-500");
         }
 
       }else if(sensor_id === id ){
@@ -129,13 +142,13 @@ function onMessageArrived(message) {
           }
         }
       }
-    }else if(jsonMessage.variable === "humidity" && sensor_id === id){
+    }else if(variable === "hum" && sensor_id === id){
       let humIndiP = document.getElementById("humidityP");
       if (humIndiP !== null){
         humIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " %H";
       }
       
-    }else if (jsonMessage.variable === "temperature" && sensor_id === id){
+    }else if (variable === "temp" && sensor_id === id){
       let tempIndiP = document.getElementById("temperatuurP");
       tempIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " °C";
     }
