@@ -36,7 +36,6 @@ export class AddUserComponent implements OnInit {
   }
 
   addUser() {
-    
     const salt = bcrypt.genSaltSync(10);
     var data = {
       username:this.newUser.value.username,

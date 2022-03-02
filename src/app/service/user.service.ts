@@ -9,7 +9,6 @@ import { User } from "../model/user.model";
   
 export class UserService {
     private baseURL = "http://localhost:8080/wolkjes/user"
-    private user:User;
 
     constructor(private http: HttpClient){
         
@@ -22,5 +21,13 @@ export class UserService {
 
         let options = { headers: headers };
         return this.http.post<User[]>(this.baseURL+"/", data, options);
+    }
+
+    getAll(data: any): Observable<User[]> {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+
+        return this.http.get<User[]>(this.baseURL + "/" + data);
     }
 }
