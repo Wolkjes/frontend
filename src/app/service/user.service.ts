@@ -30,4 +30,12 @@ export class UserService {
 
         return this.http.get<User[]>(this.baseURL + "/" + data);
     }
+
+    update(data:any, user_id:number){
+        return this.http.put<User[]>(this.baseURL + "/"+user_id, data).subscribe();  
+    }
+
+    delete(user_id:number){
+        return this.http.delete<User[]>(this.baseURL + "/"+user_id).subscribe();  
+    }
 }

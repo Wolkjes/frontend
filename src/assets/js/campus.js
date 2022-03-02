@@ -127,11 +127,11 @@ function onMessageArrived(message) {
         if(co2IndiP !== null){
           co2IndiP.textContent = jsonMessage.value + " PPM";
          
-          if (jsonMessage.value > 800){
+          if (jsonMessage.value > critical){
             co2IndiP.classList.add("text-red-500");
             co2IndiP.classList.remove("text-orange-500");
             co2IndiP.classList.remove("text-green-500");
-          }else if(co2 > 700){
+          }else if(co2 > warning){
             co2IndiP.classList.add("text-orange-500");
             co2IndiP.classList.remove("text-red-500");
             co2IndiP.classList.remove("text-green-500");

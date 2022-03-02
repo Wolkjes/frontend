@@ -44,8 +44,10 @@ export class AddUserComponent implements OnInit {
       role:this.newUser.value.role,
       campus_id:this.campus_id
     }
-    this.userService.create(data).subscribe(data => {
-      this.user = data;
-    })
+    this.userService.create(data).subscribe();
+
+    setTimeout(() => {
+      window.location.reload();
+    },100)
   }
 }
