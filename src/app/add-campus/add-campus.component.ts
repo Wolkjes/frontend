@@ -28,16 +28,22 @@ export class AddCampusComponent implements OnInit {
     this.campusService.create(data).subscribe(data => {
       this.campus = data;
       this.update(data);
-    });
-    //this.campusService.getLatest();
-    
+    });    
   }
 
   update(data:any): void{
     this.campus = data;
     this.grafanaService.create(this.campus[0])
 
+    this.setCookie("activeCampusId", this.campus[0].campus_id);
+    this.setCookie("activeCampusNaam", this.campus[0].name)
+
     window.location.reload();
+  }
+
+  setCookie(name, value, days = 7, path = '/') {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString()
+    document.cookie = name + "=" + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path
   }
 
   ngOnInit(): void {

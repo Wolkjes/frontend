@@ -47,6 +47,7 @@ function threshold(){
   var critical = document.getElementById("maxOrange").value;
   var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
   message.destinationName = campus + "/threshold" ;
+  message.retained = true;
   client.send(message);
 
   window.location.reload();
@@ -88,7 +89,8 @@ function onMessageArrived(message) {
   }else{
     let jsonMessage = JSON.parse(message.payloadString);
     let sensor_id = jsonMessage.sensor_id;
-    if  (jsonMessage.variable === "CO2"){
+    let variable = message.destinationName.split("/")[2]
+    if  (variable === "co2"){
       let co2 = jsonMessage.value;
       let destination = message.destinationName.split("/")[1]
       let co2P = document.getElementById(destination);
@@ -135,13 +137,13 @@ function onMessageArrived(message) {
           }
         }
       }
-    }else if(jsonMessage.variable === "humidity" && sensor_id === id){
+    }else if(variable === "hum" && sensor_id === id){
       let humIndiP = document.getElementById("humidityP");
       if (humIndiP !== null){
         humIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " %H";
       }
       
-    }else if (jsonMessage.variable === "temperature" && sensor_id === id){
+    }else if (variable === "temp" && sensor_id === id){
       let tempIndiP = document.getElementById("temperatuurP");
       tempIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " °C";
     }

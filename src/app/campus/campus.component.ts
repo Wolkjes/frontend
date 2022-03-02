@@ -3,6 +3,7 @@ import { EventEmitterService } from '../event-emitter.service';
 import { LokaalService } from '../service/lookaal.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Lokaal } from '../model/lokaal.model';
+import { Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-campus',
@@ -13,9 +14,12 @@ import { Lokaal } from '../model/lokaal.model';
 
 export class CampusComponent implements OnInit {
 
-  private campus_id:number;
+  campus_id:number;
   naam:string;
   lokalen:Lokaal[];
+  lokaal_id:number;
+  message = 1;
+  messageLokaalNaam:string;
 
   addSensorIsShown: boolean = false;
   editSensorIsShown: boolean = false;
@@ -61,8 +65,10 @@ export class CampusComponent implements OnInit {
     this.editSensorIsShown = ! this.editSensorIsShown;
   }
 
-  toggleDeleteLokaal() {
+  toggleDeleteLokaal(currentId:number, currentNaam:string) {
     this.deleteLokaalIsShown = ! this.deleteLokaalIsShown;
+    this.message = currentId;
+    this.messageLokaalNaam = currentNaam;
   }
 
   toggleEditCampus(){

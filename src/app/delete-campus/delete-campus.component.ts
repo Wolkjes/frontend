@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { EventEmitterService } from '../event-emitter.service';
 import { Campus } from '../model/campus.model';
-import { Sensor } from '../model/sensor.model';
-import { SensorService } from '../service/sensor.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CampusService } from '../service/campus.service';
+import { GrafanaService } from '../service/grafana.service';
 
 @Component({
   selector: 'app-delete-campus',
@@ -16,7 +15,7 @@ export class DeleteCampusComponent implements OnInit {
   private campus: Campus[];
   campusDel: FormGroup;
 
-  constructor(private eventEmitterService: EventEmitterService, fb: FormBuilder,  private campusService: CampusService,private cookieService: CookieService) { 
+  constructor(private eventEmitterService: EventEmitterService, fb: FormBuilder,  private campusService: CampusService,private cookieService: CookieService, private grafanaService:GrafanaService) { 
     this.campusDel = fb.group({
       confirm_message: [""],
     });
@@ -27,20 +26,28 @@ export class DeleteCampusComponent implements OnInit {
       alert("PLS confirm that you want to delete the campus")
     }else{
       this.campusService.delete(this.cookieService.get("activeCampusId"));
-      this.campusService.getAll().subscribe(data => {
-        this.campus = data;
-        this.update(data);
-      });
+      this.grafanaService.deleteDashboard(this.cookieService.get("activeCampusId"));
+      setTimeout(() => {
+        this.campusService.getAll().subscribe(data => {
+          this.campus = data;
+          this.update(data);
+        });
+      }, 500);
     }
   }
 
   update(data:any): void{
-    this.setCookie("activeCampusId", this.campus[0].campus_id);
-    this.setCookie("activeCampusNaam", this.campus[0].name);
+    if (this.campus.length === 0){
+      this.setCookie("activeCampusId", 0);
+      this.setCookie("activeCampusNaam", "PLS select a campus");
+    }else{
+      this.setCookie("activeCampusId", this.campus[0].campus_id);
+      this.setCookie("activeCampusNaam", this.campus[0].name);
+    }
     
     setTimeout(() => {
       window.location.reload();
-    }, 1000);
+    }, 500);
   }
 
   setCookie(name, value, days = 7, path = '/') {

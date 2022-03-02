@@ -33,9 +33,9 @@ export class EditCampusComponent implements OnInit {
 
     this.setCookie("activeCampusNaam", this.campusFrom.value.name_campus);
 
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 500);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   }
 
   setCookie(name, value, days = 7, path = '/') {
