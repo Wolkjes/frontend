@@ -47,7 +47,7 @@ export class CampusComponent implements OnInit {
       }
     }  
  
-  // close all windows from another Component
+  // close all modals
   close() {
     this.addSensorIsShown = false;
     this.editSensorIsShown = false;
