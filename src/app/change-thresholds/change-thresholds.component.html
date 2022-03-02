@@ -2,21 +2,17 @@
     <form action="#" method="POST" [formGroup]="thresholds" (ngSubmit)="addTresholds()" >
         <div class="shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6">
-                <div class="col-span-6 sm:col-span-3">
-                    <div class="flex">
-                        <div class="m-5">
-                            <label for="maxGreen">Groen vanaf 0 tot:</label>
-                            <input type="number" min="0" max="5000" formControlName="maxGreen" name="maxGreen"
-                                id="maxGreen"
-                                class="mt-1 focus:ring-blue-500 focus:blue-500 block w-60 shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-                        <div class="m-5">
-
-                            <label for="maxOrange">Oranje tot:</label>
-                            <input type="number" min="0" max="5000" formControlName="maxOrange" name="maxOrange"
-                                id="maxOrange"
-                                class="w-60 mt-1 focus:ring-blue-500 focus:blue-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 lg:col-span-3">
+                        <label for="maxGreen">Groen vanaf 0 tot:</label>
+                        <input type="number" min="0" max="5000" formControlName="maxGreen" name="maxGreen" id="maxGreen"
+                            class="mt-1 focus:ring-blue-500 focus:blue-500 block w-60 shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="maxOrange">Oranje tot:</label>
+                        <input type="number" min="0" max="5000" formControlName="maxOrange" name="maxOrange"
+                            id="maxOrange"
+                            class="w-60 mt-1 focus:ring-blue-500 focus:blue-500 block shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
                     <li *ngFor="let error of errors" class="col-span-6 bg-red-100 border border-red-400 text-red-700 px-1 py-1 list-none rounded mb-1"  role="alert">
                         <ul class="inline-block">{{error}}</ul>
