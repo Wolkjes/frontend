@@ -25,7 +25,7 @@ export class DeleteCampusComponent implements OnInit {
     if (this.campusDel.value.confirm_message !== document.getElementById("confirm")?.textContent){
       alert("PLS confirm that you want to delete the campus")
     }else{
-      this.campusService.delete(this.cookieService.get("activeCampusId"));
+      this.campusService.delete(this.cookieService.get("activeCampusId"), this.cookieService.get("activeCampusNaam"));
       this.grafanaService.deleteDashboard(this.cookieService.get("activeCampusId"));
       setTimeout(() => {
         this.campusService.getAll().subscribe(data => {

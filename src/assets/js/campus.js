@@ -11,7 +11,7 @@ function onConnect() {
   client.subscribe("+/+/+")
   client.subscribe("new/+")   //subscribe to our topic
   setInterval(()=>{
-},5000)} 
+},500)} 
 
 const publish = (topic, msg) => {  //takes topic and message string
   let message = new Paho.MQTT.Message(msg);
