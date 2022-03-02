@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { EventEmitterService } from '../event-emitter.service';
 import { User } from '../model/user.model';
 import { UserService } from '../service/user.service';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-users-dashboard',
@@ -13,7 +14,7 @@ export class UsersDashboardComponent implements OnInit {
 
   private campus_id:number;
   users:User[];
-
+  deleteUser:User;
 
   addUserIshown: boolean = false;
   deleteUserIsShown: boolean = false;
@@ -50,9 +51,40 @@ export class UsersDashboardComponent implements OnInit {
   toggleShowAddUser() {
     this.addUserIshown = ! this.addUserIshown;
   }
+  
+  updateUser(user:User){
+    var username = ((<HTMLInputElement>document.getElementById(user.persoon_id + "username")).value);
+    var email = ((<HTMLInputElement>document.getElementById(user.persoon_id + "email")).value);
+    var password = ((<HTMLInputElement>document.getElementById(user.persoon_id + "password")).value);
+    var role = ((<HTMLInputElement>document.getElementById(user.persoon_id + "role")).value);
+    const salt = bcrypt.genSaltSync(10);
+    var data;
 
-  toggleDeleteUser() {
+    if  (password.trim() !== ""){
+      data = {
+        username:username,
+        email:email,
+        password:bcrypt.hashSync(password, salt),
+        role:role
+      }
+    }else{
+      data = {
+        username:username,
+        email:email,
+        password: password,
+        role:role
+      }
+    }
+    this.userService.update(data, user.persoon_id);
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  }
+
+  toggleDeleteUser(user:User) {
     this.deleteUserIsShown = ! this.deleteUserIsShown
+    this.deleteUser = user;
   }
 
 }
