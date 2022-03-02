@@ -4,6 +4,7 @@ import { EventEmitterService } from '../event-emitter.service';
 import { User } from '../model/user.model'
 import { UserService } from '../service/user.service';
 import * as bcrypt from 'bcryptjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-add-user',
@@ -12,16 +13,18 @@ import * as bcrypt from 'bcryptjs';
 })
 export class AddUserComponent implements OnInit {
 
+  private campus_id:number;
   newUser: FormGroup;
   private user:User[];
 
-  constructor(fb: FormBuilder, private eventEmitterService: EventEmitterService, private userService: UserService) {
+  constructor(fb: FormBuilder, private eventEmitterService: EventEmitterService, private userService: UserService, private cookieService:CookieService) {
     this.newUser = fb.group({
       username:[""],
       email:[""],
       password:[""],
       role:[""]
     });
+    this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
   } 
 
   ngOnInit(): void {
@@ -39,7 +42,8 @@ export class AddUserComponent implements OnInit {
       username:this.newUser.value.username,
       email:this.newUser.value.email,
       password: bcrypt.hashSync(this.newUser.value.password, salt),
-      role:this.newUser.value.role
+      role:this.newUser.value.role,
+      campus_id:this.campus_id
     }
     this.userService.create(data).subscribe(data => {
       this.user = data;
