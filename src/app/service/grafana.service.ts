@@ -74,6 +74,7 @@ export class GrafanaService {
 
     var dashboard = this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => 
     {
+      console.log(sensor.id);
       var panels:any[] = data.dashboard.panels;
       panels.push(
         {
@@ -330,7 +331,8 @@ export class GrafanaService {
             ]
           }
         ],
-        "datasource": null
+        "datasource": null,
+        "title": sensor.lokaal_naam.toString()
       });
       console.log(panels);
       var jsonData = {
@@ -343,6 +345,28 @@ export class GrafanaService {
       }
       return this.http.post(this.baseUrl+"/dashboards/db", jsonData, this.options).subscribe(data => console.log(data));
     })
+  }
+
+  delete(lokaal_naam:string, campus_id:number){
+
+    this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => {
+    var dashboard = data;
+
+    for(let i = 0; i < dashboard.dashboard.panels.length; i++){
+      console.log(i);
+      console.log(dashboard.dashboard.panels[i].title)
+      if  (dashboard.dashboard.panels[i].title === lokaal_naam){
+        dashboard.dashboard.panels.splice(i,1);
+      }
+
+    }
+    return this.http.post(this.baseUrl+"/dashboards/db", dashboard, this.options).subscribe(data => console.log(data));
+    })
+  }
+
+  deleteDashboard(campus_id:any){
+
+      return this.http.delete(this.baseUrl + "/dashboards/uid/"+ campus_id, this.options).subscribe(data => console.log(data));
   }
 
 }

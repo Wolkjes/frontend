@@ -49,7 +49,6 @@ export class CampusService {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
       });
-      console.log(campus_id)
     return this.http.delete<any>(this.baseUrl+"/"+campus_id).subscribe(data => console.log(data));
     
   }
