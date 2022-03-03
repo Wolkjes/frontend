@@ -50,8 +50,6 @@ export class SingleSensorComponent implements OnInit {
 
   update(data:any): void{
     this.sensor = data;
-    console.log(this.sensor[0])
-    console.log(this.imgPath)
     this.panel_id = this.sensor[0].id
     this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl("http://188.166.43.149:3000/d-solo/" + this.campus_id +"/" + this.campus_naam + "?orgId=1&theme=light&panelId=" + this.panel_id + "&refresh=4s");
   }

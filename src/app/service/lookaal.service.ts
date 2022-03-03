@@ -39,8 +39,8 @@ export class LokaalService {
     return this.http.post(this.baseUrl, data);
   }
 
-  update(campus_id: any, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${campus_id}`, data);
+  update(lokaal_id: any, data: any){
+    return this.http.put(`${this.baseUrl}/${lokaal_id}`, data).subscribe();
   }
 
   delete(lokaal_id: any, campus_naam:string, lokaal_naam:any){

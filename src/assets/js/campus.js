@@ -22,12 +22,17 @@ const publish = (topic, msg) => {  //takes topic and message string
 client.onMessageArrived = onMessageArrived;
 
 function add(){
-  var e = document.getElementById("choose_sensor");
-  var sensor = e.value;
-  var lokaal = document.getElementById("sensorNaam").value;
-  var message = new Paho.MQTT.Message(JSON.stringify({"value": false, "key": "new", "lokaal": lokaal, "campus": campus}));
-  message.destinationName = "new/" + sensor;
-  client.send(message);
+  if (document.getElementById("sensorNaam").classList.contains('ng-valid') && document.getElementById("choose_sensor").classList.contains('ng-valid')){
+    console.log("valid");
+    var e = document.getElementById("choose_sensor");
+    var sensor = e.value;
+    var lokaal = document.getElementById("sensorNaam").value;
+    var message = new Paho.MQTT.Message(JSON.stringify({"value": false, "key": "new", "lokaal": lokaal, "campus": campus}));
+    message.destinationName = "new/" + sensor;
+    client.send(message);
+  }else{
+    console.log("invalid")
+  }
 }
 
 function changeCampus(){

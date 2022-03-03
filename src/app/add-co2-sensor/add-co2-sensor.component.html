@@ -3,12 +3,13 @@
         <div class="shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6">
                 <div class="grid grid-cols-6 gap-6">
-                    <div class="col-span-6 sm:col-span-3">
+                    <div class="col-span-6 sm:col-span-3 form-group">
                         <label for="sensorNaam" class="block text-sm font-medium text-gray-700">
                             Naam
                         </label>
-                        <input type="text" formControlName="sensorNaam" name="sensorNaam" id="sensorNaam"
-                            class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        <input type="text" formControlName="sensorNaam" id="sensorNaam"
+                            class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md form-control">
+                            
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
@@ -24,6 +25,9 @@
                         </select>
                     </div>
                 </div>
+                <li *ngFor="let error of errors" class="border border-red-400 text-red-700 my-1 px-1 py-1 rounded">
+                    <ul class="inline-block">{{error}}</ul>
+                </li>
             </div>
             <div class="flex justify-end bg-gray-50">
                 <div class="px-4 py-3 text-right sm:px-0">

@@ -18,8 +18,9 @@ export class CampusComponent implements OnInit {
   naam:string;
   lokalen:Lokaal[];
   lokaal_id:number;
-  message = 1;
+  message:number;
   messageLokaalNaam:string;
+  messageLokaalId:number;
 
   addSensorIsShown: boolean = false;
   editSensorIsShown: boolean = false;
@@ -61,8 +62,10 @@ export class CampusComponent implements OnInit {
     this.addSensorIsShown = ! this.addSensorIsShown;
   }
 
-  toggleShowEditSensor() {
+  toggleShowEditSensor(currentId:number, currentNaam:string) {
     this.editSensorIsShown = ! this.editSensorIsShown;
+    this.message = currentId;
+    this.messageLokaalNaam = currentNaam;
   }
 
   toggleDeleteLokaal(currentId:number, currentNaam:string) {
