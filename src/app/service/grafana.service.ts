@@ -380,7 +380,7 @@ export class GrafanaService {
       }
 
     }
-    return this.http.post(this.baseUrl+"/dashboards/db", dashboard, this.options);
+    return this.http.post(this.baseUrl+"/dashboards/db", dashboard, this.options).subscribe();
     })
   }
 
