@@ -20,8 +20,17 @@ export class AddCo2SensorComponent implements OnInit {
   sensors: Sensor[] = [];
   newSensor = new FormGroup({
     sensorNaam: new FormControl('', [
+<<<<<<< HEAD
       Validators.required,
       Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)
+=======
+<<<<<<< HEAD
+      Validators.required
+=======
+      Validators.required,
+      Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)
+>>>>>>> 8b29646 (added validation on add user form)
+>>>>>>> 8feb630 (added validation on add user form)
     ]),
     choose_sensor: new FormControl('', [
       Validators.required

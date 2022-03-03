@@ -49,10 +49,17 @@ export class AddUserComponent implements OnInit {
   } 
 
   ngOnInit(): void {
+<<<<<<< HEAD
     // this.userService.emails().subscribe(data => {
     //   console.log(data)
     //   this.users = data}
     //   )
+=======
+    this.userService.emails().subscribe(data => {
+      console.log(data)
+      this.users = data}
+      )
+>>>>>>> 8feb630 (added validation on add user form)
   }
 
   get username(){
@@ -84,6 +91,7 @@ export class AddUserComponent implements OnInit {
     this.errors = [];
     if (this.username?.invalid){
       this.errors.push("username mag niet leeg zijn.")
+<<<<<<< HEAD
     }
     if (this.email?.invalid){
       this.errors.push("Email is niet van het juiste formaat")
@@ -105,6 +113,29 @@ export class AddUserComponent implements OnInit {
     // if (this.users.includes(this.newUser.value.email)){
     //   this.errors.push("Deze email bestaat al. Kies een andere email")
     // }
+=======
+    }
+    if (this.email?.invalid){
+      this.errors.push("Email is niet van het juiste formaat")
+    }
+    if (this.email?.invalid)
+    if (this.password?.invalid){
+      this.errors.push("the password can't be empty")
+    }
+    if (this.role?.invalid){
+      this.errors.push("De role mag niet leeg zijn")
+    }
+    if (this.newUser.value.password != this.newUser.value.confirm){
+      this.errors.push("De wachtwoorden moeten hetzelfde zijn.")
+    }
+    
+    console.log(this.users)
+    
+    // console.log(this.users.includes(this.newUser.value.email))
+    if (this.users.includes(this.newUser.value.email)){
+      this.errors.push("Deze email bestaat al. Kies een andere email")
+    }
+>>>>>>> 8feb630 (added validation on add user form)
 
     if (this.errors.length ===0){
       const salt = bcrypt.genSaltSync(10);
