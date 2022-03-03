@@ -86,6 +86,7 @@ function threshold(){
 }
 
 function onMessageArrived(message) {
+  let jsonMessage = JSON.parse(message.payloadString);
   if (message.destinationName.substring(0,3) === "new"){
     var idString = message.destinationName.substring(4);
       var xhr = new XMLHttpRequest();
@@ -97,11 +98,26 @@ function onMessageArrived(message) {
           new: true,
           id: null
        }));
+  }else if(message.destinationName.split("/")[2] === "offline" && jsonMessage.key == "offline"){
+    let destination = message.destinationName.split("/")[1]
+    let co2P = document.getElementById(destination);
+    console.log(message.destinationName)
+    console.log(destination)
+    if (co2P !== null){
+      console.log(jsonMessage)
+      co2P.textContent = "Sensor is offline😢";
+      let color = document.getElementById(destination+"color");
+      color.classList.remove("bg-green-500");
+      color.classList.remove("bg-orange-500");
+      color.classList.remove("bg-red-500");
+      color.classList.remove("bg-gray-400");
+      color.classList.add("bg-gray-400");
+    }
   }else{
-    let jsonMessage = JSON.parse(message.payloadString);
     let sensor_id = jsonMessage.sensor_id;
     let variable = message.destinationName.split("/")[2]
     if  (variable === "co2"){
+      console.log(jsonMessage)
       let co2 = jsonMessage.value;
       let destination = message.destinationName.split("/")[1]
       let co2P = document.getElementById(destination);
@@ -134,7 +150,6 @@ function onMessageArrived(message) {
       }else if(sensor_id === id ){
         if(co2IndiP !== null){
           co2IndiP.textContent = jsonMessage.value + " PPM";
-         
           if (jsonMessage.value > critical){
             co2IndiP.classList.add("text-red-500");
             co2IndiP.classList.remove("text-orange-500");
