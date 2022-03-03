@@ -5,7 +5,6 @@ import { SensorService } from '../service/sensor.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { GrafanaService } from '../service/grafana.service';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-co2-sensor',
@@ -18,13 +17,11 @@ export class AddCo2SensorComponent implements OnInit {
   errors:string[] = [];
   sensors: Sensor[] = [];
   newSensor = new FormGroup({
-    sensorNaam: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)
+    sensorNaam: new FormControl('test', [
+      Validators.required
     ]),
     choose_sensor: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)
+      Validators.required
     ])
   });
   private campus_id:number;
@@ -50,7 +47,7 @@ export class AddCo2SensorComponent implements OnInit {
   addSensor(){
     this.errors = [];
     if (this.sensorNaam?.invalid){
-      this.errors.push("Lokaal kan niet leeg zijn!");
+      this.errors.push("klas kan niet leeg zijn!");
     }
     if (this.choose_sensor?.invalid){
       this.errors.push("Selecteer een sensor alstublieft!");
@@ -74,12 +71,13 @@ export class AddCo2SensorComponent implements OnInit {
     }
   }
 
-   update(data:any): void{
-    this.sensor = data;   
+  update(data:any): void{
+    this.sensor = data;
+    this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)
 
-    forkJoin(this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)).subscribe(result => { location.reload(); })
-
-      //window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 800);
   }
 
   getSensors(): void{
