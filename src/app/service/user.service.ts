@@ -34,7 +34,6 @@ export class UserService {
         return this.http.put<User[]>(this.baseURL + "/"+user_id, data).subscribe();  
     }
 
-<<<<<<< HEAD
     delete(data:any):any{
         this.options = {
             headers: this.headers,
@@ -45,13 +44,4 @@ export class UserService {
     // emails(): Observable<User[]> {
     //     return this.http.get<User[]>(this.baseURL+"/emails");
     // }
-=======
-    delete(user_id:number){
-        return this.http.delete<User[]>(this.baseURL + "/"+user_id).subscribe();  
-    }
-
-    emails(): Observable<User[]> {
-        return this.http.get<User[]>(this.baseURL+"/emails");
-    }
->>>>>>> 8feb630 (added validation on add user form)
 }
