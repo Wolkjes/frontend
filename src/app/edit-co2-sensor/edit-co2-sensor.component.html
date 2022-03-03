@@ -2,13 +2,16 @@
     <form action="#" method="POST">
         <div class="shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6">
-                <div class="grid grid-cols-6 gap-6">
-                    <div class="col-span-6 sm:col-span-3">
+                <div class="grid grid-cols-6 gap-6 mb-5">
+                    <div class="col-span-6 col-span-6">
                         <label for="name-sensor" class="block text-sm font-medium text-gray-700">Naam</label>
                         <input type="text" name="name_sensor" id="name_sensor"
                             class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
                 </div>
+                <li *ngFor="let error of errors" class="bg-red-100 border border-red-400 text-red-700 px-1 py-1 list-none rounded mb-1" role="alert">
+                    <ul class="inline-block">{{error}}</ul>                 
+                </li>
             </div>
             <div class="flex justify-end bg-gray-50">
                 <div class="px-4 py-3 text-right sm:px-0">

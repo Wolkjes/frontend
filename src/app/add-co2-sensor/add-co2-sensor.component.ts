@@ -17,11 +17,13 @@ export class AddCo2SensorComponent implements OnInit {
   errors:string[] = [];
   sensors: Sensor[] = [];
   newSensor = new FormGroup({
-    sensorNaam: new FormControl('test', [
-      Validators.required
+    sensorNaam: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)
     ]),
     choose_sensor: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)
     ])
   });
   private campus_id:number;
@@ -47,7 +49,7 @@ export class AddCo2SensorComponent implements OnInit {
   addSensor(){
     this.errors = [];
     if (this.sensorNaam?.invalid){
-      this.errors.push("klas kan niet leeg zijn!");
+      this.errors.push("Lokaal kan niet leeg zijn!");
     }
     if (this.choose_sensor?.invalid){
       this.errors.push("Selecteer een sensor alstublieft!");
