@@ -24,10 +24,6 @@ export class UserService {
     }
 
     getAll(data: any): Observable<User[]> {
-        let headers = new HttpHeaders({
-            'Content-Type': 'application/json'
-        })
-
         return this.http.get<User[]>(this.baseURL + "/" + data);
     }
 
@@ -37,5 +33,9 @@ export class UserService {
 
     delete(user_id:number){
         return this.http.delete<User[]>(this.baseURL + "/"+user_id).subscribe();  
+    }
+
+    emails(): Observable<User[]> {
+        return this.http.get<User[]>(this.baseURL+"/emails");
     }
 }
