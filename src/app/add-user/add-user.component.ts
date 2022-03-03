@@ -49,10 +49,10 @@ export class AddUserComponent implements OnInit {
   } 
 
   ngOnInit(): void {
-    this.userService.emails().subscribe(data => {
-      console.log(data)
-      this.users = data}
-      )
+    // this.userService.emails().subscribe(data => {
+    //   console.log(data)
+    //   this.users = data}
+    //   )
   }
 
   get username(){
@@ -99,12 +99,12 @@ export class AddUserComponent implements OnInit {
       this.errors.push("De wachtwoorden moeten hetzelfde zijn.")
     }
     
-    console.log(this.users)
+    // console.log(this.users)
     
     // console.log(this.users.includes(this.newUser.value.email))
-    if (this.users.includes(this.newUser.value.email)){
-      this.errors.push("Deze email bestaat al. Kies een andere email")
-    }
+    // if (this.users.includes(this.newUser.value.email)){
+    //   this.errors.push("Deze email bestaat al. Kies een andere email")
+    // }
 
     if (this.errors.length ===0){
       const salt = bcrypt.genSaltSync(10);
