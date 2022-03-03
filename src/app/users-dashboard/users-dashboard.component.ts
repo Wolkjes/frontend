@@ -17,7 +17,9 @@ export class UsersDashboardComponent implements OnInit {
   deleteUser:User;
 
   addUserIshown: boolean = false;
+  addUserFromOtherCampusIsShown: boolean = false;
   deleteUserIsShown: boolean = false;
+  
 
   constructor(
     private eventEmitterService: EventEmitterService,
@@ -45,11 +47,16 @@ export class UsersDashboardComponent implements OnInit {
   //to close all modals
   close(){
     this.addUserIshown = false;
+    this.addUserFromOtherCampusIsShown = false;
     this.deleteUserIsShown = false;
   }
 
   toggleShowAddUser() {
     this.addUserIshown = ! this.addUserIshown;
+  }
+
+  toggleShowAddUserFromOtherCampus() {
+    this.addUserFromOtherCampusIsShown = ! this.addUserFromOtherCampusIsShown;
   }
   
   updateUser(user:User){

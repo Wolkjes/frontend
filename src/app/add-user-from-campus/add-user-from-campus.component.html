@@ -1,33 +1,34 @@
 <div class="mt-5 md:mt-0 md:col-span-2 shadow-2xl">
-    <form [formGroup]="newSensor" (ngSubmit)="addSensor()" id="newSensorForm">
+    <form id="newSensorForm">
         <div class="shadow overflow-hidden sm:rounded-md">
             <div class="px-4 py-5 bg-white sm:p-6">
-                <div class="grid grid-cols-6 gap-6 mb-5">
-                    <div class="col-span-6 sm:col-span-3 form-group">
-                        <label for="sensorNaam" class="block text-sm font-medium text-gray-700">
-                            Naam lokaal
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="choose_campus" class="block text-sm font-medium text-gray-700">
+                            Kies campus
                         </label>
-                        <input type="text" formControlName="sensorNaam" id="sensorNaam"
-                            class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md form-control">
-                            
+                        <select id="choose_campus" name="choose_campus" formControlName="choose_campus"
+                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            <option disabled value="">Kies campus</option>
+                            <option >
+                                sensor.sensor_id
+                            </option>
+                        </select>
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="choose_sensor" class="block text-sm font-medium text-gray-700">
-                            Kiessensor
+                        <label for="choose_usesr" class="block text-sm font-medium text-gray-700">
+                            Kies user
                         </label>
-                        <select id="choose_sensor" name="choose_sensor" formControlName="choose_sensor"
+                        <select id="choose_user" name="choose_user" formControlName="choose_user"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                            <option disabled value="">Kies een sensor</option>
-                            <option *ngFor="let sensor of sensors">
-                                {{sensor.sensor_id}}
+                            <option disabled value="">Kies user</option>
+                            <option >
+                                sensor.sensor_id
                             </option>
                         </select>
                     </div>
                 </div>
-                <li *ngFor="let error of errors" class="bg-red-100 border border-red-400 text-red-700 px-1 py-1 list-none rounded mb-1" role="alert">
-                    <ul class="inline-block">{{error}}</ul>                 
-                </li>
             </div>
             <div class="flex justify-end bg-gray-50">
                 <div class="px-4 py-3 text-right sm:px-0">

@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { DeleteLokaalComponent } from './delete-lokaal/delete-lokaal.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ChangeThresholdsComponent } from './change-thresholds/change-thresholds.component';
+import { AddUserFromCampusComponent } from './add-user-from-campus/add-user-from-campus.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { ChangeThresholdsComponent } from './change-thresholds/change-thresholds
     PageNotFoundComponent,
     DeleteLokaalComponent,
     DeleteUserComponent,
-    ChangeThresholdsComponent
+    ChangeThresholdsComponent,
+    AddUserFromCampusComponent
   ],
   imports: [
     BrowserModule,

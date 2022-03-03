@@ -9,7 +9,10 @@ import { User } from "../model/user.model";
   
 export class UserService {
     private baseURL = "http://localhost:8080/wolkjes/user"
-
+    private headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+    });
+    private options;
     constructor(private http: HttpClient){
         
     }
@@ -24,10 +27,6 @@ export class UserService {
     }
 
     getAll(data: any): Observable<User[]> {
-        let headers = new HttpHeaders({
-            'Content-Type': 'application/json'
-        })
-
         return this.http.get<User[]>(this.baseURL + "/" + data);
     }
 
@@ -35,7 +34,14 @@ export class UserService {
         return this.http.put<User[]>(this.baseURL + "/"+user_id, data).subscribe();  
     }
 
-    delete(user_id:number){
-        return this.http.delete<User[]>(this.baseURL + "/"+user_id).subscribe();  
-    }
+    delete(data:any):any{
+        this.options = {
+            headers: this.headers,
+            body:data
+        };
+        return this.http.request("DELETE", this.baseURL+"/", this.options).subscribe();    }
+
+    // emails(): Observable<User[]> {
+    //     return this.http.get<User[]>(this.baseURL+"/emails");
+    // }
 }
