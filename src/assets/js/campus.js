@@ -48,36 +48,40 @@ function changeCampus(){
 }
 
 function threshold(){
-  var warning = document.getElementById("maxGreen").value;
-  var critical = document.getElementById("maxOrange").value;
-  var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
-  message.destinationName = campus + "/threshold" ;
-  message.retained = true;
-  client.send(message);
+  if (document.getElementById("maxGreen").classList.contains('ng-valid') && document.getElementById("maxOrange").classList.contains('ng-valid')){
+    if (document.getElementById("maxGreen").value <= document.getElementById("maxOrange").value){
+      var warning = document.getElementById("maxGreen").value;
+      var critical = document.getElementById("maxOrange").value;
+      var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
+      message.destinationName = campus + "/threshold" ;
+      message.retained = true;
+      client.send(message);
 
-  window.location.reload();
-  const background = document.getElementsByClassName("threshold");
-  const waardes = document.getElementsByClassName("threshold_text");
+      window.location.reload();
+      const background = document.getElementsByClassName("threshold");
+      const waardes = document.getElementsByClassName("threshold_text");
 
-  for (let i = 0; i < waardes.length; i++) {
-    if(waardes[i].value > critical){
-      background[i].classList.remove("bg-green-500");
-      background[i].classList.remove("bg-orange-500");
-      background[i].classList.remove("bg-red-500");
-      background[i].classList.remove("bg-gray-400");
-      background[i].classList.add("bg-red-500");
-    }else if(collection[i].value > warning){
-      background[i].classList.remove("bg-green-500");
-      background[i].classList.remove("bg-orange-500");
-      background[i].classList.remove("bg-red-500");
-      background[i].classList.remove("bg-gray-400");
-      background[i].classList.add("bg-orange-500");
-    }else{
-      background[i].classList.remove("bg-green-500");
-      background[i].classList.remove("bg-orange-500");
-      background[i].classList.remove("bg-red-500");
-      background[i].classList.remove("bg-gray-400");
-      background[i].classList.add("bg-green-500");
+      for (let i = 0; i < waardes.length; i++) {
+        if(waardes[i].value > critical){
+          background[i].classList.remove("bg-green-500");
+          background[i].classList.remove("bg-orange-500");
+          background[i].classList.remove("bg-red-500");
+          background[i].classList.remove("bg-gray-400");
+          background[i].classList.add("bg-red-500");
+        }else if(collection[i].value > warning){
+          background[i].classList.remove("bg-green-500");
+          background[i].classList.remove("bg-orange-500");
+          background[i].classList.remove("bg-red-500");
+          background[i].classList.remove("bg-gray-400");
+          background[i].classList.add("bg-orange-500");
+        }else{
+          background[i].classList.remove("bg-green-500");
+          background[i].classList.remove("bg-orange-500");
+          background[i].classList.remove("bg-red-500");
+          background[i].classList.remove("bg-gray-400");
+          background[i].classList.add("bg-green-500");
+        }
+      }
     }
   }
 }
@@ -113,64 +117,89 @@ function onMessageArrived(message) {
   }else{
     let sensor_id = jsonMessage.sensor_id;
     let variable = message.destinationName.split("/")[2]
-    if  (variable === "co2"){
-      console.log(jsonMessage)
-      let co2 = jsonMessage.value;
-      let destination = message.destinationName.split("/")[1]
-      let co2P = document.getElementById(destination);
-      let co2IndiP = document.getElementById("co2P");
-      let critical = jsonMessage.critical;
-      let warning = jsonMessage.warning;   
-      if (co2P !== null){
-        co2P.textContent = jsonMessage.value;
-        let color = document.getElementById(destination+"color");
-        if(co2 > critical){
-          color.classList.remove("bg-green-500");
-          color.classList.remove("bg-orange-500");
-          color.classList.remove("bg-red-500");
-          color.classList.remove("bg-gray-400");
-          color.classList.add("bg-red-500");
-        }else if(co2 > warning){
-          color.classList.remove("bg-green-500");
-          color.classList.remove("bg-orange-500");
-          color.classList.remove("bg-red-500");
-          color.classList.remove("bg-gray-400");
-          color.classList.add("bg-orange-500");
-        }else{
-          color.classList.remove("bg-green-500");
-          color.classList.remove("bg-orange-500");
-          color.classList.remove("bg-red-500");
-          color.classList.remove("bg-gray-400");
-          color.classList.add("bg-green-500");
-        }
-
-      }else if(sensor_id === id ){
-        if(co2IndiP !== null){
-          co2IndiP.textContent = jsonMessage.value + " PPM";
-          if (jsonMessage.value > critical){
-            co2IndiP.classList.add("text-red-500");
-            co2IndiP.classList.remove("text-orange-500");
-            co2IndiP.classList.remove("text-green-500");
+    if (message.destinationName.split("/")[0] === campus){
+      if  (variable === "co2"){
+        console.log(jsonMessage)
+        let co2 = jsonMessage.value;
+        let destination = message.destinationName.split("/")[1]
+        let co2P = document.getElementById(destination);
+        let co2IndiP = document.getElementById("co2P");
+        let critical = jsonMessage.critical;
+        let warning = jsonMessage.warning;   
+        if (co2P !== null){
+          co2P.textContent = jsonMessage.value;
+          let color = document.getElementById(destination+"color");
+          if(co2 > critical){
+            color.classList.remove("bg-green-500");
+            color.classList.remove("bg-orange-500");
+            color.classList.remove("bg-red-500");
+            color.classList.remove("bg-gray-400");
+            color.classList.add("bg-red-500");
           }else if(co2 > warning){
-            co2IndiP.classList.add("text-orange-500");
-            co2IndiP.classList.remove("text-red-500");
-            co2IndiP.classList.remove("text-green-500");
+            color.classList.remove("bg-green-500");
+            color.classList.remove("bg-orange-500");
+            color.classList.remove("bg-red-500");
+            color.classList.remove("bg-gray-400");
+            color.classList.add("bg-orange-500");
           }else{
-            co2IndiP.classList.add("text-green-500");
-            co2IndiP.classList.remove("text-orange-500");
-            co2IndiP.classList.remove("text-red-500");
+            color.classList.remove("bg-green-500");
+            color.classList.remove("bg-orange-500");
+            color.classList.remove("bg-red-500");
+            color.classList.remove("bg-gray-400");
+            color.classList.add("bg-green-500");
           }
+
+        }else if(sensor_id === id ){
+          if(co2IndiP !== null){
+            co2IndiP.textContent = jsonMessage.value + " PPM";
+            if (jsonMessage.value > critical){
+              co2IndiP.classList.add("text-red-500");
+              co2IndiP.classList.remove("text-orange-500");
+              co2IndiP.classList.remove("text-green-500");
+            }else if(co2 > warning){
+              color.classList.remove("bg-green-500");
+              color.classList.remove("bg-orange-500");
+              color.classList.remove("bg-red-500");
+              color.classList.remove("bg-gray-400");
+              color.classList.add("bg-orange-500");
+            }else{
+              color.classList.remove("bg-green-500");
+              color.classList.remove("bg-orange-500");
+              color.classList.remove("bg-red-500");
+              color.classList.remove("bg-gray-400");
+              color.classList.add("bg-green-500");
+            }
+    
+          }else if(sensor_id === id ){
+            if(co2IndiP !== null){
+              co2IndiP.textContent = jsonMessage.value + " PPM";
+            
+              if (jsonMessage.value > critical){
+                co2IndiP.classList.add("text-red-500");
+                co2IndiP.classList.remove("text-orange-500");
+                co2IndiP.classList.remove("text-green-500");
+              }else if(co2 > warning){
+                co2IndiP.classList.add("text-orange-500");
+                co2IndiP.classList.remove("text-red-500");
+                co2IndiP.classList.remove("text-green-500");
+              }else{
+                co2IndiP.classList.add("text-green-500");
+                co2IndiP.classList.remove("text-orange-500");
+                co2IndiP.classList.remove("text-red-500");
+              }
+            }
+          }
+        }else if(variable === "hum" && sensor_id === id){
+          let humIndiP = document.getElementById("humidityP");
+          if (humIndiP !== null){
+            humIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " %H";
+          }
+          
+        }else if (variable === "temp" && sensor_id === id){
+          let tempIndiP = document.getElementById("temperatuurP");
+          tempIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " °C";
         }
       }
-    }else if(variable === "hum" && sensor_id === id){
-      let humIndiP = document.getElementById("humidityP");
-      if (humIndiP !== null){
-        humIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " %H";
-      }
-      
-    }else if (variable === "temp" && sensor_id === id){
-      let tempIndiP = document.getElementById("temperatuurP");
-      tempIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " °C";
     }
   }
 }
