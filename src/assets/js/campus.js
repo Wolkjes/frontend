@@ -102,10 +102,7 @@ function onMessageArrived(message) {
   }else if(message.destinationName.split("/")[2] === "offline" && jsonMessage.key == "offline"){
     let destination = message.destinationName.split("/")[1]
     let co2P = document.getElementById(destination);
-    console.log(message.destinationName)
-    console.log(destination)
     if (co2P !== null){
-      console.log(jsonMessage)
       co2P.textContent = "Sensor is offline😢";
       let color = document.getElementById(destination+"color");
       color.classList.remove("bg-green-500");
@@ -119,7 +116,6 @@ function onMessageArrived(message) {
     let variable = message.destinationName.split("/")[2]
     if (message.destinationName.split("/")[0] === campus){
       if  (variable === "co2"){
-        console.log(jsonMessage)
         let co2 = jsonMessage.value;
         let destination = message.destinationName.split("/")[1]
         let co2P = document.getElementById(destination);
@@ -148,7 +144,6 @@ function onMessageArrived(message) {
             color.classList.remove("bg-gray-400");
             color.classList.add("bg-green-500");
           }
-
         }else if(sensor_id === id ){
           if(co2IndiP !== null){
             co2IndiP.textContent = jsonMessage.value + " PPM";
@@ -157,48 +152,26 @@ function onMessageArrived(message) {
               co2IndiP.classList.remove("text-orange-500");
               co2IndiP.classList.remove("text-green-500");
             }else if(co2 > warning){
-              color.classList.remove("bg-green-500");
-              color.classList.remove("bg-orange-500");
-              color.classList.remove("bg-red-500");
-              color.classList.remove("bg-gray-400");
-              color.classList.add("bg-orange-500");
+              co2IndiP.classList.remove("text-green-500");
+              co2IndiP.classList.remove("text-orange-500");
+              co2IndiP.classList.add("text-orange-500");
             }else{
-              color.classList.remove("bg-green-500");
-              color.classList.remove("bg-orange-500");
-              color.classList.remove("bg-red-500");
-              color.classList.remove("bg-gray-400");
-              color.classList.add("bg-green-500");
+              co2IndiP.classList.remove("text-orange-500");
+              co2IndiP.classList.remove("text-red-500");
+              co2IndiP.classList.add("text-green-500");
             }
     
-          }else if(sensor_id === id ){
-            if(co2IndiP !== null){
-              co2IndiP.textContent = jsonMessage.value + " PPM";
-            
-              if (jsonMessage.value > critical){
-                co2IndiP.classList.add("text-red-500");
-                co2IndiP.classList.remove("text-orange-500");
-                co2IndiP.classList.remove("text-green-500");
-              }else if(co2 > warning){
-                co2IndiP.classList.add("text-orange-500");
-                co2IndiP.classList.remove("text-red-500");
-                co2IndiP.classList.remove("text-green-500");
-              }else{
-                co2IndiP.classList.add("text-green-500");
-                co2IndiP.classList.remove("text-orange-500");
-                co2IndiP.classList.remove("text-red-500");
-              }
-            }
           }
-        }else if(variable === "hum" && sensor_id === id){
-          let humIndiP = document.getElementById("humidityP");
-          if (humIndiP !== null){
-            humIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " %H";
-          }
-          
-        }else if (variable === "temp" && sensor_id === id){
-          let tempIndiP = document.getElementById("temperatuurP");
-          tempIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " °C";
         }
+      }else if(variable === "hum" && sensor_id === id){
+        let humIndiP = document.getElementById("humidityP");
+        if (humIndiP !== null){
+          humIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " %H";
+        }
+          
+      }else if (variable === "temp" && sensor_id === id){
+        let tempIndiP = document.getElementById("temperatuurP");
+        tempIndiP.textContent = parseFloat(jsonMessage.value).toFixed(2) + " °C";
       }
     }
   }
