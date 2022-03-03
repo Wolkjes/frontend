@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { EventEmitterService } from '../event-emitter.service';
 import { UserService } from '../service/user.service';
 
@@ -10,18 +11,24 @@ import { UserService } from '../service/user.service';
 export class DeleteUserComponent implements OnInit {
 
   @Input() message:number;
-  constructor(private eventEmitterService: EventEmitterService, private userService:UserService) { }
+  campus_id:number;
+  constructor(private eventEmitterService: EventEmitterService, 
+    private userService:UserService,
+    private cookieService:CookieService) { }
 
   ngOnInit(): void {
-    console.log(this.message)
-  }
+    this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));  }
 
   close(){
   this.eventEmitterService.close();
   }
 
   deleteUser(){
-    this.userService.delete(this.message);
+    var data = {
+      user_id:this.message,
+      campus_id:this.campus_id
+    }
+    this.userService.delete(data);
 
     setTimeout(() => {
       window.location.reload();
