@@ -73,13 +73,12 @@ export class AddCo2SensorComponent implements OnInit {
     }
   }
 
-  update(data:any): void{
+  async update(data:any){
     this.sensor = data;
-    this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)
+    await this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 800);
+    
+    window.location.reload();
   }
 
   getSensors(): void{
