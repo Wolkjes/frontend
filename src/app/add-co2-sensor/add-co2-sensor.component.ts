@@ -5,6 +5,7 @@ import { SensorService } from '../service/sensor.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { GrafanaService } from '../service/grafana.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-co2-sensor',
@@ -73,12 +74,12 @@ export class AddCo2SensorComponent implements OnInit {
     }
   }
 
-  async update(data:any){
+   update(data:any): void{
     this.sensor = data;
-    await this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)
-
     
-    window.location.reload();
+    forkJoin(this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam)).subscribe(result => { location.reload(); })
+
+      //window.location.reload();
   }
 
   getSensors(): void{
