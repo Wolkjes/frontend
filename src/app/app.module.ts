@@ -25,6 +25,7 @@ import { DeleteLokaalComponent } from './delete-lokaal/delete-lokaal.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ChangeThresholdsComponent } from './change-thresholds/change-thresholds.component';
 import { AddUserFromCampusComponent } from './add-user-from-campus/add-user-from-campus.component';
+import { VentilationControlComponent } from './ventilation-control/ventilation-control.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { AddUserFromCampusComponent } from './add-user-from-campus/add-user-from
     DeleteLokaalComponent,
     DeleteUserComponent,
     ChangeThresholdsComponent,
-    AddUserFromCampusComponent
+    AddUserFromCampusComponent,
+    VentilationControlComponent
   ],
   imports: [
     BrowserModule,
