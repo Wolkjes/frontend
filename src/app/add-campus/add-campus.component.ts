@@ -1,6 +1,6 @@
 import { Component, OnInit, setTestabilityGetter } from '@angular/core';
 import { Campus } from '../model/campus.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CampusService } from '../service/campus.service';
 import { GrafanaService } from '../service/grafana.service';
 
@@ -12,23 +12,38 @@ import { GrafanaService } from '../service/grafana.service';
 })
 export class AddCampusComponent implements OnInit {
 
-  newCampus: FormGroup;
   private campus:Campus[];
+  errors:string[] = [];
+  newCampus = new FormGroup({
+    lokaal_campus: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)
+    ])
+  });
 
   constructor(fb: FormBuilder,  private campusService: CampusService, private grafanaService: GrafanaService) {
-    this.newCampus = fb.group({
-      lokaal_campus: [""],
-    });
+  }
+
+
+  get lokaal_campus(){
+    return this.newCampus.get('lokaal_campus');
   }
 
   addCampus() {
-    var data = {
-      name: this.newCampus.value.lokaal_campus
+    this.errors = [];
+    if (this.lokaal_campus?.invalid){
+      this.errors.push("Campus naam kan niet leeg zijn!");
     }
-    this.campusService.create(data).subscribe(data => {
-      this.campus = data;
-      this.update(data);
-    });    
+
+    if( this.errors.length === 0){
+      var data = {
+        name: this.newCampus.value.lokaal_campus
+      }
+      this.campusService.create(data).subscribe(data => {
+        this.campus = data;
+        this.update(data);
+      });   
+    } 
   }
 
   update(data:any): void{

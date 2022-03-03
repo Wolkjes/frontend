@@ -17,6 +17,7 @@ export class EditCo2SensorComponent implements OnInit {
   @Input() lokaal_naam:string;
   lokaal_id:number;
   sensor:Sensor[];
+  errors:string[] = [];
   actieveCampusId:number;
   private campus_id:number;
 
@@ -28,23 +29,28 @@ export class EditCo2SensorComponent implements OnInit {
   }
 
   editSensor(){
-    this.sensorService.getSensorId(this.lokaal_id).subscribe(datasensor => {
-      this.sensor = datasensor;
-
-      var naam = (<HTMLInputElement>document.getElementById("name_sensor")).value;
-      var data = {
-        "lokaal_naam" : naam,
-        "sensor_id": this.sensor[0].sensor_id
-      }
-      this.lokaalService.update(this.lokaal_id, data)
-
-      this.grafanaService.updateLokaal(this.campus_id,naam, this.lokaal_naam, this.sensor[0].sensor_id)
-    });
-
-
-    // setTimeout(() => {
-    //   window.location.reload();
-    // },100)
+    this.errors = [];
+    var naam = (<HTMLInputElement>document.getElementById("name_sensor")).value;
+    if  (naam.trim() !== ""){
+      this.sensorService.getSensorId(this.lokaal_id).subscribe(datasensor => {
+        this.sensor = datasensor;
+  
+        var data = {
+          "lokaal_naam" : naam,
+          "sensor_id": this.sensor[0].sensor_id
+        }
+        this.lokaalService.update(this.lokaal_id, data)
+  
+        this.grafanaService.updateLokaal(this.campus_id,naam, this.lokaal_naam, this.sensor[0].sensor_id)
+      });
+  
+  
+      setTimeout(() => {
+        window.location.reload();
+      },100)
+    }else{
+      this.errors.push("Lokaal kan niet leeg zijn");
+    }
   }
 
   close(){
