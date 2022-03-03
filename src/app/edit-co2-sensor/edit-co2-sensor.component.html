@@ -5,7 +5,7 @@
                 <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-3">
                         <label for="name-sensor" class="block text-sm font-medium text-gray-700">Naam</label>
-                        <input type="text" name="name-sensor" id="name-sensor"
+                        <input type="text" name="name_sensor" id="name_sensor"
                             class="mt-1 focus:ring-blue-500 focus:blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                     focus:ring-offset-2 focus:ring-blue-500">Annuleer</button>
                 </div>
                 <div class="px-4 py-3 text-right sm:pr-6 sm:pl-3">
-                    <button type="submit"
+                    <button type="submit" (click)="editSensor()"
                         class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Bewerk</button>
                 </div>
             </div>

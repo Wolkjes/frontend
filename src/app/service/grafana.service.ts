@@ -70,6 +70,25 @@ export class GrafanaService {
     })
   }
 
+  updateLokaal(campus_id:number, nieuwe_naam:string, oude_lokaal_naam:string, sensor_id:string) {
+
+    this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => {
+    var dashboard = data;
+    console.log(campus_id + " " + nieuwe_naam + " " + oude_lokaal_naam + " " + sensor_id)
+
+      for(let i = 0; i !== dashboard.dashboard.panels.length;i++){
+        for(let j = 0; j !== dashboard.dashboard.panels[i].targets.length; j++){
+          if(dashboard.dashboard.panels[i].title === sensor_id){
+            var test = dashboard.dashboard.panels[i].targets[j].tags[0].value;
+            dashboard.dashboard.panels[i].targets[j].tags[0].value = test.replace(oude_lokaal_naam, nieuwe_naam);
+          }
+        }
+      }
+
+      return this.http.post(this.baseUrl+"/dashboards/db", dashboard, this.options).subscribe(data => console.log(data));
+    })
+  }
+
   addPanel(sensor: Sensor, campus_id: number, campus_naam: string, lokaal_naam:string){
 
     var dashboard = this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => 
@@ -332,7 +351,7 @@ export class GrafanaService {
           }
         ],
         "datasource": null,
-        "title": sensor.lokaal_naam.toString()
+        "title": sensor.sensor_id.toString()
       });
       console.log(panels);
       var jsonData = {
@@ -347,7 +366,7 @@ export class GrafanaService {
     })
   }
 
-  delete(lokaal_naam:string, campus_id:number){
+  delete(sensor_id:string, campus_id:number){
 
     this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => {
     var dashboard = data;
@@ -355,7 +374,7 @@ export class GrafanaService {
     for(let i = 0; i < dashboard.dashboard.panels.length; i++){
       console.log(i);
       console.log(dashboard.dashboard.panels[i].title)
-      if  (dashboard.dashboard.panels[i].title === lokaal_naam){
+      if  (dashboard.dashboard.panels[i].title === sensor_id){
         dashboard.dashboard.panels.splice(i,1);
       }
 

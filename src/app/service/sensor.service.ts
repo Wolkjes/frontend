@@ -22,6 +22,11 @@ export class SensorService {
     return this.http.get<Sensor[]>(`${this.baseUrl}${sensor_id}`);
   }
 
+  getSensorId(lokaal_id:number): Observable<Sensor[]>{
+    return this.http.get<Sensor[]>(`${this.baseUrl}getSensorId/${lokaal_id}`);
+
+  }
+
   gethim(sensor_id: number): Observable<Sensor[]> {
     return this.http.get<Sensor[]>(`${this.baseUrl}get/${sensor_id}`);
   }
