@@ -3,6 +3,9 @@ import { Campus } from '../model/campus.model';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CampusService } from '../service/campus.service';
 import { GrafanaService } from '../service/grafana.service';
+import { LokaalService } from '../service/lookaal.service';
+import { Lokaal } from '../model/lokaal.model';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -11,6 +14,8 @@ import { GrafanaService } from '../service/grafana.service';
   styleUrls: ['./add-campus.component.css']
 })
 export class AddCampusComponent implements OnInit {
+
+  campus_id:number;
 
   private campus:Campus[];
   errors:string[] = [];
@@ -22,8 +27,8 @@ export class AddCampusComponent implements OnInit {
   });
 
   constructor(fb: FormBuilder,  private campusService: CampusService, private grafanaService: GrafanaService) {
-  }
 
+  }
 
   get lokaal_campus(){
     return this.newCampus.get('lokaal_campus');
@@ -62,6 +67,7 @@ export class AddCampusComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
 }
