@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { Campus } from '../model/campus.model';
 import { Lokaal } from '../model/lokaal.model';
 import { json } from 'body-parser';
@@ -89,7 +89,7 @@ export class GrafanaService {
     })
   }
 
-  addPanel(sensor: Sensor, campus_id: number, campus_naam: string, lokaal_naam:string): any{
+  addPanel(sensor: Sensor, campus_id: number, campus_naam: string, lokaal_naam:string): Observable<any>{
 
     var dashboard = this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => 
     {
@@ -364,7 +364,7 @@ export class GrafanaService {
       }
       this.http.post<any[]>(this.baseUrl+"/dashboards/db", jsonData, this.options).subscribe();
     })
-    return {"value": "ok"}
+    return of(5);
   }
 
   delete(sensor_id:string, campus_id:number){
