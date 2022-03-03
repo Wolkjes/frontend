@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventEmitterService } from '../event-emitter.service';
 import { User } from '../model/user.model'
 import { UserService } from '../service/user.service';
@@ -15,21 +15,41 @@ export class AddUserComponent implements OnInit {
 
   private campus_id:number;
   newUser: FormGroup;
-  private user:User[];
+  // users:User[];
+  user:User
+  userForm: FormControl;
 
   constructor(fb: FormBuilder, private eventEmitterService: EventEmitterService, private userService: UserService, private cookieService:CookieService) {
-    this.newUser = fb.group({
-      username:[""],
-      email:[""],
-      password:[""],
-      role:[""]
-    });
+    // this.newUser = fb.group({
+    //   username:[""],
+    //   email:[""],
+    //   password:[""],
+    //   role:[""]
+    // });
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
   } 
 
   ngOnInit(): void {
+    this.newUser = new FormGroup({
+      email: new FormControl("", [
+        Validators.required,
+        Validators.minLength(4)
+        // forbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
+      ]),
+      password: new FormControl("", [
+        Validators.required
+      ]),
+      username: new FormControl("", [
+        Validators.required
 
+      ]),
+      role: new FormControl("", [
+        Validators.required
+
+      ])
+    });
   }
+  // get email() { return this.userForm.get('email'); }
 
   close(){
     this.eventEmitterService.close();
