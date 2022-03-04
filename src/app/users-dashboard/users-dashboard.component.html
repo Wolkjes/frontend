@@ -17,9 +17,9 @@
 
         <div class="text-gray-900">
 
-            <img *ngIf="users.length === 0" src="https://memegenerator.net/img/instances/81986827.jpg" />
+            <img *ngIf="users?.length === 0" src="https://memegenerator.net/img/instances/81986827.jpg" />
 
-            <div *ngIf="users.length !== 0" class=" flex justify-center rounded-3xl">
+            <div *ngIf="users?.length !== 0" class=" flex justify-center rounded-3xl">
                 <table class="w-full text-md bg-blue-100 shadow-md mb-4">
                     <tbody>
                         <tr class="border-b bg-blue-500 text-white">
