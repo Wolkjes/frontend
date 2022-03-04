@@ -202,3 +202,16 @@ function getCookie(cname) {
   }
   return "";
 }
+
+function sendVentilatie(){
+  let groen = document.getElementById("groen").value;
+  let oranje = document.getElementById("oranje").value;
+  let rood = document.getElementById("rood").value;
+  console.log(campus)
+
+  var message = new Paho.MQTT.Message(JSON.stringify({"goed": groen, "minder": oranje, "slecht": rood}));
+  message.destinationName = campus + "/ventilatie/waardes";
+  message.retained = true;
+  client.send(message);
+  window.location.reload();
+}
