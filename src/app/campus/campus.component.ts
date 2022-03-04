@@ -4,6 +4,8 @@ import { LokaalService } from '../service/lookaal.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Lokaal } from '../model/lokaal.model';
 import { Input, Output, EventEmitter} from '@angular/core';
+import { TokenStorageService } from '../service/token-storage.service';
+import jwt_decode from 'jwt-decode'
 
 @Component({
   selector: 'app-campus',
@@ -14,6 +16,8 @@ import { Input, Output, EventEmitter} from '@angular/core';
 
 export class CampusComponent implements OnInit {
 
+  decodedToken:any;
+  token;
   campus_id:number;
   naam:string;
   lokalen:Lokaal[];
@@ -29,7 +33,10 @@ export class CampusComponent implements OnInit {
   deleteCampusIsShown: boolean = false;
   changeTresholdsIsShown: boolean = false;
 
-  constructor(private eventEmitterService: EventEmitterService, private lokaalService:LokaalService, private cookieService:CookieService) {
+  constructor(private tokenService:TokenStorageService,  private eventEmitterService: EventEmitterService, private lokaalService:LokaalService, private cookieService:CookieService) {
+    this.token = this.tokenService.getToken();
+    this.decodedToken = jwt_decode(this.token)
+    // console.log(role)
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
     this.naam = this.cookieService.get("activeCampusNaam");
     this.lokalen = [];
@@ -46,7 +53,8 @@ export class CampusComponent implements OnInit {
         this.close();
         }); 
       }
-    }  
+    }
+
  
   // close all modals
   close() {
