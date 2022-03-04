@@ -6,6 +6,8 @@ import { GrafanaService } from '../service/grafana.service';
 import { LokaalService } from '../service/lookaal.service';
 import { Lokaal } from '../model/lokaal.model';
 import { CookieService } from 'ngx-cookie-service';
+import { User } from '../model/user.model';
+import { UserService } from '../service/user.service';
 
 
 @Component({
@@ -16,7 +18,6 @@ import { CookieService } from 'ngx-cookie-service';
 export class AddCampusComponent implements OnInit {
 
   campus_id:number;
-
   private campus:Campus[];
   errors:string[] = [];
   newCampus = new FormGroup({

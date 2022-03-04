@@ -26,6 +26,10 @@ export class UserService {
         return this.http.post<User[]>(this.baseURL+"/", data, options);
     }
 
+    getAllUsers(){
+        return this.http.get<User[]>(this.baseURL + "/");
+    }
+
     getAll(data: any): Observable<User[]> {
         return this.http.get<User[]>(this.baseURL + "/" + data);
     }
@@ -39,7 +43,12 @@ export class UserService {
             headers: this.headers,
             body:data
         };
-        return this.http.request("DELETE", this.baseURL+"/", this.options).subscribe();    }
+        return this.http.request("DELETE", this.baseURL+"/", this.options).subscribe();    
+    }
+
+    addToCampus(campus_id:number, persoon_id:number){
+        return this.http.put<User[]>(this.baseURL + "/tussentabel/" + campus_id, {persoon_id:persoon_id}); 
+    }
 
     // emails(): Observable<User[]> {
     //     return this.http.get<User[]>(this.baseURL+"/emails");
