@@ -55,37 +55,15 @@ function changeCampus(){
 function threshold(){
   if (document.getElementById("maxGreen").classList.contains('ng-valid') && document.getElementById("maxOrange").classList.contains('ng-valid')){
     if (document.getElementById("maxGreen").value <= document.getElementById("maxOrange").value){
-      var warning = document.getElementById("maxGreen").value;
-      var critical = document.getElementById("maxOrange").value;
-      var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
-      message.destinationName = campus + "/threshold" ;
-      message.retained = true;
-      client.send(message);
-
-      window.location.reload();
-      const background = document.getElementsByClassName("threshold");
-      const waardes = document.getElementsByClassName("threshold_text");
-
-      for (let i = 0; i < waardes.length; i++) {
-        if(waardes[i].value > critical){
-          background[i].classList.remove("bg-green-500");
-          background[i].classList.remove("bg-orange-500");
-          background[i].classList.remove("bg-red-500");
-          background[i].classList.remove("bg-gray-400");
-          background[i].classList.add("bg-red-500");
-        }else if(collection[i].value > warning){
-          background[i].classList.remove("bg-green-500");
-          background[i].classList.remove("bg-orange-500");
-          background[i].classList.remove("bg-red-500");
-          background[i].classList.remove("bg-gray-400");
-          background[i].classList.add("bg-orange-500");
-        }else{
-          background[i].classList.remove("bg-green-500");
-          background[i].classList.remove("bg-orange-500");
-          background[i].classList.remove("bg-red-500");
-          background[i].classList.remove("bg-gray-400");
-          background[i].classList.add("bg-green-500");
-        }
+      if (document.getElementById("maxGreen").value <= 5000 && document.getElementById("maxOrange").value <= 5000){
+        var warning = document.getElementById("maxGreen").value;
+        var critical = document.getElementById("maxOrange").value;
+        var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
+        message.destinationName = campus + "/threshold" ;
+        message.retained = true;
+        client.send(message);
+  
+        window.location.reload();
       }
     }
   }
