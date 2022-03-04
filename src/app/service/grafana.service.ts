@@ -33,7 +33,7 @@ export class GrafanaService {
     return this.http.get<Campus[]>(`${this.baseUrl}/${campus_id}`);
   }
 
-  create(data: Campus) {
+  create(data: Campus):Observable<any[]> {
     var jsonData = {
         "dashboard": {
           "id": null,
@@ -50,7 +50,7 @@ export class GrafanaService {
 
       console.log(data.campus_id)
 
-    return this.http.post(this.baseUrl+"/dashboards/db", jsonData, this.options).subscribe(data => console.log(data));
+    return this.http.post<any[]>(this.baseUrl+"/dashboards/db", jsonData, this.options);
   }
 
   updateCampus(campus_id:number, name:string, campus_name:string) {

@@ -54,12 +54,14 @@ export class AddCampusComponent implements OnInit {
 
   update(data:any): void{
     this.campus = data;
-    this.grafanaService.create(this.campus[0])
+    this.grafanaService.create(this.campus[0]).subscribe(data => {
+      console.log(data);
 
-    this.setCookie("activeCampusId", this.campus[0].campus_id);
-    this.setCookie("activeCampusNaam", this.campus[0].name)
+      this.setCookie("activeCampusId", this.campus[0].campus_id);
+      this.setCookie("activeCampusNaam", this.campus[0].name)
 
-    window.location.reload();
+      window.location.reload();
+    })    
   }
 
   setCookie(name, value, days = 7, path = '/') {

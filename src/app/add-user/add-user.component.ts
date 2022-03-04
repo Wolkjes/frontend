@@ -23,7 +23,8 @@ export class AddUserComponent implements OnInit {
       Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
     ]),
     password: new FormControl("", [
-      Validators.required
+      Validators.required,
+      Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)
     ]),
     confirm: new FormControl("", [
       Validators.required
@@ -98,6 +99,9 @@ export class AddUserComponent implements OnInit {
     if (this.newUser.value.password != this.newUser.value.confirm){
       this.errors.push("De wachtwoorden moeten hetzelfde zijn.")
     }
+    if (this.password?.hasError('pattern')){
+      this.errors.push("Een cijfer, een hoofdletter en een lengte van 8 is verplicht voor een wachtwoord.")
+    }
     
     // console.log(this.users)
     
@@ -115,10 +119,13 @@ export class AddUserComponent implements OnInit {
         role:this.newUser.value.role,
         campus_id:this.campus_id
       }
-      this.userService.create(data).subscribe();
-      setTimeout(() => {
-        window.location.reload();
-      },100)
+      this.userService.create(data).subscribe(data => {
+        if(data['value'] === "Deze user bestaat al"){
+          this.errors.push("Deze user bestaat al");
+        }else{
+          window.location.reload();
+        }
+      });
     }
   }
 }
