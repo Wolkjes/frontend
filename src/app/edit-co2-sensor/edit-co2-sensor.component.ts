@@ -16,9 +16,11 @@ export class EditCo2SensorComponent implements OnInit {
   @Input() message:number;
   @Input() lokaal_naam:string;
   lokaal_id:number;
+  campus_naam:string;
   sensor:Sensor[];
   errors:string[] = [];
   actieveCampusId:number;
+
   private campus_id:number;
 
   constructor(private grafanaService:GrafanaService, private cookieService:CookieService, private eventEmitterService: EventEmitterService, private sensorService:SensorService, private lokaalService:LokaalService) { }
@@ -26,6 +28,7 @@ export class EditCo2SensorComponent implements OnInit {
   ngOnInit(): void {
     this.lokaal_id = this.message;
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
+    this.campus_naam = this.cookieService.get("activeCampusNaam");
   }
 
   editSensor(){
@@ -37,7 +40,9 @@ export class EditCo2SensorComponent implements OnInit {
   
         var data = {
           "lokaal_naam" : naam,
-          "sensor_id": this.sensor[0].sensor_id
+          "sensor_id": this.sensor[0].sensor_id,
+          "campus_naam": this.campus_naam,
+          "oud_lokaal":this.lokaal_naam
         }
         this.lokaalService.update(this.lokaal_id, data)
   
