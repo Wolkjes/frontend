@@ -28,6 +28,7 @@ function add(){
     var sensor = e.value;
     var lokaal = document.getElementById("sensorNaam").value;
     var message = new Paho.MQTT.Message(JSON.stringify({"value": false, "key": "new", "lokaal": lokaal, "campus": campus}));
+    message.retained = true;
     message.destinationName = "new/" + sensor;
     client.send(message);
   }else{
