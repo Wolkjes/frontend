@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {Observable, timer} from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { TokenStorageService } from '../service/token-storage.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -15,7 +16,7 @@ export class TopBarComponent implements OnInit {
 
   activeCampus:string = "Campussen";
 
-  constructor(private campusService: CampusService, private cookieService: CookieService) {
+  constructor(private campusService: CampusService, private cookieService: CookieService, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit(): void {
@@ -47,5 +48,10 @@ export class TopBarComponent implements OnInit {
 
   toggleShowAddCampus() {
     this.addCampusIsShown = ! this.addCampusIsShown;
+  }
+
+  logout(): void {
+    this.tokenStorage.signOut();
+    window.location.href = '/login';
   }
 }
