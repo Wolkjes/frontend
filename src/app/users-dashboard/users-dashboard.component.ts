@@ -11,7 +11,6 @@ import * as bcrypt from 'bcryptjs';
   styleUrls: ['./users-dashboard.component.css']
 })
 export class UsersDashboardComponent implements OnInit {
-
   private campus_id:number;
   users:User[];
   deleteUser:User;

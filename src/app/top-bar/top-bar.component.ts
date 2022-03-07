@@ -6,6 +6,7 @@ import { Validators } from '@angular/forms';
 import {Observable, timer} from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenStorageService } from '../service/token-storage.service';
+import jwt_decode from 'jwt-decode'
 
 @Component({
   selector: 'app-top-bar',
@@ -14,9 +15,17 @@ import { TokenStorageService } from '../service/token-storage.service';
 })
 export class TopBarComponent implements OnInit {
 
+  decodedToken:any;
+  token;
+
   activeCampus:string = "Campussen";
 
-  constructor(private campusService: CampusService, private cookieService: CookieService, private tokenStorage: TokenStorageService) {
+  constructor(private tokenService:TokenStorageService, private campusService: CampusService, private cookieService: CookieService, private tokenStorage: TokenStorageService) {
+    this.token = this.tokenService.getToken();
+    if (this.token !== null){
+      this.decodedToken = jwt_decode(this.token);
+    }
+    console.log(this.decodedToken);
   }
 
   ngOnInit(): void {

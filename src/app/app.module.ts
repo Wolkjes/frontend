@@ -26,6 +26,7 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ChangeThresholdsComponent } from './change-thresholds/change-thresholds.component';
 import { AddUserFromCampusComponent } from './add-user-from-campus/add-user-from-campus.component';
 import { VentilationControlComponent } from './ventilation-control/ventilation-control.component';
+import { authInterceptorProviders } from './service/auth.interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,8 @@ import { VentilationControlComponent } from './ventilation-control/ventilation-c
   ],
   providers: [
     EventEmitterService,
-    CookieService 
+    CookieService,
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

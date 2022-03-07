@@ -1,5 +1,5 @@
 <div class="flex flex-col min-h-screen">
-    <app-top-bar></app-top-bar>
+    <app-top-bar *ngIf="decodedToken !== null"></app-top-bar>
     <div class="flex-grow">
         <router-outlet></router-outlet>
     </div>
