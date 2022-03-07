@@ -48,10 +48,18 @@ export class TopBarComponent implements OnInit {
   }
 
   getCampuses(): void{
+    let check = false;
       this.campusService.getAll(this.decodedToken.persoon_id).subscribe(data => {
         this.campuses = data;
-        this.setCookie("activeCampusId", this.campuses[0].campus_id);
-        this.setCookie("activeCampusNaam", this.campuses[0].name);
+        for(let campus of this.campuses){
+          if(campus.campus_id === Number.parseFloat(this.cookieService.get("activeCampusId"))){
+            check = true;
+          }
+        }
+        if(!check){
+          this.setCookie("activeCampusId", this.campuses[0].campus_id);
+          this.setCookie("activeCampusNaam", this.campuses[0].name);
+        }
         this.activeCampus = this.cookieService.get("activeCampusNaam");
       });
   }
