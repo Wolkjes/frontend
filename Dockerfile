@@ -1,5 +1,6 @@
 FROM node:latest
 
+RUN mkdir -p /var/www/html/frontend
 WORKDIR /var/www/html/frontend
 COPY . /var/www/html/frontend
 
