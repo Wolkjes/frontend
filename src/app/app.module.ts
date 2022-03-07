@@ -28,6 +28,7 @@ import { AddUserFromCampusComponent } from './add-user-from-campus/add-user-from
 import { VentilationControlComponent } from './ventilation-control/ventilation-control.component';
 import { authInterceptorProviders } from './service/auth.interceptor.service';
 import { AuthGuard } from './_guards/auth.guard';
+import { AuthAdminGuard } from './_guards/auth-admin-guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +61,7 @@ import { AuthGuard } from './_guards/auth.guard';
   ],
   providers: [
     AuthGuard,
+    AuthAdminGuard,
     EventEmitterService,
     CookieService,
     authInterceptorProviders
