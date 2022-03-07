@@ -25,7 +25,6 @@ export class TopBarComponent implements OnInit {
     if (this.token !== null){
       this.decodedToken = jwt_decode(this.token);
     }
-    console.log(this.decodedToken);
   }
 
   ngOnInit(): void {

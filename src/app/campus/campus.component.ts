@@ -36,7 +36,6 @@ export class CampusComponent implements OnInit {
   constructor(private tokenService:TokenStorageService,  private eventEmitterService: EventEmitterService, private lokaalService:LokaalService, private cookieService:CookieService) {
     this.token = this.tokenService.getToken();
     this.decodedToken = jwt_decode(this.token)
-    // console.log(role)
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
     this.naam = this.cookieService.get("activeCampusNaam");
     this.lokalen = [];
