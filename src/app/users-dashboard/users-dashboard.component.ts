@@ -4,6 +4,8 @@ import { EventEmitterService } from '../event-emitter.service';
 import { User } from '../model/user.model';
 import { UserService } from '../service/user.service';
 import * as bcrypt from 'bcryptjs';
+import { TokenStorageService } from '../service/token-storage.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-users-dashboard',
@@ -12,6 +14,10 @@ import * as bcrypt from 'bcryptjs';
 })
 export class UsersDashboardComponent implements OnInit {
   private campus_id:number;
+  persoon_id:number;
+  token: any;
+  decodedToken: any;
+
   users:User[] = [];
   deleteUser:User;
 
@@ -22,11 +28,16 @@ export class UsersDashboardComponent implements OnInit {
 
   constructor(
     private eventEmitterService: EventEmitterService,
+
     private cookieService: CookieService,
+    private tokenService: TokenStorageService,
     private userService: UserService
   ) {
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));  
-   }
+    if (sessionStorage.getItem('auth-user')){
+      this.token = this.tokenService.getToken();
+      this.decodedToken = jwt_decode(this.token);     }
+  }
 
 
   ngOnInit() {
