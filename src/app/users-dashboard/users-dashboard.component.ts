@@ -12,7 +12,7 @@ import * as bcrypt from 'bcryptjs';
 })
 export class UsersDashboardComponent implements OnInit {
   private campus_id:number;
-  users:User[];
+  users:User[] = [];
   deleteUser:User;
 
   addUserIshown: boolean = false;
@@ -41,6 +41,7 @@ export class UsersDashboardComponent implements OnInit {
 
   getAll(){
     this.userService.getAll(this.campus_id).subscribe(data => this.users = data)
+    console.log(this.users.length)
   }
 
   //to close all modals

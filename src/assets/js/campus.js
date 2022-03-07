@@ -82,11 +82,13 @@ function onMessageArrived(message) {
           new: true,
           id: null
        }));
+
+
   }else if(message.destinationName.split("/")[2] === "offline" && jsonMessage.key == "offline"){
     let destination = message.destinationName.split("/")[1]
     let co2P = document.getElementById(destination);
     if (co2P !== null){
-      co2P.textContent = "Sensor is offline😢";
+      co2P.textContent = "Sensor is offline😴";
       let color = document.getElementById(destination+"color");
       color.classList.remove("bg-green-500");
       color.classList.remove("bg-orange-500");
