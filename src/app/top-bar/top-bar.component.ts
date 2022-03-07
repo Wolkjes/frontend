@@ -19,6 +19,7 @@ export class TopBarComponent implements OnInit {
   token;
 
   activeCampus:string = "Campussen";
+  onlyOneCampusAndUser:boolean = false;
 
   constructor(private tokenService:TokenStorageService, private campusService: CampusService, private cookieService: CookieService, private tokenStorage: TokenStorageService) {
     this.token = this.tokenService.getToken();
@@ -61,6 +62,12 @@ export class TopBarComponent implements OnInit {
           this.setCookie("activeCampusNaam", this.campuses[0].name);
         }
         this.activeCampus = this.cookieService.get("activeCampusNaam");
+        //If there is only one campus set boolean to hide dropdown for user
+        if (this.campuses.length=1) {
+          if (this.decodedToken.role === 'user'){
+            this.onlyOneCampusAndUser = true
+          }
+        }
       });
   }
 
