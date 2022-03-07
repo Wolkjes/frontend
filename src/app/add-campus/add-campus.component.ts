@@ -8,6 +8,8 @@ import { Lokaal } from '../model/lokaal.model';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../model/user.model';
 import { UserService } from '../service/user.service';
+import { TokenStorageService } from '../service/token-storage.service';
+import jwt_decode from 'jwt-decode'
 
 
 @Component({
@@ -27,8 +29,15 @@ export class AddCampusComponent implements OnInit {
     ])
   });
 
-  constructor(fb: FormBuilder,  private campusService: CampusService, private grafanaService: GrafanaService) {
+  decodedToken:any;
+  token;
 
+  constructor(fb: FormBuilder,  private campusService: CampusService, private grafanaService: GrafanaService, private tokenService:TokenStorageService) {
+    this.token = this.tokenService.getToken();
+    if (this.token !== null){
+      this.decodedToken = jwt_decode(this.token);
+    }
+    console.log(this.decodedToken);
   }
 
   get lokaal_campus(){
@@ -42,8 +51,10 @@ export class AddCampusComponent implements OnInit {
     }
 
     if( this.errors.length === 0){
+      console.log(this.decodedToken.persoon_id)
       var data = {
-        name: this.newCampus.value.lokaal_campus
+        name: this.newCampus.value.lokaal_campus,
+        persoon_id: this.decodedToken.persoon_id
       }
       this.campusService.create(data).subscribe(data => {
         this.campus = data;

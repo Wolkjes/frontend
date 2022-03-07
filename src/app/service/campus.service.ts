@@ -20,8 +20,8 @@ export class CampusService {
   constructor(private http: HttpClient) {
    }
 
-  getAll(): Observable<Campus[]> {
-    return this.http.get<Campus[]>(this.baseUrl);
+  getAll(persoon_id:any): Observable<Campus[]> {
+    return this.http.get<Campus[]>(this.baseUrl+"/persoon/"+persoon_id);
   }
 
   get(campus_id: number): Observable<Campus[]> {

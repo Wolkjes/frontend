@@ -35,14 +35,16 @@ export class CampusComponent implements OnInit {
 
   constructor(private tokenService:TokenStorageService,  private eventEmitterService: EventEmitterService, private lokaalService:LokaalService, private cookieService:CookieService) {
     this.token = this.tokenService.getToken();
-    this.decodedToken = jwt_decode(this.token)
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
-    this.naam = this.cookieService.get("activeCampusNaam");
+    this.decodedToken = jwt_decode(this.token)
     this.lokalen = [];
   }
 
   getAll(): void{
-    this.lokaalService.getAll(this.campus_id).subscribe(data => this.lokalen = data);
+    this.lokaalService.getAll(this.campus_id).subscribe(data => {
+      this.lokalen = data
+      this.naam = this.cookieService.get("activeCampusNaam");
+    });
   }
 
   ngOnInit() {

@@ -29,7 +29,6 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCampuses();
-    this.activeCampus = this.cookieService.get("activeCampusNaam");
   }
 
   campuses: Campus[] = [];
@@ -49,7 +48,12 @@ export class TopBarComponent implements OnInit {
   }
 
   getCampuses(): void{
-      this.campusService.getAll().subscribe(data => this.campuses = data);
+      this.campusService.getAll(this.decodedToken.persoon_id).subscribe(data => {
+        this.campuses = data;
+        this.setCookie("activeCampusId", this.campuses[0].campus_id);
+        this.setCookie("activeCampusNaam", this.campuses[0].name);
+        this.activeCampus = this.cookieService.get("activeCampusNaam");
+      });
   }
 
   addCampusIsShown: boolean = false;

@@ -5,7 +5,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CampusService } from '../service/campus.service';
 import { GrafanaService } from '../service/grafana.service';
-
+import { TokenStorageService } from '../service/token-storage.service';
+import jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-delete-campus',
   templateUrl: './delete-campus.component.html',
@@ -14,11 +15,18 @@ import { GrafanaService } from '../service/grafana.service';
 export class DeleteCampusComponent implements OnInit {
   private campus: Campus[];
   campusDel: FormGroup;
+  decodedToken:any;
+  token;
 
-  constructor(private eventEmitterService: EventEmitterService, fb: FormBuilder,  private campusService: CampusService,private cookieService: CookieService, private grafanaService:GrafanaService) { 
+  constructor(private tokenService:TokenStorageService, private eventEmitterService: EventEmitterService, fb: FormBuilder,  private campusService: CampusService,private cookieService: CookieService, private grafanaService:GrafanaService) { 
     this.campusDel = fb.group({
       confirm_message: [""],
     });
+
+    this.token = this.tokenService.getToken();
+    if (this.token !== null){
+      this.decodedToken = jwt_decode(this.token);
+    }
   }
 
   deleteCampus(): void{
@@ -28,7 +36,7 @@ export class DeleteCampusComponent implements OnInit {
       this.campusService.delete(this.cookieService.get("activeCampusId"), this.cookieService.get("activeCampusNaam"));
       this.grafanaService.deleteDashboard(this.cookieService.get("activeCampusId"));
       setTimeout(() => {
-        this.campusService.getAll().subscribe(data => {
+        this.campusService.getAll(this.decodedToken).subscribe(data => {
           this.campus = data;
           this.update(data);
         });
