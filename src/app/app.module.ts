@@ -27,6 +27,7 @@ import { ChangeThresholdsComponent } from './change-thresholds/change-thresholds
 import { AddUserFromCampusComponent } from './add-user-from-campus/add-user-from-campus.component';
 import { VentilationControlComponent } from './ventilation-control/ventilation-control.component';
 import { authInterceptorProviders } from './service/auth.interceptor.service';
+import { AuthGuard } from './_guards/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { authInterceptorProviders } from './service/auth.interceptor.service';
     FormsModule
   ],
   providers: [
+    AuthGuard,
     EventEmitterService,
     CookieService,
     authInterceptorProviders
