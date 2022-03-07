@@ -41,7 +41,8 @@
                             </td>
                             <td class="p-3 px-5">
                                 <select id="{{user.persoon_id}}role" value="{{user.role}}" class="bg-transparent">
-                                    <option value="user">user</option>
+                                    <option *ngIf="user.persoon_id !== decodedToken.persoon_id" value="user">user
+                                    </option>
                                     <option value="admin">admin</option>
                                 </select>
                             </td>
