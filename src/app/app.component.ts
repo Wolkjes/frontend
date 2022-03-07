@@ -9,14 +9,15 @@ import jwt_decode from 'jwt-decode'
 })
 export class AppComponent implements OnInit{
   
-  decodedToken:any;
-  token;
   isLoggedIn = false;
+  decodedToken:any = null;
+  token;
   constructor(private tokenService:TokenStorageService, private tokenStorageService: TokenStorageService) {
     this.token = this.tokenService.getToken();
     if (this.token !== null){
       this.decodedToken = jwt_decode(this.token);
-    }   }
+    }   
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
