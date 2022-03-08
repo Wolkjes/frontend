@@ -48,7 +48,7 @@ export class LokaalService {
       headers: this.headers,
       body:{"campus_naam":campus_naam, "lokaal_naam": lokaal_naam}
      };
-    return this.http.request("DELETE", `${this.baseUrl}/${lokaal_id}`, this.options).subscribe();
+    return this.http.request("DELETE", `${this.baseUrl}/${lokaal_id}`, this.options);
   }
 
 

@@ -30,12 +30,15 @@ export class DeleteLokaalComponent implements OnInit {
     this.sensorService.getSensorId(this.lokaal_id).subscribe(data => {
       this.sensor = data;
       this.grafanaService.delete(this.sensor[0].sensor_id, Number.parseFloat(this.cookieService.get("activeCampusId")));
-      this.lokaalService.delete(this.message, this.cookieService.get("activeCampusNaam"), this.lokaal_naam);
+      this.lokaalService.delete(this.message, this.cookieService.get("activeCampusNaam"), this.lokaal_naam).subscribe(data => {
+        console.log(data);
+        window.location.reload();
+      });
     });
   
-      setTimeout(() => {
-      window.location.reload();
-    }, 500);
+    //   setTimeout(() => {
+    //     window.location.reload();
+    // }, 500);
   }
 
   close() {

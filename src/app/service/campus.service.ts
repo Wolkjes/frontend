@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { Campus } from '../model/campus.model';
 
 @Injectable({
@@ -40,10 +40,11 @@ export class CampusService {
     return this.http.post<Campus[]>(this.baseUrl+"/", data, options);
   }
 
-  update(campus_id: number, data: any){
-    return this.http.put(this.baseUrl+"/"+campus_id, {name:data}, this.options).subscribe(data => {
+  update(campus_id: number, data: any): Observable<any>{
+    this.http.put(this.baseUrl+"/"+campus_id, {name:data}, this.options).subscribe(data => {
       console.log(data);
     });
+    return of("ok");
   }
 
   delete(campus_id: any, campus_naam:any):any{    
