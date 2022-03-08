@@ -35,6 +35,10 @@ function add(){
     message.retained = true;
     message.destinationName = campus + "/" + lokaal + "/new";
     client.send(message);
+    message = new Paho.MQTT.Message(JSON.stringify({"value": false, "key": "delete"}));
+    message.retained = true;
+    message.destinationName = campus + "/new";
+    client.send(message);
   }else{
     console.log("invalid")
   }
