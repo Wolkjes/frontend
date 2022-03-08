@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { Campus } from '../model/campus.model';
+var base = process.env['BASE'];
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CampusService {
     
   private options;
 
-  private baseUrl = "http://localhost:8080/wolkjes/campus";
+  private baseUrl = "http://" + base + ":8080/wolkjes/campus";
   private campus:Campus;
 
   constructor(private http: HttpClient) {

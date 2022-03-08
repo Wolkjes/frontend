@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { Sensor } from '../model/sensor.model';
-
+var base = process.env['BASE'];
 @Injectable({
   providedIn: 'root'
 })
 export class SensorService {
 
-  private baseUrl = "http://localhost:8080/wolkjes/sensor/";
+  private baseUrl = "http://" + base + ":8080/wolkjes/sensor/";
 
   constructor(private http: HttpClient) {
 

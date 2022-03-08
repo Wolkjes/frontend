@@ -3,13 +3,13 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { Campus } from '../model/campus.model';
 import { Lokaal } from '../model/lokaal.model';
-
+var base = process.env['BASE'];
 @Injectable({
   providedIn: 'root'
 })
 export class LokaalService {
 
-  private baseUrl = 'http://localhost:8080/wolkjes/lokaal';
+  private baseUrl = 'http://' + base + ':8080/wolkjes/lokaal';
 
   private headers = new HttpHeaders({
     "Content-Type": "application/json",

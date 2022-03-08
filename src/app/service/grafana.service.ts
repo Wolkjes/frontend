@@ -5,14 +5,14 @@ import { Campus } from '../model/campus.model';
 import { Lokaal } from '../model/lokaal.model';
 import { json } from 'body-parser';
 import { Sensor } from '../model/sensor.model';
-
+var base = process.env['BASE'];
 
 @Injectable({
   providedIn: 'root'
 })
 export class GrafanaService {
 
-  private baseUrl = 'http://localhost:4200/api';
+  private baseUrl = 'http://' + base + ':4200/api';
   private version = 2;
 
   private headers = new HttpHeaders({
