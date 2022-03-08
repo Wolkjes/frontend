@@ -8,7 +8,7 @@ import { EventEmitterService } from '../event-emitter.service';
   styleUrls: ['./change-thresholds.component.css']
 })
 export class ChangeThresholdsComponent implements OnInit {
-  errors:string[] = [];
+  errors: string[] = [];
   thresholds = new FormGroup({
     maxGreen: new FormControl(500, [
       Validators.required,
@@ -20,47 +20,47 @@ export class ChangeThresholdsComponent implements OnInit {
     ])
   });
 
-  constructor(private eventEmitterService: EventEmitterService, private fb:FormBuilder) {
+  constructor(private eventEmitterService: EventEmitterService, private fb: FormBuilder) {
   }
 
-  get maxGreen(){
+  get maxGreen() {
     return this.thresholds.get('maxGreen');
   }
 
-  get maxOrange(){
+  get maxOrange() {
     return this.thresholds.get('maxOrange');
   }
 
   ngOnInit(): void {
   }
 
-  addTresholds():void{
+  addTresholds(): void {
     this.errors = [];
 
-    if (this.thresholds.value.maxGreen > 5000){
+    if (this.thresholds.value.maxGreen >= 5000) {
       this.errors.push("Waarde van groen mag niet hoger dan 5000 zijn");
     }
 
-    if(this.thresholds.value.maxOrange > 5000){
+    if (this.thresholds.value.maxOrange >= 5000) {
       this.errors.push("Waarde van oranje mag niet hoger dan 5000 zijn");
     }
 
-    if (this.errors.length === 0){
-      if (this.maxOrange?.invalid){
+    if (this.errors.length === 0) {
+      if (this.maxOrange?.invalid) {
         this.errors.push("'Oranje tot:' kan niet leeg zijn");
       }
-  
-      if(this.maxGreen?.invalid){
+
+      if (this.maxGreen?.invalid) {
         this.errors.push("'Groen vanaf 0 tot:' kan niet leeg zijn");
       }
-  
-      if(this.thresholds.value.maxGreen >= this.thresholds.value.maxOrange && this.maxGreen?.valid && this.maxOrange?.valid){
+
+      if (this.thresholds.value.maxGreen >= this.thresholds.value.maxOrange && this.maxGreen?.valid && this.maxOrange?.valid) {
         this.errors.push("De waarde van groen kan niet hoger zijn dan de waarde van oranje");
       }
     }
   }
 
-  close(){
+  close() {
     this.eventEmitterService.close();
   }
 

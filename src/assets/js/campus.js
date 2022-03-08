@@ -57,9 +57,12 @@ function changeCampus(){
 }
 
 function threshold(){
+  var green = parseInt(document.getElementById("maxGreen").value);
+  var orange = parseInt(document.getElementById("maxOrange").value);
+  console.log(green + orange)
   if (document.getElementById("maxGreen").classList.contains('ng-valid') && document.getElementById("maxOrange").classList.contains('ng-valid')){
-    if (document.getElementById("maxGreen").value <= document.getElementById("maxOrange").value){
-      if (document.getElementById("maxGreen").value <= 5000 && document.getElementById("maxOrange").value <= 5000){
+    if (green < orange){
+      if (green < 5000 && orange < 5000){
         var warning = document.getElementById("maxGreen").value;
         var critical = document.getElementById("maxOrange").value;
         var message = new Paho.MQTT.Message(JSON.stringify({"key": "threshold", "warning": warning, "critical": critical}));
