@@ -78,7 +78,7 @@ function threshold(){
 
 function onMessageArrived(message) {
   let jsonMessage = JSON.parse(message.payloadString);
-  if (message.destinationName.substring(0,3) === "new"){
+  if (message.destinationName.split("/")[0] === "new"){
     console.log(message.destinationName);
     var idString = message.destinationName.substring(4);
       var xhr = new XMLHttpRequest();
