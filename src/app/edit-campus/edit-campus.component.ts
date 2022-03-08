@@ -49,10 +49,17 @@ export class EditCampusComponent implements OnInit {
 
         },
         () => {
+          console.log("completed")
           this.grafanaService.updateCampus(Number.parseFloat(campus_id), this.campusFrom.value.name_campus, campus_name).subscribe(
+            (data) => {
+              console.log(data);
+              this.setCookie("activeCampusNaam", this.campusFrom.value.name_campus);
+            },
+            function (err) {
+
+            },
             () => {
               console.log("completed")
-              this.setCookie("activeCampusNaam", this.campusFrom.value.name_campus);
               window.location.reload();
             }
           );
