@@ -7,6 +7,7 @@ import { Observable, timer } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenStorageService } from '../service/token-storage.service';
 import jwt_decode from 'jwt-decode'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
@@ -21,7 +22,7 @@ export class TopBarComponent implements OnInit {
   activeCampus: string = "Campussen";
   onlyOneCampusAndUser: boolean = false;
 
-  constructor(private tokenService: TokenStorageService, private campusService: CampusService, private cookieService: CookieService, private tokenStorage: TokenStorageService) {
+  constructor(private router: Router, private tokenService: TokenStorageService, private campusService: CampusService, private cookieService: CookieService, private tokenStorage: TokenStorageService) {
     this.token = this.tokenService.getToken();
     if (this.token !== null) {
       this.decodedToken = jwt_decode(this.token);
@@ -44,7 +45,9 @@ export class TopBarComponent implements OnInit {
     this.setCookie("activeCampusNaam", campus.name)
 
     setTimeout(() => {
-      window.location.reload();
+      this.router.navigateByUrl('/', {skipLocationChange: false}).then(() => {
+        window.location.reload();
+    });
     }, 500);
   }
 
