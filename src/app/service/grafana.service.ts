@@ -53,7 +53,7 @@ export class GrafanaService {
     return this.http.post<any[]>(this.baseUrl+"/dashboards/db", jsonData, this.options);
   }
 
-  updateCampus(campus_id:number, name:string, campus_name:string) {
+  updateCampus(campus_id:number, name:string, campus_name:string):Observable<any> {
 
     this.http.get<any>(this.baseUrl+"/dashboards/uid/" + campus_id).subscribe(data => {
       var dashboard = data;
@@ -66,8 +66,10 @@ export class GrafanaService {
         }
       }
 
-      return this.http.post(this.baseUrl+"/dashboards/db", dashboard, this.options).subscribe(data => console.log(data));
+      this.http.post(this.baseUrl+"/dashboards/db", dashboard, this.options).subscribe();
+      
     })
+    return of(5);
   }
 
   updateLokaal(campus_id:number, nieuwe_naam:string, oude_lokaal_naam:string, sensor_id:string) {
@@ -385,8 +387,7 @@ export class GrafanaService {
   }
 
   deleteDashboard(campus_id:any){
-
-      return this.http.delete(this.baseUrl + "/dashboards/uid/"+ campus_id, this.options).subscribe(data => console.log(data));
+      this.http.delete(this.baseUrl + "/dashboards/uid/"+ campus_id, this.options).subscribe(data => console.log(data));
   }
 
 }

@@ -57,7 +57,11 @@ export class TopBarComponent implements OnInit {
             check = true;
           }
         }
-        if(!check){
+
+        if (this.campuses.length === 0){
+          this.setCookie("activeCampusId", 0);
+          this.setCookie("activeCampusNaam", "PLS select a campus");
+        }else if(!check){
           this.setCookie("activeCampusId", this.campuses[0].campus_id);
           this.setCookie("activeCampusNaam", this.campuses[0].name);
         }

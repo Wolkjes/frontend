@@ -35,12 +35,11 @@ export class DeleteCampusComponent implements OnInit {
     }else{
       this.campusService.delete(this.cookieService.get("activeCampusId"), this.cookieService.get("activeCampusNaam"));
       this.grafanaService.deleteDashboard(this.cookieService.get("activeCampusId"));
-      setTimeout(() => {
-        this.campusService.getAll(this.decodedToken).subscribe(data => {
-          this.campus = data;
-          this.update(data);
-        });
-      }, 500);
+      this.campusService.getAll(this.decodedToken.persoon_id).subscribe(data => {
+        console.log("test");
+        this.campus = data;
+        this.update(data);
+      });
     }
   }
 

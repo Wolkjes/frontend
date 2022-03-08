@@ -13,7 +13,7 @@ import { GrafanaService } from '../service/grafana.service';
 })
 export class EditCampusComponent implements OnInit {
 
-  errors:string[] = [];
+  errors: string[] = [];
   campusFrom = new FormGroup({
     name_campus: new FormControl('', [
       Validators.required,
@@ -21,35 +21,51 @@ export class EditCampusComponent implements OnInit {
     ])
   });
 
-  constructor(private grafanaService:GrafanaService, private eventEmitterService: EventEmitterService, private campusService:CampusService, fb: FormBuilder, private cookieService:CookieService) {
+  constructor(private grafanaService: GrafanaService, private eventEmitterService: EventEmitterService, private campusService: CampusService, fb: FormBuilder, private cookieService: CookieService) {
 
   }
 
   ngOnInit(): void {
   }
 
-  get name_campus(){
+  get name_campus() {
     return this.campusFrom.get('name_campus');
   }
 
-  editCampus(): void{
+  editCampus(): void {
     this.errors = [];
-    if (this.name_campus?.invalid){
+    if (this.name_campus?.invalid) {
       this.errors.push("Campus naam kan niet leeg zijn!");
     }
 
-    if( this.errors.length === 0){
+    if (this.errors.length === 0) {
       let campus_id = this.cookieService.get("activeCampusId");
       let campus_name = this.cookieService.get("activeCampusNaam");
-      this.campusService.update(Number.parseFloat(campus_id), this.campusFrom.value.name_campus);
-      this.grafanaService.updateCampus(Number.parseFloat(campus_id), this.campusFrom.value.name_campus, campus_name);
-  
-  
-      this.setCookie("activeCampusNaam", this.campusFrom.value.name_campus);
-  
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
+      this.campusService.update(Number.parseFloat(campus_id), this.campusFrom.value.name_campus).subscribe(
+        function (x) {
+          console.log('Next: %s', x);
+        },
+        function (err) {
+          console.log('Error: %s', err);
+        },
+        function () {
+          console.log('Completed');
+        }
+      );
+      this.grafanaService.updateCampus(Number.parseFloat(campus_id), this.campusFrom.value.name_campus, campus_name).subscribe(data => {
+        this.setCookie("activeCampusNaam", this.campusFrom.value.name_campus);
+        () => {
+          console.log("closed");
+          window.location.reload();
+        }
+      });
+
+
+
+
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 500);
     }
   }
 
