@@ -92,6 +92,7 @@ export class AddCo2SensorComponent implements OnInit {
   update(data: any): void {
     this.sensor = data;
     this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam).subscribe(data => {
+
       console.log(data);
     })
 
