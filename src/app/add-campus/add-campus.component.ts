@@ -57,9 +57,9 @@ export class AddCampusComponent implements OnInit {
         persoon_id: this.decodedToken.persoon_id
       }
       this.campusService.create(data).subscribe(data => {
-        if(data['value'] === "Deze campus bestaat al"){
+        if (data['value'] === "Deze campus bestaat al") {
           this.errors.push("Deze campus bestaat al");
-        }else{
+        } else {
           this.campus = data;
           this.update(data);
           window.location.reload();
@@ -75,8 +75,6 @@ export class AddCampusComponent implements OnInit {
 
       this.setCookie("activeCampusId", this.campus[0].campus_id);
       this.setCookie("activeCampusNaam", this.campus[0].name)
-
-      window.location.reload();
     })
   }
 
