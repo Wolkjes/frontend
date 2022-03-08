@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EventEmitterService } from '../event-emitter.service';
 import { Campus } from '../model/campus.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -15,46 +15,48 @@ import jwt_decode from 'jwt-decode';
 export class DeleteCampusComponent implements OnInit {
   private campus: Campus[];
   campusDel: FormGroup;
-  decodedToken:any;
+  decodedToken: any;
   token;
 
-  constructor(private tokenService:TokenStorageService, private eventEmitterService: EventEmitterService, fb: FormBuilder,  private campusService: CampusService,private cookieService: CookieService, private grafanaService:GrafanaService) { 
+  constructor(private tokenService: TokenStorageService, private eventEmitterService: EventEmitterService, fb: FormBuilder, private campusService: CampusService, private cookieService: CookieService, private grafanaService: GrafanaService) {
     this.campusDel = fb.group({
       confirm_message: [""],
     });
 
     this.token = this.tokenService.getToken();
-    if (this.token !== null){
+    if (this.token !== null) {
       this.decodedToken = jwt_decode(this.token);
     }
   }
 
-  deleteCampus(): void{
-    if (this.campusDel.value.confirm_message !== document.getElementById("confirm")?.textContent){
+  deleteCampus(): void {
+    if (this.campusDel.value.confirm_message !== document.getElementById("confirm")?.textContent) {
       alert("PLS confirm that you want to delete the campus")
-    }else{
+    } else {
       this.campusService.delete(this.cookieService.get("activeCampusId"), this.cookieService.get("activeCampusNaam"));
       this.grafanaService.deleteDashboard(this.cookieService.get("activeCampusId"));
-      this.campusService.getAll(this.decodedToken.persoon_id).subscribe(data => {
-        console.log("test");
-        this.campus = data;
-        this.update(data);
-      });
+
+      setTimeout(() => {
+        this.campusService.getAll(this.decodedToken.persoon_id).subscribe(data => {
+          this.campus = data;
+          this.update(data);
+        });
+      }, 100);
     }
   }
 
-  update(data:any): void{
-    if (this.campus.length === 0){
+  update(data: any): void {
+    if (this.campus.length === 0) {
       this.setCookie("activeCampusId", 0);
       this.setCookie("activeCampusNaam", "PLS select a campus");
-    }else{
+    } else {
       this.setCookie("activeCampusId", this.campus[0].campus_id);
       this.setCookie("activeCampusNaam", this.campus[0].name);
     }
-    
+
     setTimeout(() => {
       window.location.reload();
-    }, 500);
+    }, 400);
   }
 
   setCookie(name, value, days = 7, path = '/') {
@@ -65,7 +67,7 @@ export class DeleteCampusComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  close(){
+  close() {
     this.eventEmitterService.close();
   }
 
