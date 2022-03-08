@@ -55,7 +55,7 @@ export class ChangeThresholdsComponent implements OnInit {
       }
 
       if (this.thresholds.value.maxGreen >= this.thresholds.value.maxOrange && this.maxGreen?.valid && this.maxOrange?.valid) {
-        this.errors.push("De waarde van groen kan niet hoger zijn dan de waarde van oranje");
+        this.errors.push("De waarde van groen kan niet hoger of gelijkaan zijn als de waarde van oranje");
       }
     }
   }
