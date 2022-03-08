@@ -42,31 +42,30 @@ export class EditCampusComponent implements OnInit {
       let campus_id = this.cookieService.get("activeCampusId");
       let campus_name = this.cookieService.get("activeCampusNaam");
       this.campusService.update(Number.parseFloat(campus_id), this.campusFrom.value.name_campus).subscribe(
-        function (x) {
-
+        (x) => {
+          console.log('Next: %s', x);
         },
-        function (err) {
-
+        (err) => {
+          console.log('Error: %s', err);
         },
         () => {
-          console.log("completed")
-          this.grafanaService.updateCampus(Number.parseFloat(campus_id), this.campusFrom.value.name_campus, campus_name).subscribe(
-            (data) => {
-              console.log(data);
-              this.setCookie("activeCampusNaam", this.campusFrom.value.name_campus);
-            },
-            function (err) {
-
-            },
-            () => {
-              console.log("completed")
-              window.location.reload();
-            }
-          );
+          console.log('Completed');
         }
       );
+      this.grafanaService.updateCampus(Number.parseFloat(campus_id), this.campusFrom.value.name_campus, campus_name).subscribe(
+        (x) => {
+          console.log('Next: %s', x);
+          this.setCookie("activeCampusNaam", this.campusFrom.value.name_campus);
+        },
+        (err) => {
+          console.log('Error: %s', err);
+        },
+        () => {
+          console.log('done');
+          window.location.reload();
+        })
       // setTimeout(() => {
-      //   window.location.reload();
+      //window.location.reload();
       // }, 500);
     }
   }
