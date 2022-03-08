@@ -15,8 +15,8 @@ import { LokaalService } from '../service/lookaal.service';
 })
 export class AddCo2SensorComponent implements OnInit {
 
-  private sensor:Sensor[];
-  errors:string[] = [];
+  private sensor: Sensor[];
+  errors: string[] = [];
   sensors: Sensor[] = [];
   newSensor = new FormGroup({
     sensorNaam: new FormControl('', [
@@ -27,11 +27,11 @@ export class AddCo2SensorComponent implements OnInit {
       Validators.required
     ])
   });
-  private campus_id:number;
-  private campus_naam:string;
-  lokalen:Lokaal[];
+  private campus_id: number;
+  private campus_naam: string;
+  lokalen: Lokaal[];
 
-  constructor(private lokaalService:LokaalService, private eventEmitterService: EventEmitterService, private sensorService: SensorService, fb: FormBuilder, private cookieService: CookieService, private grafanaService:GrafanaService) {
+  constructor(private lokaalService: LokaalService, private eventEmitterService: EventEmitterService, private sensorService: SensorService, fb: FormBuilder, private cookieService: CookieService, private grafanaService: GrafanaService) {
     this.campus_id = Number.parseFloat(this.cookieService.get("activeCampusId"));
     this.campus_naam = this.cookieService.get("activeCampusNaam");
     this.lokalen = [];
@@ -42,36 +42,36 @@ export class AddCo2SensorComponent implements OnInit {
     this.getAll();
   }
 
-  get sensorNaam(){
+  get sensorNaam() {
     return this.newSensor.get('sensorNaam');
   }
 
-  get choose_sensor(){
+  get choose_sensor() {
     return this.newSensor.get('choose_sensor');
   }
 
-  getAll(): void{
+  getAll(): void {
     this.lokaalService.getAll(this.campus_id).subscribe(data => this.lokalen = data);
   }
 
-  addSensor(){
+  addSensor() {
     this.errors = [];
 
-    for (let lokaal of this.lokalen){
+    for (let lokaal of this.lokalen) {
       console.log(lokaal.lokaal_naam)
-      if(lokaal.lokaal_naam === this.newSensor.value.sensorNaam){
+      if (lokaal.lokaal_naam === this.newSensor.value.sensorNaam) {
         this.errors.push("Er bestaat al een lokaal met deze naam");
       }
     }
 
-    if (this.sensorNaam?.invalid){
+    if (this.sensorNaam?.invalid) {
       this.errors.push("klas kan niet leeg zijn!");
     }
-    if (this.choose_sensor?.invalid){
+    if (this.choose_sensor?.invalid) {
       this.errors.push("Selecteer een sensor alstublieft!");
     }
 
-    if (this.errors.length === 0){
+    if (this.errors.length === 0) {
       var lokaal = this.newSensor.value.sensorNaam;
       var newS = false;
       this.sensorService.update(this.newSensor.value.choose_sensor, {
@@ -89,21 +89,24 @@ export class AddCo2SensorComponent implements OnInit {
     }
   }
 
-  update(data:any): void{
+  update(data: any): void {
     this.sensor = data;
     this.grafanaService.addPanel(data[0], this.campus_id, this.campus_naam, this.newSensor.value.sensorNaam).subscribe(data => {
-      data;
-      window.location.reload();
+      console.log(data);
     })
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 300)
   }
 
-  getSensors(): void{
+  getSensors(): void {
     this.sensorService.getAll().subscribe(data => this.sensors = data);
-}
+  }
 
 
 
-  close(){
+  close() {
     this.eventEmitterService.close();
   }
 

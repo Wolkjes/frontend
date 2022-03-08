@@ -72,6 +72,7 @@ function threshold(){
 function onMessageArrived(message) {
   let jsonMessage = JSON.parse(message.payloadString);
   if (message.destinationName.substring(0,3) === "new"){
+    console.log(message.destinationName);
     var idString = message.destinationName.substring(4);
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "http://localhost:8080/wolkjes/sensor/", true);
