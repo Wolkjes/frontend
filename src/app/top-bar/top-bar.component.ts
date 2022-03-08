@@ -21,6 +21,7 @@ export class TopBarComponent implements OnInit {
 
   activeCampus: string = "Campussen";
   onlyOneCampusAndUser: boolean = false;
+  noCampusOrLoggedInAsUser: boolean = false;
 
   constructor(private router: Router, private tokenService: TokenStorageService, private campusService: CampusService, private cookieService: CookieService, private tokenStorage: TokenStorageService) {
     this.token = this.tokenService.getToken();
@@ -70,13 +71,25 @@ export class TopBarComponent implements OnInit {
         this.setCookie("activeCampusNaam", this.campuses[0].name);
       }
       this.activeCampus = this.cookieService.get("activeCampusNaam");
-      //If there is only one campus set boolean to hide dropdown for user
 
+      console.log(this.campuses.length === 0)
+      console.log(this.decodedToken.role === 'user')
+      console.log(this.decodedToken.role === 'admin')
+      //If there are no campusses or you are a user role, then hide second dropdown (so you can't go to the user tab)
+      if (this.campuses.length === 0){
+        this.noCampusOrLoggedInAsUser = true;
+      } else if(this.decodedToken.role === 'user') {
+        this.noCampusOrLoggedInAsUser = true; 
+      } else if(this.decodedToken.role === 'admin'){
+        this.noCampusOrLoggedInAsUser = false;
+      }
+      
+      //If there is only one campus set boolean to hide dropdown to choose campus for user
       if (this.campuses.length === 1) {
         if (this.decodedToken.role === 'user') {
-          this.onlyOneCampusAndUser = true
-        }
-      }
+          this.onlyOneCampusAndUser = true;
+      } 
+    }
     });
   }
 
