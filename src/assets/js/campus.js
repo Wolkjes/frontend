@@ -197,14 +197,17 @@ function getCookie(cname) {
 }
 
 function sendVentilatie(){
-  let groen = document.getElementById("groen").value;
-  let oranje = document.getElementById("oranje").value;
-  let rood = document.getElementById("rood").value;
-  console.log(campus)
+  if (document.getElementById("groen").classList.contains('ng-valid') && document.getElementById("oranje").classList.contains('ng-valid') && document.getElementById("rood").classList.contains('ng-valid')){
+    let groen = document.getElementById("groen").value;
+    let oranje = document.getElementById("oranje").value;
+    let rood = document.getElementById("rood").value;
+    console.log(campus)
+  
+    var message = new Paho.MQTT.Message(JSON.stringify({"goed": groen, "minder": oranje, "slecht": rood}));
+    message.destinationName = campus + "/ventilatie/waardes";
+    message.retained = true;
+    client.send(message);
+    window.location.reload();
+  }
 
-  var message = new Paho.MQTT.Message(JSON.stringify({"goed": groen, "minder": oranje, "slecht": rood}));
-  message.destinationName = campus + "/ventilatie/waardes";
-  message.retained = true;
-  client.send(message);
-  window.location.reload();
 }
