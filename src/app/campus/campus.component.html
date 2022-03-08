@@ -3,78 +3,142 @@
     <div class="flex justify-between flex-wrap py-8">
       <div class="flex">
         <h1 class="text-2xl py-1">{{ naam }}</h1>
-        <div class="m-1 ml-3" *ngIf="decodedToken.role === 'admin' && campus_id !== 0">
-          <button (click)="toggleEditCampus()" class="p-1 rounded-lg hover:bg-blue-500 hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="justify-self-end h-6 w-6" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+        <div
+          class="m-1 ml-3"
+          *ngIf="decodedToken.role === 'admin' && campus_id !== 0"
+        >
+          <button
+            (click)="toggleEditCampus()"
+            class="p-1 rounded-lg hover:bg-blue-500 hover:text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="justify-self-end h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              />
             </svg>
           </button>
 
-          <button (click)="toggleDeleteCampus()" class="p-1 rounded-lg hover:bg-red-500 hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          <button
+            (click)="toggleDeleteCampus()"
+            class="p-1 rounded-lg hover:bg-red-500 hover:text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              />
             </svg>
           </button>
         </div>
       </div>
-      <div class="flex" *ngIf="decodedToken.role === 'admin' && campus_id !== 0">
-        <button (click)="toggleChangeTresholds()"
-          class="mr-2 bg-transparent sm:justify-end hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+      <div
+        class="flex"
+        *ngIf="decodedToken.role === 'admin' && campus_id !== 0"
+      >
+        <button
+          (click)="toggleChangeTresholds()"
+          class="mr-2 bg-transparent sm:justify-end hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        >
           Verander thresholds
         </button>
-        <button (click)="toggleShowAddSensor()"
-          class="bg-transparent sm:justify-end hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        <button
+          (click)="toggleShowAddSensor()"
+          class="bg-transparent sm:justify-end hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        >
           Voeg sensor toe
         </button>
       </div>
     </div>
 
-    <p class="mb-10" *ngIf="lokalen?.length==0">U heeft nog geen lokalen toegevoegd. 😢</p>
+    <p class="mb-10" *ngIf="lokalen?.length == 0">
+      U heeft nog geen lokalen toegevoegd. 😢
+    </p>
 
     <div class="flex flex-wrap -m-4">
-      <a href="/singleSensor/{{ lokaal.sensor_id }}" class="xl:w-1/3 sm:w-1/2 w-full p-4"
-        *ngFor="let lokaal of lokalen">
-        <div id="{{ lokaal.lokaal_naam }}color"
-          class="threshold text-white border border-gray-200 p-6 rounded-lg shadow-2xl hover:bg-opacity-80 bg-gray-400">
+      <a
+        href="/singleSensor/{{ lokaal.sensor_id }}"
+        class="xl:w-1/3 sm:w-1/2 w-full p-4"
+        *ngFor="let lokaal of lokalen"
+      >
+        <div
+          id="{{ lokaal.lokaal_naam }}color"
+          class="threshold text-white border border-gray-200 p-6 rounded-lg shadow-2xl hover:bg-opacity-80 bg-gray-400"
+        >
           <div class="flex justify-between">
             <h2 id="naam" class="text-lg font-medium title-font mb-2">
               {{ lokaal.lokaal_naam }}
             </h2>
-            <div *ngIf="decodedToken.role === 'admin'" class="flex" (click)="noA($event); (false)">
-              <button (click)="
+            <div
+              *ngIf="decodedToken.role === 'admin'"
+              class="flex"
+              (click)="noA($event); (false)"
+            >
+              <button
+                (click)="
                   toggleShowEditSensor(lokaal.lokaal_id, lokaal.lokaal_naam)
-                " class="p-1 rounded-lg hover:bg-blue-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="justify-self-end h-6 w-6" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                "
+                class="p-1 rounded-lg hover:bg-blue-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="justify-self-end h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                  />
                 </svg>
               </button>
-              <button (click)="
+              <button
+                (click)="
                   toggleDeleteLokaal(lokaal.lokaal_id, lokaal.lokaal_naam)
-                " class="p-1 rounded-lg hover:bg-red-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                "
+                class="p-1 rounded-lg hover:bg-red-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
                 </svg>
               </button>
             </div>
           </div>
-<<<<<<< HEAD
-          <p class="threshold_text leading-relaxed text-2xl" id="{{ lokaal.lokaal_naam }}">
-            Sensor Offline😢
-=======
           <p
             class="threshold_text leading-relaxed text-2xl"
             id="{{ lokaal.lokaal_naam }}"
           >
-            Sensor Offline😴
->>>>>>> 40acf86 (error op main, proberen rebase)
+            Sensor Offline😢
           </p>
         </div>
       </a>
@@ -82,46 +146,115 @@
   </div>
 </section>
 
-<div *ngIf="addSensorIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
-  aria-modal="true">
-  <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-  <app-add-co2-sensor class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+<div
+  *ngIf="addSensorIsShown"
+  class="fixed z-10 inset-0 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    (click)="close()"
+    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    aria-hidden="true"
+  ></div>
+  <app-add-co2-sensor
+    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+  >
   </app-add-co2-sensor>
 </div>
 
-<div *ngIf="editSensorIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
-  aria-modal="true">
-  <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-  <app-edit-co2-sensor [message]="message" [lokaal_naam]="messageLokaalNaam"
-    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+<div
+  *ngIf="editSensorIsShown"
+  class="fixed z-10 inset-0 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    (click)="close()"
+    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    aria-hidden="true"
+  ></div>
+  <app-edit-co2-sensor
+    [message]="message"
+    [lokaal_naam]="messageLokaalNaam"
+    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+  >
   </app-edit-co2-sensor>
 </div>
 
-<div *ngIf="deleteLokaalIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
-  aria-modal="true">
-  <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-  <app-delete-lokaal [lokaal_naam]="messageLokaalNaam" [message]="message"
-    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2" id="{{ lokaal_id }}">
+<div
+  *ngIf="deleteLokaalIsShown"
+  class="fixed z-10 inset-0 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    (click)="close()"
+    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    aria-hidden="true"
+  ></div>
+  <app-delete-lokaal
+    [lokaal_naam]="messageLokaalNaam"
+    [message]="message"
+    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+    id="{{ lokaal_id }}"
+  >
   </app-delete-lokaal>
 </div>
 
-<div *ngIf="editCampusIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
-  aria-modal="true">
-  <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-  <app-edit-campus class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+<div
+  *ngIf="editCampusIsShown"
+  class="fixed z-10 inset-0 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    (click)="close()"
+    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    aria-hidden="true"
+  ></div>
+  <app-edit-campus
+    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+  >
   </app-edit-campus>
 </div>
 
-<div *ngIf="deleteCampusIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
-  aria-modal="true">
-  <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-  <app-delete-campus class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+<div
+  *ngIf="deleteCampusIsShown"
+  class="fixed z-10 inset-0 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    (click)="close()"
+    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    aria-hidden="true"
+  ></div>
+  <app-delete-campus
+    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+  >
   </app-delete-campus>
 </div>
 
-<div *ngIf="changeTresholdsIsShown" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title"
-  role="dialog" aria-modal="true">
-  <div (click)="close()" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-  <app-change-thresholds class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+<div
+  *ngIf="changeTresholdsIsShown"
+  class="fixed z-10 inset-0 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    (click)="close()"
+    class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    aria-hidden="true"
+  ></div>
+  <app-change-thresholds
+    class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+  >
   </app-change-thresholds>
 </div>
