@@ -62,7 +62,6 @@ export class AddCampusComponent implements OnInit {
         } else {
           this.campus = data;
           this.update(data);
-          window.location.reload();
         }
       });
     }
@@ -76,6 +75,10 @@ export class AddCampusComponent implements OnInit {
       this.setCookie("activeCampusId", this.campus[0].campus_id);
       this.setCookie("activeCampusNaam", this.campus[0].name)
     })
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 200)
   }
 
   setCookie(name, value, days = 7, path = '/') {
