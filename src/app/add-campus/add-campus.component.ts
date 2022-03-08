@@ -19,9 +19,9 @@ import jwt_decode from 'jwt-decode'
 })
 export class AddCampusComponent implements OnInit {
 
-  campus_id:number;
-  private campus:Campus[];
-  errors:string[] = [];
+  campus_id: number;
+  private campus: Campus[];
+  errors: string[] = [];
   newCampus = new FormGroup({
     lokaal_campus: new FormControl('', [
       Validators.required,
@@ -29,28 +29,28 @@ export class AddCampusComponent implements OnInit {
     ])
   });
 
-  decodedToken:any;
+  decodedToken: any;
   token;
 
-  constructor(fb: FormBuilder,  private campusService: CampusService, private grafanaService: GrafanaService, private tokenService:TokenStorageService) {
+  constructor(fb: FormBuilder, private campusService: CampusService, private grafanaService: GrafanaService, private tokenService: TokenStorageService) {
     this.token = this.tokenService.getToken();
-    if (this.token !== null){
+    if (this.token !== null) {
       this.decodedToken = jwt_decode(this.token);
     }
     console.log(this.decodedToken);
   }
 
-  get lokaal_campus(){
+  get lokaal_campus() {
     return this.newCampus.get('lokaal_campus');
   }
 
   addCampus() {
     this.errors = [];
-    if (this.lokaal_campus?.invalid){
+    if (this.lokaal_campus?.invalid) {
       this.errors.push("Campus naam kan niet leeg zijn!");
     }
 
-    if( this.errors.length === 0){
+    if (this.errors.length === 0) {
       console.log(this.decodedToken.persoon_id)
       var data = {
         name: this.newCampus.value.lokaal_campus,
@@ -59,11 +59,11 @@ export class AddCampusComponent implements OnInit {
       this.campusService.create(data).subscribe(data => {
         this.campus = data;
         this.update(data);
-      });   
-    } 
+      });
+    }
   }
 
-  update(data:any): void{
+  update(data: any): void {
     this.campus = data;
     this.grafanaService.create(this.campus[0]).subscribe(data => {
       console.log(data);
@@ -72,7 +72,7 @@ export class AddCampusComponent implements OnInit {
       this.setCookie("activeCampusNaam", this.campus[0].name)
 
       window.location.reload();
-    })    
+    })
   }
 
   setCookie(name, value, days = 7, path = '/') {
@@ -81,7 +81,7 @@ export class AddCampusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
 }
