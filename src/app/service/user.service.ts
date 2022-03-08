@@ -29,9 +29,11 @@ export class UserService {
     getAllUsers(){
         return this.http.get<User[]>(this.baseURL + "/");
     }
-
-    getAll(data: any): Observable<User[]> {
-        return this.http.get<User[]>(this.baseURL + "/" + data);
+    getAll(data: any, persoon_id:number): Observable<User[]> {
+        var body = {
+            persoon_id: persoon_id
+        }
+        return this.http.get<User[]>(this.baseURL + "/" + data + "/" + persoon_id);
     }
 
     update(data:any, user_id:number){

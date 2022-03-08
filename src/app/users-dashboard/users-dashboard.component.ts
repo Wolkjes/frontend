@@ -58,8 +58,9 @@ export class UsersDashboardComponent implements OnInit {
     this.userService.getAllUsers().subscribe(data => this.Allusers = data);
   }
 
-  getAll() {
-    this.userService.getAll(this.campus_id).subscribe(data => this.users = data)
+  getAll(){
+    this.userService.getAll(this.campus_id, this.decodedToken.persoon_id).subscribe(data => this.users = data)
+    console.log(this.users.length)
   }
 
   //to close all modals
