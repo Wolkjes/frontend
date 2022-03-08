@@ -72,9 +72,6 @@ export class TopBarComponent implements OnInit {
       }
       this.activeCampus = this.cookieService.get("activeCampusNaam");
 
-      console.log(this.campuses.length === 0)
-      console.log(this.decodedToken.role === 'user')
-      console.log(this.decodedToken.role === 'admin')
       //If there are no campusses or you are a user role, then hide second dropdown (so you can't go to the user tab)
       if (this.campuses.length === 0){
         this.noCampusOrLoggedInAsUser = true;
