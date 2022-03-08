@@ -106,7 +106,7 @@ export class GrafanaService {
             "y": 0
           },
           "type": "timeseries",
-          "timeFrom": "4h",
+          "timeFrom": "8h",
           "hideTimeOverride": true,
           "fieldConfig": {
             "defaults": {
