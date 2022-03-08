@@ -57,8 +57,13 @@ export class AddCampusComponent implements OnInit {
         persoon_id: this.decodedToken.persoon_id
       }
       this.campusService.create(data).subscribe(data => {
-        this.campus = data;
-        this.update(data);
+        if(data['value'] === "Deze campus bestaat al"){
+          this.errors.push("Deze campus bestaat al");
+        }else{
+          this.campus = data;
+          this.update(data);
+          window.location.reload();
+        }
       });
     }
   }
