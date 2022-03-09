@@ -23,6 +23,7 @@ First update your sensor to the latest version: [https://github.com/Wolkjes/oper
 Then connect your sensor to the network and enter the correct IP-address:
 <ol>
     <li>Turn the sensor on</li>
+    <li>Press the top button</li>
     <li>The sensor makes a wifi connection, connect to this with another device</li>
     <li>Then you will get a message to login on this wifi connection, open this and the configuration page will open in the browser</li>
     <li>Select the correct SSID of the password and enter the password of that SSID</li>
