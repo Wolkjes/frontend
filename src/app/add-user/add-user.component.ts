@@ -100,7 +100,7 @@ export class AddUserComponent implements OnInit {
       this.errors.push("De wachtwoorden moeten hetzelfde zijn.")
     }
     if (this.password?.hasError('pattern')){
-      this.errors.push("Een cijfer, een hoofdletter en een lengte van 8 is verplicht voor een wachtwoord.")
+      this.errors.push("Een cijfer, een kleine letter, een hoofdletter en een lengte van 8 is verplicht voor een wachtwoord.")
     }
     
     // console.log(this.users)

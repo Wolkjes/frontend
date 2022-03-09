@@ -100,6 +100,14 @@ export class UsersDashboardComponent implements OnInit {
     } else if (!email.match(/\S+@\S+\.\S+/)) {
       this.errors.push("Dit is geen geldig email adres")
     }
+    
+    console.log(password.trim() !== "")
+    console.log(!password.trim().match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))
+
+    if (password.trim() !== "" && 
+    !password.trim().match(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}$/)) {
+      this.errors.push("Een cijfer, een kleine letter, een hoofdletter en een lengte van 8 is verplicht voor een wachtwoord.")
+    }
 
     const salt = bcrypt.genSaltSync(10);
     var data;
