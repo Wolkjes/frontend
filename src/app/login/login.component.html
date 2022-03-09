@@ -42,6 +42,7 @@
           Sign in
         </button>
       </div>
+      <p *ngIf="isLoginFailed" class="mt-5 bg-red-100 border border-red-400 text-red-700 px-1 py-1 list-none rounded mb-1">{{errorMessage}}</p>
     </form>
   </div>
 </div>
