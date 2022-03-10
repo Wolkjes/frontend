@@ -1,8 +1,12 @@
+//const environment = require('src/environments/environment.ts');
+//var base = environment.BASE;
+const base = "188.166.43.149"
+
 var url = window.location.pathname;
 var id = url.substring(url.lastIndexOf('/') + 1);
 var campus = getCookie("activeCampusNaam");
 
-const client = new Paho.MQTT.Client("ws://188.166.43.149:9001/mqtt", "myClientId" + new Date().getTime());
+const client = new Paho.MQTT.Client("ws://" + base + ":9001/mqtt", "myClientId" + new Date().getTime());
 
 client.connect({ onSuccess: onConnect })
 let counter = 0
@@ -82,7 +86,7 @@ function onMessageArrived(message) {
     console.log(message.destinationName);
     var idString = message.destinationName.substring(4);
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://localhost:8080/wolkjes/sensor/", true);
+      xhr.open("POST", "http://" + base + ":8080/wolkjes/sensor/", true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.send(JSON.stringify({
           sensor_id: idString,

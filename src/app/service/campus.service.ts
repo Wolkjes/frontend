@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { Campus } from '../model/campus.model';
-var base = process.env['BASE'];
-
+import { environment } from 'src/environments/environment';
+var base = environment.BASE;
 @Injectable({
   providedIn: 'root'
 })
