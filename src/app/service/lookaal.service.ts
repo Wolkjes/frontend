@@ -18,6 +18,7 @@ export class LokaalService {
     "Access-Control-Expose-Headers": "Set-Cookie",
     "Access-Control-Allow-Headers": "Content-Type, x-xsrf-token, X-Requested-With, Accept, Expires, Last-Modified, Cache-Control",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Authorization": "Bearer eyJrIjoiNUp1dDZKMjFZcE9ZWk5hclRDN29HQVh2MzBJM0xOR04iLCJuIjoiS2V5IiwiaWQiOjF9",
   });
 
   private options;
