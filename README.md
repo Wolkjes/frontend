@@ -26,6 +26,10 @@ ng serve
 
 Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
+## Environment files
+
+At the moment we don't have environment files, but you can implement these yourself. Because this isn't very safe for the apllication.
+
 ## Backend and server files
 
 Clone the backend from here: [https://github.com/Wolkjes/backend] and follow the instructions in the README to start the backend
