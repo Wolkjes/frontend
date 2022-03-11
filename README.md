@@ -16,6 +16,18 @@ npm install
 
 to install all node modules.
 
+## Update project
+
+Before you start, you first need to set all the variables. Go check out https://github.com/Wolkjes/server and Grafana setup to check out how to set those veriables.
+
+You also need to change the `proxy.config.json`file. There you see a variable `target`, you **ONLY** need to change the IP. So **don't change :3000 and /api**
+
+<img src="images/proxy.png"></img>
+
+In all the `service.ts files` located in the directory `service`, there is a link with `localhost`in, this should be changed to your`IP` address.
+
+<img src="images/localhost.png"></img>
+
 ## Run project
 
 Now we can start the project, in the terminal run:
