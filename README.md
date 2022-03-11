@@ -8,11 +8,23 @@ Download or clone the github project to a local directory, make sure the backend
 
 ## First start
 
-Now we will install all the required modules to run the project. In the terminal you need to run `npm install` to install all node modules.
+Now we will install all the required modules to run the project. In the terminal you need to run
+
+```
+npm install
+```
+
+to install all node modules.
 
 ## Run project
 
-Now we run `ng serve` in the terminal to start the project. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Now we can start the project, in the terminal run:
+
+```
+ng serve
+```
+
+Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Backend and server files
 
