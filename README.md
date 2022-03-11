@@ -2,25 +2,30 @@
 
 This project was generated with Angular, here is the default Angular: [README](angular.md)
 
+## download/clone
+
+Download or clone the github project to a local directory, make sure the backend and the frontend are located in the same folder. Next open the project in an IDE of your choise, we used Visual Studio Code. Next you open a terminal in the root of the project.
+
 ## First start
 
-Run `npm install` to install all node packages.
+Now we will install all the required modules to run the project. In the terminal you need to run `npm install` to install all node modules.
 
 ## Run project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Now we run `ng serve` in the terminal to start the project. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Backend and server files
 
 Clone the backend from here: [https://github.com/Wolkjes/backend] and follow the instructions in the README to start the backend
 
-Clone the server files from here: [https://github.com/Wolkjes/server] and follow the instructions in the README to run the docker-compose file 
+Clone the server files from here: [https://github.com/Wolkjes/server] and follow the instructions in the README to run the docker-compose file
 
 ## Add sensor
 
 First update your sensor to the latest version: [https://github.com/Wolkjes/operame]
 
 Then connect your sensor to the network and enter the correct IP-address:
+
 <ol>
     <li>Turn the sensor on</li>
     <li>Press the top button</li>
